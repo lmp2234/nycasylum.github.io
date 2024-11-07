@@ -1,0 +1,66 @@
+---
+title: "projectproposal"
+author: "Lisa, Cindy, Nasiha, Yucheng"
+date: "2024-11-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+First, you will define your teams and propose a project. This proposal should be a half-page to a page in length and include: 
+
+## The group members (names and UNIs) 
+
+Lisa Pardee: lmp2234 
+
+Cindy Ho: cjh2248  
+
+Nasiha Hussain: nh2796 
+
+Yucheng Zhao: yz4990 
+
+
+## Tentative Project Title + Ideas 
+
+Asylum seekers shelter types/availability in NYC 
+
+
+## The motivation for this project 
+
+To showcase shelters for asylum seekers, medical services, temporary housing, food, insurance, etc.  
+
+
+## The intended final products 
+
+Map of access of sources  
+
+
+## The anticipated data sources 
+
+Shelters: https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format. 
+
+Medical services:  
+
+Translator service: 
+
+Food banks:  
+
+## The planned analyses / visualizations / coding challenges 
+
+Interactive Maps: people can search for what they need 
+
+Coding Challenges: cleaning up data, finding sources by borough, variability and incomplete data sources, updating hours of shelters or might misrepresent what is going on in real life  
+
+## The planned timeline 
+
+11/10-11/15: Project Meeting with TAs (delegate tasks for everyone) 
+
+TENTATIVE 11/22: meet together to discuss findings + direction of project  
+
+12/1: Finish coding and build website  
+
+12/4: Meet in person to screencast and finalize touches on website  
+
+12/6: Make last adjustments and submit  
