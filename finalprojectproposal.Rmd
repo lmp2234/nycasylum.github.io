@@ -2,7 +2,7 @@
 title: "projectproposal"
 author: "Lisa, Cindy, Nasiha, Yucheng"
 date: "2024-11-07"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -41,9 +41,9 @@ Map of access of sources
 
 Shelters: https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format. 
 
-Medical services:  
+Medical services: https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx
 
-Translator service: 
+Translator services: 
 
 Food banks:  
 
