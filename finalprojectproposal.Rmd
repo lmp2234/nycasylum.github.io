@@ -45,7 +45,7 @@ Medical services: https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx
 
 Translator services: 
 
-Food banks:  
+Food banks:  https://github.com/NewYorkCityCouncil/food_insecurity/tree/main?tab=readme-ov-file 
 
 ## The planned analyses / visualizations / coding challenges 
 
