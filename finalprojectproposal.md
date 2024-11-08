@@ -23,19 +23,19 @@ Access to Comprehensive Services for NYC Asylum Seekers
 ## The motivation for this project
 
 The purpose of this project is to create a resource navigation tool for
-asylum seekers arriving in NYC. This tool will encompass available
-shelters, medical services, temporary housing, food, insurance, etc.
+asylum seekers arriving in NYC while also showing the impact of barriers
+and social determinants of health on this population. This tool will
+encompass available shelters, medical services, temporary housing, food,
+insurance, etc.
 
 ## The intended final products
 
 A detailed and comprehensive website/tool that enables visualization of
 the prevalence of asylum seekers by borough (i.e., including demographic
-data), impact of social determinants of health on this population, services available to asylum seekers, and how to access such
-services.
+data), the impact of social determinants of health, services available
+to asylum seekers, and how to access such services.
 
 ## The anticipated data sources
-
-Social Determinants of health: https://dataverse.unc.edu/dataverse/addhealth
 
 Shelters:
 <https://citylimits.org/nyc-shelter-count/#>:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format.
@@ -43,17 +43,19 @@ Shelters:
 Medical services:
 <https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx>
 
+Social Determinants of Health:
+<https://dataverse.unc.edu/dataverse/addhealth>
+
 Food banks:
+<https://github.com/NewYorkCityCouncil/food_insecurity/tree/main?tab=readme-ov-file>
 
 ## The planned analyses / visualizations / coding challenges
 
-Plots showing details on social determinants of health, health outcomes, main barriers and challenges for asylum seekers in NYC
+Interactive Maps: people can search for what they need
 
-Interactive Maps: people can search for the resources they need
-
-Coding Challenges: Cleaning up available data, locating sources by
-borough, variability and incomplete data sources, updating hours of
-shelters, incomplete or incorrect data, and potential to misrepresent what is occurring in real time.
+Coding Challenges: cleaning up data, finding sources by borough,
+variability and incomplete data sources, updating hours of shelters or
+might misrepresent what is going on in real life
 
 ## The planned timeline
 

@@ -29,13 +29,13 @@ Access to Comprehensive Services for NYC Asylum Seekers
 
 ## The motivation for this project 
 
-The purpose of this project is to create a resource navigation tool for asylum seekers arriving in NYC. 
+The purpose of this project is to create a resource navigation tool for asylum seekers arriving in NYC while also showing the impact of barriers and social determinants of health on this population. 
 This tool will encompass available shelters, medical services, temporary housing, food, insurance, etc.  
 
 
 ## The intended final products 
 
-A detailed and comprehensive website/tool that enables visualization of the prevalence of asylum seekers by borough (i.e., including demographic data), services available to asylum seekers, and how to access such services.  
+A detailed and comprehensive website/tool that enables visualization of the prevalence of asylum seekers by borough (i.e., including demographic data), the impact of social determinants of health, services available to asylum seekers, and how to access such services.  
 
 ## The anticipated data sources 
 
@@ -43,7 +43,7 @@ Shelters: https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2
 
 Medical services: https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx
 
-Translator services: 
+Social Determinants of Health: https://dataverse.unc.edu/dataverse/addhealth 
 
 Food banks:  https://github.com/NewYorkCityCouncil/food_insecurity/tree/main?tab=readme-ov-file 
 
