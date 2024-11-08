@@ -23,9 +23,12 @@ Yucheng Zhao: yz4990
 
 
 ## Tentative Project Title + Ideas 
+
 Access to Comprehensive Services for NYC Asylum Seekers 
 
+
 ## The motivation for this project 
+
 The purpose of this project is to create a resource navigation tool for asylum seekers arriving in NYC. 
 This tool will encompass available shelters, medical services, temporary housing, food, insurance, etc.  
 
@@ -48,7 +51,7 @@ Food banks:  https://github.com/NewYorkCityCouncil/food_insecurity/tree/main?tab
 
 Interactive Maps: people can search for what they need 
 
-Coding Challenges: Cleaning up available data, locating sources by borough, variability and incomplete data sources, updating hours of shelters, and potential to misrepresent what is occurring in real time.  
+Coding Challenges: cleaning up data, finding sources by borough, variability and incomplete data sources, updating hours of shelters or might misrepresent what is going on in real life  
 
 ## The planned timeline 
 
