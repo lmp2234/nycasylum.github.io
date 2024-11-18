@@ -1,0 +1,27 @@
+---
+title: "projectdraft"
+output: github_document
+date: "2024-11-18"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+# Lisa: ADD Health Data 
+```{r}
+
+```
+
+# Nasiha: Hospital Data 
+
+```{r}
+
+```
+
+# Yucheng: Shelter Data 
+
+```{r}
+
+```
+
