@@ -29,6 +29,19 @@ hospitals_by_type =
   hospital_data %>% 
   group_by(`Facility Type`) %>% 
   summarise(Facility_Count = n())
+
+facility_type_by_borough =
+  hospital_data %>%
+  group_by(Borough, `Facility Type`) %>%
+  summarise(Facility_Count = n(), .groups = "drop") %>%
+  pivot_wider(names_from = `Facility Type`, values_from = Facility_Count, values_fill = 0)
+
+ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill = Borough)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Number of Facilities by Borough", x = "Borough", y = "Facility Count")
 ```
+
+![](projectdraft_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 # Yucheng: Shelter Data
