@@ -16,7 +16,18 @@ library(tidyverse)
 # Nasiha: Hospital Data 
 
 ```{r}
+hospital_data =
+  read_csv(file = "./data/Hospitals.csv")
 
+facilities_by_borough = 
+  hospital_data %>%
+  group_by(Borough) %>%
+  summarise(Facility_Count = n())
+
+hospitals_by_type = 
+  hospital_data %>% 
+  group_by(`Facility Type`) %>% 
+  summarise(Facility_Count = n())
 ```
 
 # Yucheng: Shelter Data 
