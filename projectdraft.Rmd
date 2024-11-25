@@ -6,6 +6,8 @@ date: "2024-11-18"
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(viridis)
+library(plotly)
 ```
 
 # Lisa: ADD Health Data 
@@ -47,6 +49,35 @@ ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill =
 # Yucheng: Shelter Data 
 
 ```{r}
+as_df = read_csv("./data/asylum_seekers_report.csv") |> 
+  janitor::clean_names() |> 
+  filter(agency != "total") |> 
+  mutate(category = ifelse(category == "Population - Individuals", "Individuals", category))
 
+head(as_df)
+```
+```{r}
+count_by_cat = as_df |> 
+  group_by(category) |> 
+  summarize(count_by_cat = sum(count, na.rm = TRUE), .groups = "drop")
+
+ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
+  geom_col() +
+  labs(title = "Total Counts of Asylum Seekers by Category", x = "Category", y = "Count") +
+  scale_fill_viridis_d() +
+  theme_minimal()
+```
+```{r}
+counts_by_cat_agen = 
+  ggplot(as_df, aes(x = category, y = count, fill = agency)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Counts by Category and Agency", x = "Category", y = "Count") +
+  scale_fill_viridis_d() +
+  theme_minimal()
+
+ggplotly(counts_by_cat_agen)
 ```
 
+```{r}
+
+```
