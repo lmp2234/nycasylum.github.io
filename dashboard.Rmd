@@ -9,9 +9,5 @@ output:
 
 ```{r setup}
 library(tidyverse)
-library(p8105.datasets)
-library(plotly)
-library(httr)
-library(jsonlite)
 library(dplyr)
 ```
