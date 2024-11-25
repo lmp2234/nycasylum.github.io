@@ -1,10 +1,6 @@
 ---
 title: "Dashboard"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
-    source: embed 
+output: html_document
 ---
 
 ```{r setup}
