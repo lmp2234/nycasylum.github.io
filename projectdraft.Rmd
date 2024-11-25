@@ -12,7 +12,17 @@ library(plotly)
 
 # Lisa: ADD Health Data 
 ```{r}
+install.packages("haven")
+library(haven)
+w1data <- read_sas("w1inhome.sas7bdat")
 
+
+citizen_counts <- table(w1data[["H1GI14"]])
+print(citizen_counts)
+
+w4data <- read_sas("w4inhome.sas7bdat")
+citizenw4_counts <- table(w4data[["H4OD4"]])
+print(citizenw4_counts)
 ```
 
 # Nasiha: Hospital Data 
