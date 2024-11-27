@@ -1,0 +1,179 @@
+---
+title: "p8105_final_shelter"
+author: "Yucheng Zhao"
+date: "2024-11-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(viridis)
+library(plotly)
+```
+
+# Yucheng: Shelter Data 
+
+```{r}
+as_df = read_csv("./data/asylum_seekers_report.csv") |> 
+  janitor::clean_names() |> 
+  filter(agency != "total") |> 
+  mutate(category = ifelse(category == "Population - Individuals", "Individuals", category))
+
+head(as_df)
+```
+```{r}
+count_by_cat = as_df |> 
+  group_by(category) |> 
+  summarize(count_by_cat = sum(count, na.rm = TRUE), .groups = "drop")
+
+total_counts = ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
+  geom_col() +
+  labs(title = "Total Counts of Asylum Seekers by Category", x = "Category", y = "Count") +
+  scale_fill_viridis_d() +
+  theme_minimal()
+ggplotly(total_counts)
+```
+```{r}
+counts_by_cat_agen = 
+  ggplot(as_df, aes(x = category, y = count, fill = agency)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Counts by Category and Agency", x = "Category", y = "Count") +
+  scale_fill_viridis_d() +
+  theme_minimal()
+
+ggplotly(counts_by_cat_agen)
+```
+
+```{r}
+daily_df = read_csv("./data/dhs_daily_report.csv", na = "NA")
+head(daily_df)
+```
+```{r}
+daily_df = daily_df |> 
+  filter(count != "NA")
+
+unique(daily_df$measure)
+unique(daily_df$table)
+```
+
+
+```{r}
+count_by_table = daily_df |> 
+  group_by(table) |> 
+  summarise(total_count = sum(count, na.rm = TRUE)) |> 
+  ggplot(aes(x = reorder(table, +total_count), y = total_count, fill = table)) +
+    geom_col() +
+    labs(title = "Total Counts by Table", x = "Table", y = "Total Count") +
+    scale_fill_viridis_d() +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45))
+
+ggplotly(count_by_table)
+```
+
+
+
+
+```{r}
+# trends in key individual variables
+key_individual_tables <- daily_df |> 
+  filter(table %in% c("single_adults", "family_intake", "families_with_children", "adult_families_census")) |> 
+  group_by(table, date) |> 
+  summarize(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+
+key_individual_plot = 
+  ggplot(key_individual_tables, aes(x = date, y = count, color = table)) +
+    geom_line(size = 1) +
+    facet_wrap(~ table, scales = "free_y") +
+    labs(title = "Trends in Key Individual Tables Over Time",
+         x = "Date",
+         y = "Count") +
+    theme_minimal() +
+    theme(legend.position = "none")  # Remove redundant legend
+
+
+ggplotly(key_individual_plot)
+```
+```{r}
+# total individuals in shelter over time
+total_individuals_df = daily_df |> 
+  filter(measure == "Total Individuals") |> 
+  ggplot(aes(x = date, y = count)) +
+    geom_line(color = "blue") +
+    labs(title = "Total Individuals in Shelter Over Time",
+         x = "Date",
+         y = "Number of Individuals") +
+    theme_minimal()
+
+ggplotly(total_individuals_df)
+```
+
+
+```{r}
+# monthly trends in total individuals
+monthly_df = daily_df |> 
+  separate(date, into = c("year", "month", "day"), convert = TRUE) |> 
+  filter(measure == "Total Individuals") |> 
+  group_by(month) |> 
+  summarise(total_count = sum(count, na.rm = TRUE))
+
+monthly_plot = 
+  ggplot(monthly_df, aes(x = month, y = total_count)) +
+    geom_line(color = "blue", size = 1) +
+    labs(title = "Monthly Trends in Total Individuals",
+         x = "Month",
+         y = "Total Count") +
+    theme_minimal()
+
+
+ggplotly(monthly_plot)
+```
+```{r}
+# daily trends in total individuals
+daily_trends_df = daily_df |> 
+  separate(date, into = c("year", "month", "day"), convert = TRUE) |> 
+  filter(measure == "Total Individuals") |> 
+  group_by(day) |> 
+  summarise(total_count = sum(count, na.rm = TRUE))
+
+daily_trends_plot = 
+  ggplot(daily_trends_df, aes(x = day, y = total_count)) +
+    geom_line(color = "green", size = 1) +
+    labs(title = "Daily Trends in Total Individuals",
+         x = "Day",
+         y = "Total Count") +
+    theme_minimal()
+
+
+ggplotly(daily_trends_plot)
+```
+
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+
+
+
+
+
