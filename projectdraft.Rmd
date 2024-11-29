@@ -1,6 +1,6 @@
 ---
 title: "projectdraft"
-output: github_document
+output: html_document
 date: "2024-11-18"
 ---
 
@@ -8,22 +8,13 @@ date: "2024-11-18"
 library(tidyverse)
 library(viridis)
 library(plotly)
+library(haven)
+library(readr)
 ```
 
 # Lisa: ADD Health Data 
 ```{r}
 
-library(haven)
-library(readr)
-
-w1inhome <- read_csv("w1inhome.csv")
-
-citizen_counts <- table(w1data[["H1GI14"]])
-print(citizen_counts)
-
-w4data <- read_sas("w4inhome.sas7bdat")
-citizenw4_counts <- table(w4data[["H4OD4"]])
-print(citizenw4_counts)
 ```
 
 # Nasiha: Hospital Data 

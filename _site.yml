@@ -2,8 +2,19 @@ name: "Final DS Project!"
 output_dir: "."
 navbar:
   title: "Home"
-  right:
-    - icon: fa-github fa-lg
+  left: 
+    - text: "Data Processing"
+      href: projectdraft.html
+    - text: "Analyses"
+      menu:
+      - text: "Health Data"
+        href: projectdraft.html
+      - text: "Shelter Data"
+        href: p8105_shelter_visuals.html
+      - text: "Hospital Data"
+        href: projectdraft.html
+    - text: "Project Report"
+      href: projectdraft.html
 output:
   html_document:
-    theme: cerulean
+    theme: flatly
