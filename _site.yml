@@ -8,13 +8,18 @@ navbar:
     - text: "Analyses"
       menu:
       - text: "Health Data"
-        href: projectdraft.html
+        href: health_data.html
       - text: "Shelter Data"
         href: p8105_shelter_visuals.html
       - text: "Hospital Data"
         href: projectdraft.html
     - text: "Project Report"
       href: projectdraft.html
+  right:
+    - text: "About the Team"
+      href: about_us.html
+    - icon: fa-github fa-lg
+      href: https://github.com/lmp2234/dsfinalproject
 output:
   html_document:
     theme: flatly

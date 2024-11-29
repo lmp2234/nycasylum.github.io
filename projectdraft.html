@@ -10,13 +10,14 @@
 
 
 
+<meta name="date" content="2024-11-18" />
 
 <title>projectdraft</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -32,6 +33,16 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -242,11 +253,37 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        
+        <li>
+  <a href="projectdraft.html">Data Processing</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="health_data.html">Health Data</a>
+    </li>
+    <li>
+      <a href="p8105_shelter_visuals.html">Shelter Data</a>
+    </li>
+    <li>
+      <a href="projectdraft.html">Hospital Data</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="projectdraft.html">Project Report</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a>
+  <a href="about_us.html">About the Team</a>
+</li>
+<li>
+  <a href="https://github.com/lmp2234/dsfinalproject">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -260,14 +297,12 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">projectdraft</h1>
+<h4 class="date">2024-11-18</h4>
 
 </div>
 
 
-<div id="projectdraft" class="section level1">
-<h1>projectdraft</h1>
-<p>2024-11-18</p>
-</div>
 <div id="lisa-add-health-data" class="section level1">
 <h1>Lisa: ADD Health Data</h1>
 </div>
@@ -276,7 +311,7 @@ $(document).ready(function () {
 <pre class="r"><code>hospital_data =
   read_csv(file = &quot;./data/Hospitals.csv&quot;)</code></pre>
 <pre><code>## Rows: 78 Columns: 6
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): Facility Type, Borough, Facility Name, Cross Streets, Phone, Locati...
 ## 
@@ -302,11 +337,52 @@ ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill =
   geom_bar(stat = &quot;identity&quot;) +
   theme_minimal() +
   labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;)</code></pre>
-<p><img
-src="projectdraft_files/figure-gfm/unnamed-chunk-2-1.png" /><!-- --></p>
+<p><img src="projectdraft_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="yucheng-shelter-data" class="section level1">
 <h1>Yucheng: Shelter Data</h1>
+<pre class="r"><code>as_df = read_csv(&quot;./data/asylum_seekers_report.csv&quot;) |&gt; 
+  janitor::clean_names() |&gt; 
+  filter(agency != &quot;total&quot;) |&gt; 
+  mutate(category = ifelse(category == &quot;Population - Individuals&quot;, &quot;Individuals&quot;, category))</code></pre>
+<pre><code>## Rows: 42 Columns: 6
+## ── Column specification ───────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): category, date, table, population, agency
+## num (1): count
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>head(as_df)</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   category               date      table                 population agency count
+##   &lt;chr&gt;                  &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… DHS    31316
+## 2 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… DYCD      44
+## 3 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… HPD     6409
+## 4 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… H+H    20856
+## 5 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… NYCEM   4390
+## 6 Families with Children 30-Sep-23 ASYLUM SEEKER DAILY … individua… DHS    28880</code></pre>
+<pre class="r"><code>count_by_cat = as_df |&gt; 
+  group_by(category) |&gt; 
+  summarize(count_by_cat = sum(count, na.rm = TRUE), .groups = &quot;drop&quot;)
+
+ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
+  geom_col() +
+  labs(title = &quot;Total Counts of Asylum Seekers by Category&quot;, x = &quot;Category&quot;, y = &quot;Count&quot;) +
+  scale_fill_viridis_d() +
+  theme_minimal()</code></pre>
+<p><img src="projectdraft_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>counts_by_cat_agen = 
+  ggplot(as_df, aes(x = category, y = count, fill = agency)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  labs(title = &quot;Counts by Category and Agency&quot;, x = &quot;Category&quot;, y = &quot;Count&quot;) +
+  scale_fill_viridis_d() +
+  theme_minimal()
+
+ggplotly(counts_by_cat_agen)</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-8ef032956b163ac0d38b" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-8ef032956b163ac0d38b">{"x":{"data":[{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997],"y":[31316,28880,748,1688,8143,354,1688],"text":["category: Individuals<br />count: 31316<br />agency: DHS","category: Families with Children<br />count: 28880<br />agency: DHS","category: Adult Families<br />count:   748<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS","category: Families with Children<br />count:  8143<br />agency: DHS","category: Adult Families<br />count:   354<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DHS","legendgroup":"DHS","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998],"y":[44,0,0,44,0,0,44],"text":["category: Individuals<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(59,82,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DYCD","legendgroup":"DYCD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3,2,1,4,2,1,4],"y":[20856,14900,1239,4717,4256,611,4717],"text":["category: Individuals<br />count: 20856<br />agency: H+H","category: Families with Children<br />count: 14900<br />agency: H+H","category: Adult Families<br />count:  1239<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H","category: Families with Children<br />count:  4256<br />agency: H+H","category: Adult Families<br />count:   611<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(33,144,140,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"H+H","legendgroup":"H+H","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.1800000000000002,2.1800000000000002,1.1799999999999999,4.1799999999999997,2.1800000000000002,1.1799999999999999,4.1799999999999997],"y":[6409,4078,309,2022,1151,159,2022],"text":["category: Individuals<br />count:  6409<br />agency: HPD","category: Families with Children<br />count:  4078<br />agency: HPD","category: Adult Families<br />count:   309<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD","category: Families with Children<br />count:  1151<br />agency: HPD","category: Adult Families<br />count:   159<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(93,200,99,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"HPD","legendgroup":"HPD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003],"y":[4390,6,444,3940,3,221,3940],"text":["category: Individuals<br />count:  4390<br />agency: NYCEM","category: Families with Children<br />count:     6<br />agency: NYCEM","category: Adult Families<br />count:   444<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM","category: Families with Children<br />count:     3<br />agency: NYCEM","category: Adult Families<br />count:   221<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"NYCEM","legendgroup":"NYCEM","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":54.794520547945211},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Counts by Category and Agency","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,4.5999999999999996],"tickmode":"array","ticktext":["Adult Families","Families with Children","Individuals","Single Adults"],"tickvals":[1,2,3,4],"categoryorder":"array","categoryarray":["Adult Families","Families with Children","Individuals","Single Adults"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Category","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1565.8000000000002,32881.800000000003],"tickmode":"array","ticktext":["0","10000","20000","30000"],"tickvals":[0,10000,20000,30000],"categoryorder":"array","categoryarray":["0","10000","20000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"agency","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"f80a78867a73":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"f80a78867a73","visdat":{"f80a78867a73":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

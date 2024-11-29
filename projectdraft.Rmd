@@ -79,7 +79,3 @@ counts_by_cat_agen =
 
 ggplotly(counts_by_cat_agen)
 ```
-
-```{r}
-
-```
