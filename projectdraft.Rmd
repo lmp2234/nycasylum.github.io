@@ -115,11 +115,42 @@ bp_table <- filtered_df %>%
 bp_table %>% 
   kable(caption = "Blood Pressure Classification by Immigrant Generation Status", format = "html")
 
+bp_first_gen <- bp_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")  
+
+
+bp_first_gen_plot <- bp_first_gen %>%
+  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  labs(
+    title = "Blood Pressure Classification for First Generation Immigrants",
+    x = "Blood Pressure Classification",
+    y = "Count",
+    fill = "Blood Pressure"
+  ) +
+  scale_x_discrete(labels = c("Normal", "Prehypertension", "Hypertension I", "Hypertension II")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none"  
+  )
+
+bp_first_gen_plot
 
 ```
 
 
+High Blood Cholesterol 
 
+```{r}
+
+
+
+
+```
 
 
 # Nasiha: Hospital Data 
