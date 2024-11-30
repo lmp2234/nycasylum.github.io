@@ -1,5 +1,5 @@
 ---
-title: "projectdraft"
+title: "project_draft"
 output: html_document
 date: "2024-11-18"
 ---
@@ -10,6 +10,8 @@ library(viridis)
 library(plotly)
 library(haven)
 library(readr)
+install.packages("nnet")
+library(nnet)
 ```
 
 # Lisa: ADD Health Data 
