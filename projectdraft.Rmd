@@ -253,6 +253,28 @@ bmi_first_gen_plot <- bmi_first_gen %>%
 
 bmi_first_gen_plot
 ```
+#Analyses
+
+```{r}
+bmi_table <- filtered_df %>%
+  count(h4bmicls, first_generation) %>%
+  spread(key = first_generation, value = n, fill = 0)
+
+chi_square_bmi <- chisq.test(bmi_table)
+summary(chi_square_bmi)
+
+
+chi_square_bmi$expected
+
+
+fisher_test_bmi <- fisher.test(bmi_table, simulate.p.value = TRUE)
+summary(fisher_test_bmi)
+
+fisher_test_bmi$p.value
+
+bmi_regression <- multinom(h4bmicls ~ first_generation, data = filtered_df)
+summary(bmi_regression)
+```
 
 # Nasiha: Hospital Data 
 
