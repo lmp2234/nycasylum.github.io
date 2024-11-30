@@ -11,7 +11,7 @@
 
 
 
-<title>projectdraft</title>
+<title>hospital_data</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -32,6 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -286,54 +288,12 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">hospital_data</h1>
 
 </div>
 
 
-<div id="projectdraft" class="section level1">
-<h1>projectdraft</h1>
-<p>2024-11-18</p>
-</div>
-<div id="lisa-add-health-data" class="section level1">
-<h1>Lisa: ADD Health Data</h1>
-</div>
-<div id="nasiha-hospital-data" class="section level1">
-<h1>Nasiha: Hospital Data</h1>
-<pre class="r"><code>hospital_data =
-  read_csv(file = &quot;./data/Hospitals.csv&quot;)</code></pre>
-<pre><code>## Rows: 78 Columns: 6
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (6): Facility Type, Borough, Facility Name, Cross Streets, Phone, Locati...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>facilities_by_borough = 
-  hospital_data %&gt;%
-  group_by(Borough) %&gt;%
-  summarise(Facility_Count = n())
 
-hospitals_by_type = 
-  hospital_data %&gt;% 
-  group_by(`Facility Type`) %&gt;% 
-  summarise(Facility_Count = n())
-
-facility_type_by_borough =
-  hospital_data %&gt;%
-  group_by(Borough, `Facility Type`) %&gt;%
-  summarise(Facility_Count = n(), .groups = &quot;drop&quot;) %&gt;%
-  pivot_wider(names_from = `Facility Type`, values_from = Facility_Count, values_fill = 0)
-
-ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill = Borough)) +
-  geom_bar(stat = &quot;identity&quot;) +
-  theme_minimal() +
-  labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;)</code></pre>
-<p><img
-src="projectdraft_files/figure-gfm/unnamed-chunk-2-1.png" /><!-- --></p>
-</div>
-<div id="yucheng-shelter-data" class="section level1">
-<h1>Yucheng: Shelter Data</h1>
-</div>
 
 
 

@@ -274,7 +274,7 @@ $(document).ready(function () {
   <a href="about_us.html">About the Team</a>
 </li>
 <li>
-  <a href="https://github.com/lmp2234/dsfinalproject">
+  <a href="https://github.com/lmp2234/dsfinalproject.io">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -293,7 +293,96 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>library(haven)
+library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(dplyr)
+library(knitr)
+library(tidyr)
 
+
+w1data &lt;- read.csv(&quot;w1inhome.csv&quot;) %&gt;%
+  clean_names() %&gt;% 
+  select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
+
+w4data &lt;- read_sas(&quot;w4inhome.sas7bdat&quot;) %&gt;% 
+  clean_names() %&gt;% 
+  mutate(
+    across(everything(), ~ type.convert(as.character(.), as.is = TRUE)),
+    first_gen = case_when(
+      h4od4 == 0 ~ 1, 
+      h4od4 == 1 ~ 0, 
+      TRUE ~ NA_real_
+    )
+  )
+
+first_gen_count &lt;- w4data %&gt;% 
+  count(first_gen, name = &quot;count&quot;)
+print(first_gen_count)</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   first_gen count
+##       &lt;dbl&gt; &lt;int&gt;
+## 1         0  4937
+## 2         1   177</code></pre>
+<pre class="r"><code>merged_df &lt;- w1data %&gt;%
+  inner_join(w4data, by = &quot;aid&quot;) %&gt;% 
+  mutate(
+    first_generation = case_when(
+      h4od4 == 0 | h1gi11 == 0 ~ 1, 
+      TRUE ~ 0
+    ),
+    second_generation = case_when(
+      h1nm6 == 0 | h1nf6 == 0 ~ 1, 
+      TRUE ~ 0
+    ), 
+    third_generation = case_when(
+      first_generation == 0 &amp; second_generation == 0 ~ 1, 
+      TRUE ~ 0 
+    )
+  )
+
+generation_counts &lt;- merged_df %&gt;% 
+  summarize(
+     first_generation = sum(first_generation, na.rm = TRUE),
+    second_generation = sum(second_generation, na.rm = TRUE),
+    third_generation = sum(third_generation, na.rm = TRUE)
+  ) %&gt;%
+  pivot_longer(everything(), names_to = &quot;Generation&quot;, values_to = &quot;Count&quot;)
+
+generation_counts %&gt;% 
+  kable(
+    caption = &quot;Individuals by Generation Status&quot;,
+    col.names = c(&quot;Generation Status&quot;, &quot;Count&quot;), 
+    align = &quot;lc&quot;,
+    format = &quot;markdown&quot;
+  )</code></pre>
+<table>
+<caption>Individuals by Generation Status</caption>
+<thead>
+<tr class="header">
+<th align="left">Generation Status</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">first_generation</td>
+<td align="center">257</td>
+</tr>
+<tr class="even">
+<td align="left">second_generation</td>
+<td align="center">189</td>
+</tr>
+<tr class="odd">
+<td align="left">third_generation</td>
+<td align="center">4730</td>
+</tr>
+</tbody>
+</table>
 
 
 

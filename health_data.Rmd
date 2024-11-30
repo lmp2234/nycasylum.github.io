@@ -8,6 +8,7 @@ library(haven)
 library(janitor)
 library(dplyr)
 library(knitr)
+library(tidyr)
 
 
 w1data <- read.csv("w1inhome.csv") %>%

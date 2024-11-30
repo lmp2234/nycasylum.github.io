@@ -4,7 +4,7 @@ navbar:
   title: "Home"
   left: 
     - text: "Data Processing"
-      href: projectdraft.html
+      href: data_processing.html
     - text: "Analyses"
       menu:
       - text: "Health Data"
@@ -12,14 +12,14 @@ navbar:
       - text: "Shelter Data"
         href: p8105_shelter_visuals.html
       - text: "Hospital Data"
-        href: projectdraft.html
+        href: hospital_data.html
     - text: "Project Report"
-      href: projectdraft.html
+      href: project_report.html
   right:
     - text: "About the Team"
       href: about_us.html
     - icon: fa-github fa-lg
-      href: https://github.com/lmp2234/dsfinalproject
+      href: https://github.com/lmp2234/dsfinalproject.io
 output:
   html_document:
     theme: flatly
