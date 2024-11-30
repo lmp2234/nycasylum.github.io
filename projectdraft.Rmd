@@ -92,7 +92,7 @@ filtered_df <- merged_df %>%
 
 bp_table <- filtered_df %>%
   count(h4bpcls, first_generation, second_generation, third_generation) %>%
-  filter(!(h4bpcls %in% c(6, 7, 9))) %>%
+  filter(!(h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) %>%
   mutate(
     h4bpcls = recode(h4bpcls,
                      `1` = "Normal",
@@ -147,11 +147,112 @@ High Blood Cholesterol
 
 ```{r}
 
+cholesterol_table <- filtered_df %>% 
+  count(h4id5b, first_generation, second_generation, third_generation) %>% 
+  filter(!(h4id5b == 6 | h4id5b == 8)) %>% 
+  mutate(
+    h4id5b = recode(h4id5b, 
+                    `0` = "No", 
+                    `1` = "Yes")
+  ) %>%
+  pivot_wider(
+    names_from = c("first_generation", "second_generation", "third_generation"),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %>%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %>%
+  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+
+cholesterol_table %>% 
+  kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 
 
+cholesterol_first_gen <- cholesterol_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")  
 
+
+cholesterol_first_gen_plot <- cholesterol_first_gen %>%
+  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  labs(
+    title = "Blood Cholesterol Classification for First Generation Immigrants",
+    x = "Blood Cholesterol Classification",
+    y = "Count",
+    fill = "Blood Cholesterol"
+  ) +
+  scale_x_discrete(labels = c("No", "Yes")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none"  
+  )
+
+cholesterol_first_gen_plot
 ```
 
+Body Mass Index 
+```{r}
+bmi_table <- filtered_df %>% 
+  count(h4bmicls, first_generation, second_generation, third_generation) %>% 
+  filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)) %>% 
+  mutate(
+    h4bmicls = recode(h4bmicls, 
+                    `1` = "Underweight <18.5", 
+                    `2` = "Normal 18.5 - < 25", 
+                    `3` = "Overweight 25 - <30", 
+                    `4` = "Obese I 30-<35", 
+                    `5` = "Obese II: 35-<40", 
+                    `6` = "Obese III: 40+",
+                    )
+  ) %>%
+  pivot_wider(
+    names_from = c("first_generation", "second_generation", "third_generation"),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %>%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %>%
+  select(h4bmicls, `First Generation`, `Second Generation`, `Third Generation`)
+
+bmi_table %>% 
+  kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
+
+
+bmi_first_gen <- bmi_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")  
+
+
+bmi_first_gen_plot <- bmi_first_gen %>%
+  ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  labs(
+    title = "BMI Classification for First Generation Immigrants",
+    x = "BMI Classification",
+    y = "Count",
+    fill = "BMI"
+  ) +
+  scale_x_discrete(labels = c("Underweight <18.5", "Normal 18.5 - < 25", "Overweight 25 - <30","Obese I 30-<35", "Obese II: 35-<40","Obese III: 40+" )) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none"  
+  )
+
+bmi_first_gen_plot
+```
 
 # Nasiha: Hospital Data 
 
