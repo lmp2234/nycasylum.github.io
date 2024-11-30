@@ -2,3 +2,64 @@
 title: "health_data"
 output: html_document
 ---
+
+```{r}
+library(haven)
+library(janitor)
+library(dplyr)
+library(knitr)
+
+
+w1data <- read.csv("w1inhome.csv") %>%
+  clean_names() %>% 
+  select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
+
+w4data <- read_sas("w4inhome.sas7bdat") %>% 
+  clean_names() %>% 
+  mutate(
+    across(everything(), ~ type.convert(as.character(.), as.is = TRUE)),
+    first_gen = case_when(
+      h4od4 == 0 ~ 1, 
+      h4od4 == 1 ~ 0, 
+      TRUE ~ NA_real_
+    )
+  )
+
+first_gen_count <- w4data %>% 
+  count(first_gen, name = "count")
+print(first_gen_count)
+
+merged_df <- w1data %>%
+  inner_join(w4data, by = "aid") %>% 
+  mutate(
+    first_generation = case_when(
+      h4od4 == 0 | h1gi11 == 0 ~ 1, 
+      TRUE ~ 0
+    ),
+    second_generation = case_when(
+      h1nm6 == 0 | h1nf6 == 0 ~ 1, 
+      TRUE ~ 0
+    ), 
+    third_generation = case_when(
+      first_generation == 0 & second_generation == 0 ~ 1, 
+      TRUE ~ 0 
+    )
+  )
+
+generation_counts <- merged_df %>% 
+  summarize(
+     first_generation = sum(first_generation, na.rm = TRUE),
+    second_generation = sum(second_generation, na.rm = TRUE),
+    third_generation = sum(third_generation, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(), names_to = "Generation", values_to = "Count")
+
+generation_counts %>% 
+  kable(
+    caption = "Individuals by Generation Status",
+    col.names = c("Generation Status", "Count"), 
+    align = "lc",
+    format = "markdown"
+  )
+```
+

@@ -17,6 +17,7 @@ library(readr)
 library(haven)
 library(janitor)
 library(dplyr)
+library(knitr)
 
 
 w1data <- read.csv("w1inhome.csv") %>%
@@ -39,8 +40,38 @@ first_gen_count <- w4data %>%
 print(first_gen_count)
 
 merged_df <- w1data %>%
-  inner_join(w4data, by = "aid")
+  inner_join(w4data, by = "aid") %>% 
+  mutate(
+    first_generation = case_when(
+      h4od4 == 0 | h1gi11 == 0 ~ 1, 
+      TRUE ~ 0
+    ),
+    second_generation = case_when(
+      h1nm6 == 0 | h1nf6 == 0 ~ 1, 
+      TRUE ~ 0
+    ), 
+    third_generation = case_when(
+      first_generation == 0 & second_generation == 0 ~ 1, 
+      TRUE ~ 0 
+    )
+  )
 
+generation_counts <- merged_df %>% 
+  summarize(
+     first_generation = sum(first_generation, na.rm = TRUE),
+    second_generation = sum(second_generation, na.rm = TRUE),
+    third_generation = sum(third_generation, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(), names_to = "Generation", values_to = "Count")
+
+generation_counts %>% 
+  kable(
+    caption = "Individuals by Generation Status",
+    col.names = c("Generation Status", "Count"), 
+    align = "lc",
+    format = "markdown"
+  )
+  
 ```
 
 # Nasiha: Hospital Data 
