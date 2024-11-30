@@ -14,7 +14,23 @@ library(readr)
 
 # Lisa: ADD Health Data 
 ```{r}
+library(haven)
+library(janitor)
+library(dplyr)
 
+w4data <- read_sas("w4inhome.sas7bdat") %>% 
+  clean_names() %>% 
+  mutate(
+    first_gen = case_when(
+      h4od4 == 0 ~ 1, 
+      h4od4 == 1 ~ 0, 
+      TRUE ~ NA_real_
+    )
+  )
+
+first_gen_count <- w4data %>% 
+  count(first_gen, name = "count")
+print(first_gen_count)
 ```
 
 # Nasiha: Hospital Data 
