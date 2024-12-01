@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2024-11-18" />
+
+<title>project_draft</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="data_processing.html">Data Processing</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="health_data.html">Health Data</a>
+    </li>
+    <li>
+      <a href="p8105_shelter_visuals.html">Shelter Data</a>
+    </li>
+    <li>
+      <a href="hospital_data.html">Hospital Data</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project_report.html">Project Report</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about_us.html">About the Team</a>
+</li>
+<li>
+  <a href="https://github.com/lmp2234/dsfinalproject.io">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">project_draft</h1>
+<h4 class="date">2024-11-18</h4>
+
+</div>
+
+
+<div id="lisa-add-health-data" class="section level1">
+<h1>Lisa: ADD Health Data</h1>
+<pre class="r"><code>library(haven)
+library(janitor)
+library(dplyr)
+library(knitr)
+
+
+w1data &lt;- read.csv(&quot;w1inhome.csv&quot;) %&gt;%
+  clean_names() %&gt;% 
+  select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
+
+w4data &lt;- read_sas(&quot;w4inhome.sas7bdat&quot;) %&gt;% 
+  clean_names() %&gt;% 
+  mutate(
+    across(everything(), ~ type.convert(as.character(.), as.is = TRUE)),
+    first_gen = case_when(
+      h4od4 == 0 ~ 1, 
+      h4od4 == 1 ~ 0, 
+      TRUE ~ NA_real_
+    )
+  )
+
+first_gen_count &lt;- w4data %&gt;% 
+  count(first_gen, name = &quot;count&quot;)
+print(first_gen_count)</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   first_gen count
+##       &lt;dbl&gt; &lt;int&gt;
+## 1         0  4937
+## 2         1   177</code></pre>
+<pre class="r"><code>merged_df &lt;- w1data %&gt;%
+  inner_join(w4data, by = &quot;aid&quot;) %&gt;% 
+  mutate(
+    first_generation = case_when(
+      h4od4 == 0 | h1gi11 == 0 ~ 1, 
+      TRUE ~ 0
+    ),
+    second_generation = case_when(
+      h1nm6 == 0 | h1nf6 == 0 ~ 1, 
+      TRUE ~ 0
+    ), 
+    third_generation = case_when(
+      first_generation == 0 &amp; second_generation == 0 ~ 1, 
+      TRUE ~ 0 
+    )
+  )
+
+generation_counts &lt;- merged_df %&gt;% 
+  summarize(
+     first_generation = sum(first_generation, na.rm = TRUE),
+    second_generation = sum(second_generation, na.rm = TRUE),
+    third_generation = sum(third_generation, na.rm = TRUE)
+  ) %&gt;%
+  pivot_longer(everything(), names_to = &quot;Generation&quot;, values_to = &quot;Count&quot;)
+
+generation_counts %&gt;% 
+  kable(
+    caption = &quot;Individuals by Generation Status&quot;,
+    col.names = c(&quot;Generation Status&quot;, &quot;Count&quot;), 
+    align = &quot;lc&quot;,
+    format = &quot;markdown&quot;
+  )</code></pre>
+<table>
+<caption>Individuals by Generation Status</caption>
+<thead>
+<tr class="header">
+<th align="left">Generation Status</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">first_generation</td>
+<td align="center">257</td>
+</tr>
+<tr class="even">
+<td align="left">second_generation</td>
+<td align="center">189</td>
+</tr>
+<tr class="odd">
+<td align="left">third_generation</td>
+<td align="center">4730</td>
+</tr>
+</tbody>
+</table>
+<p>creating tables &amp; visualizations of the following health
+indicators by immigrant generation status: blood pressure
+classification, high cholesterol, and body mass index classification</p>
+<p>first, cleaning the data for each of the health indicators</p>
+<pre class="r"><code>filtered_df &lt;- merged_df %&gt;%
+  mutate(across(
+    c(h4bpcls, h4id5b, h4bmicls),
+    ~ replace(., 
+              (cur_column() == &quot;h4bpcls&quot; &amp; (h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) |
+              (cur_column() == &quot;h4id5b&quot; &amp; (h4id5b == 6 | h4id5b == 8)) |
+              (cur_column() == &quot;h4bmicls&quot; &amp; (h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)),
+              NA)
+  )) %&gt;%
+  drop_na(h4bpcls, h4id5b, h4bmicls)
+
+
+bp_table &lt;- filtered_df %&gt;%
+  count(h4bpcls, first_generation, second_generation, third_generation) %&gt;%
+  filter(!(h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) %&gt;%
+  mutate(
+    h4bpcls = recode(h4bpcls,
+                     `1` = &quot;Normal&quot;,
+                     `2` = &quot;Prehypertension&quot;,
+                     `3` = &quot;Hypertension I&quot;,
+                     `4` = &quot;Hypertension II&quot;)
+  ) %&gt;%
+  pivot_wider(
+    names_from = c(&quot;first_generation&quot;, &quot;second_generation&quot;, &quot;third_generation&quot;),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %&gt;%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %&gt;%
+  select(h4bpcls, `First Generation`, `Second Generation`, `Third Generation`)
+
+bp_table %&gt;% 
+  kable(caption = &quot;Blood Pressure Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
+<table>
+<caption>
+Blood Pressure Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4bpcls
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Normal
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+1557
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prehypertension
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+2148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hypertension I
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+680
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hypertension II
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>bp_first_gen &lt;- bp_table %&gt;%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = &quot;Generation&quot;, 
+               values_to = &quot;Count&quot;) %&gt;%
+  filter(Generation == &quot;First Generation&quot;)  
+
+
+bp_first_gen_plot &lt;- bp_first_gen %&gt;%
+  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  labs(
+    title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
+    x = &quot;Blood Pressure Classification&quot;,
+    y = &quot;Count&quot;,
+    fill = &quot;Blood Pressure&quot;
+  ) +
+  scale_x_discrete(labels = c(&quot;Normal&quot;, &quot;Prehypertension&quot;, &quot;Hypertension I&quot;, &quot;Hypertension II&quot;)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = &quot;none&quot;  
+  )
+
+bp_first_gen_plot</code></pre>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>High Blood Cholesterol</p>
+<pre class="r"><code>cholesterol_table &lt;- filtered_df %&gt;% 
+  count(h4id5b, first_generation, second_generation, third_generation) %&gt;% 
+  filter(!(h4id5b == 6 | h4id5b == 8)) %&gt;% 
+  mutate(
+    h4id5b = recode(h4id5b, 
+                    `0` = &quot;No&quot;, 
+                    `1` = &quot;Yes&quot;)
+  ) %&gt;%
+  pivot_wider(
+    names_from = c(&quot;first_generation&quot;, &quot;second_generation&quot;, &quot;third_generation&quot;),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %&gt;%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %&gt;%
+  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+
+cholesterol_table %&gt;% 
+  kable(caption = &quot;Blood Cholesterol Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
+<table>
+<caption>
+Blood Cholesterol Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4id5b
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+119
+</td>
+<td style="text-align:right;">
+4190
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+375
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cholesterol_first_gen &lt;- cholesterol_table %&gt;%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = &quot;Generation&quot;, 
+               values_to = &quot;Count&quot;) %&gt;%
+  filter(Generation == &quot;First Generation&quot;)  
+
+
+cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
+  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  labs(
+    title = &quot;Blood Cholesterol Classification for First Generation Immigrants&quot;,
+    x = &quot;Blood Cholesterol Classification&quot;,
+    y = &quot;Count&quot;,
+    fill = &quot;Blood Cholesterol&quot;
+  ) +
+  scale_x_discrete(labels = c(&quot;No&quot;, &quot;Yes&quot;)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = &quot;none&quot;  
+  )
+
+cholesterol_first_gen_plot</code></pre>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Body Mass Index</p>
+<pre class="r"><code>bmi_table &lt;- filtered_df %&gt;% 
+  count(h4bmicls, first_generation, second_generation, third_generation) %&gt;% 
+  filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)) %&gt;% 
+  mutate(
+    h4bmicls = recode(h4bmicls, 
+                    `1` = &quot;Underweight &lt;18.5&quot;, 
+                    `2` = &quot;Normal 18.5 - &lt; 25&quot;, 
+                    `3` = &quot;Overweight 25 - &lt;30&quot;, 
+                    `4` = &quot;Obese I 30-&lt;35&quot;, 
+                    `5` = &quot;Obese II: 35-&lt;40&quot;, 
+                    `6` = &quot;Obese III: 40+&quot;,
+                    )
+  ) %&gt;%
+  pivot_wider(
+    names_from = c(&quot;first_generation&quot;, &quot;second_generation&quot;, &quot;third_generation&quot;),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %&gt;%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %&gt;%
+  select(h4bmicls, `First Generation`, `Second Generation`, `Third Generation`)
+
+bmi_table %&gt;% 
+  kable(caption = &quot;Blood Cholesterol Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
+<table>
+<caption>
+Blood Cholesterol Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4bmicls
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Underweight &lt;18.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Normal 18.5 - &lt; 25
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+1440
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Overweight 25 - &lt;30
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+1360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese I 30-&lt;35
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+842
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese II: 35-&lt;40
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+461
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese III: 40+
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+393
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>bmi_first_gen &lt;- bmi_table %&gt;%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = &quot;Generation&quot;, 
+               values_to = &quot;Count&quot;) %&gt;%
+  filter(Generation == &quot;First Generation&quot;)  
+
+
+bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
+  ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  labs(
+    title = &quot;BMI Classification for First Generation Immigrants&quot;,
+    x = &quot;BMI Classification&quot;,
+    y = &quot;Count&quot;,
+    fill = &quot;BMI&quot;
+  ) +
+  scale_x_discrete(labels = c(&quot;Underweight &lt;18.5&quot;, &quot;Normal 18.5 - &lt; 25&quot;, &quot;Overweight 25 - &lt;30&quot;,&quot;Obese I 30-&lt;35&quot;, &quot;Obese II: 35-&lt;40&quot;,&quot;Obese III: 40+&quot; )) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = &quot;none&quot;  
+  )
+
+bmi_first_gen_plot</code></pre>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+#Analyses</p>
+<pre class="r"><code>bmi_table &lt;- filtered_df %&gt;%
+  count(h4bmicls, first_generation) %&gt;%
+  spread(key = first_generation, value = n, fill = 0)
+
+chi_square_bmi &lt;- chisq.test(bmi_table)</code></pre>
+<pre><code>## Warning in stats::chisq.test(x, y, ...): Chi-squared approximation may be
+## incorrect</code></pre>
+<pre class="r"><code>summary(chi_square_bmi)</code></pre>
+<pre><code>##           Length Class  Mode     
+## statistic  1     -none- numeric  
+## parameter  1     -none- numeric  
+## p.value    1     -none- numeric  
+## method     1     -none- character
+## data.name  1     -none- character
+## observed  18     -none- numeric  
+## expected  18     -none- numeric  
+## residuals 18     -none- numeric  
+## stdres    18     -none- numeric</code></pre>
+<pre class="r"><code>chi_square_bmi$expected</code></pre>
+<pre><code>##       h4bmicls          0        1
+## [1,] 0.3177966   70.95944  3.72276
+## [2,] 6.6059322 1475.01029 77.38378
+## [3,] 6.2627119 1398.37409 73.36320
+## [4,] 3.9194915  875.16646 45.91404
+## [5,] 2.1186441  473.06295 24.81840
+## [6,] 1.7754237  396.42676 20.79782</code></pre>
+<pre class="r"><code>fisher_test_bmi &lt;- fisher.test(bmi_table, simulate.p.value = TRUE)
+summary(fisher_test_bmi)</code></pre>
+<pre><code>##             Length Class  Mode     
+## p.value     1      -none- numeric  
+## alternative 1      -none- character
+## method      1      -none- character
+## data.name   1      -none- character</code></pre>
+<pre class="r"><code>fisher_test_bmi$p.value</code></pre>
+<pre><code>## [1] 0.0009995002</code></pre>
+</div>
+<div id="nasiha-hospital-data" class="section level1">
+<h1>Nasiha: Hospital Data</h1>
+<pre class="r"><code>hospital_data =
+  read_csv(file = &quot;./data/Hospitals.csv&quot;)</code></pre>
+<pre><code>## Rows: 78 Columns: 6
+## ── Column specification ───────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): Facility Type, Borough, Facility Name, Cross Streets, Phone, Locati...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>facilities_by_borough = 
+  hospital_data %&gt;%
+  group_by(Borough) %&gt;%
+  summarise(Facility_Count = n())
+
+hospitals_by_type = 
+  hospital_data %&gt;% 
+  group_by(`Facility Type`) %&gt;% 
+  summarise(Facility_Count = n())
+
+facility_type_by_borough =
+  hospital_data %&gt;%
+  group_by(Borough, `Facility Type`) %&gt;%
+  summarise(Facility_Count = n(), .groups = &quot;drop&quot;) %&gt;%
+  pivot_wider(names_from = `Facility Type`, values_from = Facility_Count, values_fill = 0)
+
+ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill = Borough)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  theme_minimal() +
+  labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;)</code></pre>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="yucheng-shelter-data" class="section level1">
+<h1>Yucheng: Shelter Data</h1>
+<pre class="r"><code>as_df = read_csv(&quot;./data/asylum_seekers_report.csv&quot;) |&gt; 
+  janitor::clean_names() |&gt; 
+  filter(agency != &quot;total&quot;) |&gt; 
+  mutate(category = ifelse(category == &quot;Population - Individuals&quot;, &quot;Individuals&quot;, category))</code></pre>
+<pre><code>## Rows: 42 Columns: 6
+## ── Column specification ───────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): category, date, table, population, agency
+## num (1): count
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>head(as_df)</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   category               date      table                 population agency count
+##   &lt;chr&gt;                  &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… DHS    31316
+## 2 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… DYCD      44
+## 3 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… HPD     6409
+## 4 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… H+H    20856
+## 5 Individuals            30-Sep-23 ASYLUM SEEKER DAILY … individua… NYCEM   4390
+## 6 Families with Children 30-Sep-23 ASYLUM SEEKER DAILY … individua… DHS    28880</code></pre>
+<pre class="r"><code>count_by_cat = as_df |&gt; 
+  group_by(category) |&gt; 
+  summarize(count_by_cat = sum(count, na.rm = TRUE), .groups = &quot;drop&quot;)
+
+ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
+  geom_col() +
+  labs(title = &quot;Total Counts of Asylum Seekers by Category&quot;, x = &quot;Category&quot;, y = &quot;Count&quot;) +
+  scale_fill_viridis_d() +
+  theme_minimal()</code></pre>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>counts_by_cat_agen = 
+  ggplot(as_df, aes(x = category, y = count, fill = agency)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  labs(title = &quot;Counts by Category and Agency&quot;, x = &quot;Category&quot;, y = &quot;Count&quot;) +
+  scale_fill_viridis_d() +
+  theme_minimal()
+
+ggplotly(counts_by_cat_agen)</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f8ef7664471d5e94267a" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f8ef7664471d5e94267a">{"x":{"data":[{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997],"y":[31316,28880,748,1688,8143,354,1688],"text":["category: Individuals<br />count: 31316<br />agency: DHS","category: Families with Children<br />count: 28880<br />agency: DHS","category: Adult Families<br />count:   748<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS","category: Families with Children<br />count:  8143<br />agency: DHS","category: Adult Families<br />count:   354<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DHS","legendgroup":"DHS","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998],"y":[44,0,0,44,0,0,44],"text":["category: Individuals<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(59,82,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DYCD","legendgroup":"DYCD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3,2,1,4,2,1,4],"y":[20856,14900,1239,4717,4256,611,4717],"text":["category: Individuals<br />count: 20856<br />agency: H+H","category: Families with Children<br />count: 14900<br />agency: H+H","category: Adult Families<br />count:  1239<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H","category: Families with Children<br />count:  4256<br />agency: H+H","category: Adult Families<br />count:   611<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(33,144,140,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"H+H","legendgroup":"H+H","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.1800000000000002,2.1800000000000002,1.1799999999999999,4.1799999999999997,2.1800000000000002,1.1799999999999999,4.1799999999999997],"y":[6409,4078,309,2022,1151,159,2022],"text":["category: Individuals<br />count:  6409<br />agency: HPD","category: Families with Children<br />count:  4078<br />agency: HPD","category: Adult Families<br />count:   309<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD","category: Families with Children<br />count:  1151<br />agency: HPD","category: Adult Families<br />count:   159<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(93,200,99,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"HPD","legendgroup":"HPD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003],"y":[4390,6,444,3940,3,221,3940],"text":["category: Individuals<br />count:  4390<br />agency: NYCEM","category: Families with Children<br />count:     6<br />agency: NYCEM","category: Adult Families<br />count:   444<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM","category: Families with Children<br />count:     3<br />agency: NYCEM","category: Adult Families<br />count:   221<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"NYCEM","legendgroup":"NYCEM","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":54.794520547945211},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Counts by Category and Agency","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,4.5999999999999996],"tickmode":"array","ticktext":["Adult Families","Families with Children","Individuals","Single Adults"],"tickvals":[1,2,3,4],"categoryorder":"array","categoryarray":["Adult Families","Families with Children","Individuals","Single Adults"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Category","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1565.8000000000002,32881.800000000003],"tickmode":"array","ticktext":["0","10000","20000","30000"],"tickvals":[0,10000,20000,30000],"categoryorder":"array","categoryarray":["0","10000","20000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"agency","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"adb82d360294":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"adb82d360294","visdat":{"adb82d360294":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

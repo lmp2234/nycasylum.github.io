@@ -5,6 +5,7 @@ date: "2024-11-18"
 ---
 
 ```{r setup, include=FALSE}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 library(tidyverse)
 library(viridis)
 library(plotly)
