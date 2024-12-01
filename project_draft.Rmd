@@ -274,8 +274,7 @@ summary(fisher_test_bmi)
 
 fisher_test_bmi$p.value
 
-bmi_regression <- multinom(h4bmicls ~ first_generation, data = filtered_df)
-summary(bmi_regression)
+
 ```
 
 # Nasiha: Hospital Data 
