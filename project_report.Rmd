@@ -5,35 +5,35 @@ output: html_document
 
 This project report will discuss the details behind our project. 
 
-# Motivation
+## Motivation
 
 The motivation behind this project stems from asylum seekers entering NYC with a lack of resources on how to survive. These individuals, many of whom arrive after experiencing trauma, uncertainty, and displacement, often struggle to navigate the complex system of services and resources available to them. With increasing numbers of asylum seekers arriving in the city, providing them with a comprehensive, accessible, and user-friendly tool to help them find essential services is crucial.
 
 
-# Related work
+## Related work
 
 A huge contributing factor we've observed in public health is how health disparities and social determinants shape the narrative behind many asylum seekers in NYC. There is a significantly high prevalence of aslyum seekers not getting the care they need and that raises concern on what ways we can minimize this barrier. One of the findings we discovered is underweight asylum seekers and how that reveals lack of accessible food banks, services, etc. that can provide nutrition to struggling asylum seekers. This represents our reasoning on exploring this issue. 
 
 Here are some of the main topics we researcherd for this project: [shelters](https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format.), [medical services](https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx), [social determinants of health](https://dataverse.unc.edu/dataverse/addhealth), and [food banks](https://github.com/NewYorkCityCouncil/food_insecurity/tree/main?tab=readme-ov-file).  
 
 
-# Initial questions: 
+## Initial questions: 
 
 What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
 
-# Data
+## Data
 
 Source, scraping method, cleaning, etc.
 
-# Exploratory analysis
+## Exploratory analysis
 
 Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
-# Additional analysis
+## Additional analysis
 
 If you undertake formal statistical analyses, describe these in detail
 
-# Discussion
+## Discussion
 
 What were your findings? Are they what you expect? What insights into the data can you make?
 
