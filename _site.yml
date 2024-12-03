@@ -13,13 +13,16 @@ navbar:
         href: p8105_shelter_visuals.html
       - text: "Hospital Data"
         href: hospital_data.html
+    - text: "Interactive Map"
+      href: interactive_map.html
     - text: "Project Report"
       href: project_report.html
+
   right:
     - text: "About the Team"
       href: about_us.html
     - icon: fa-github fa-lg
-      href: https://github.com/lmp2234/dsfinalproject.io
+      href: https://github.com/lmp2234/nycasylum.github.io
 output:
   html_document:
     theme: flatly

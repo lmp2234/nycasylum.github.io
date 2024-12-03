@@ -1,9 +1,11 @@
 ---
-title: "about_us"
+title: "About Us!"
 output: html_document
 ---
+Here is a little background information about the team. 
 
 # Cindy Ho 
+[Cindy Ho](https://cjh2248.github.io/) is a 2nd yr MPH candidate in Sociomedical Sciences with a certificate in Infectious Disease Epidemiology. 
 
 # Yucheng Zhao 
 
