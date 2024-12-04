@@ -2,3 +2,21 @@
 title: "interactive_map"
 output: html_document
 ---
+
+```{r}
+hospital_data =
+  read_csv(file = "./data/Hospitals.csv") %>% 
+  rename(location_1 = `Location 1`)
+  tibble(
+    location_1 = c("413 120th Street New York, NY 10035 (40.798205044469, -73.932667945174)", "79 01 Elmhurst, NY 11373 (40.738710402563, -73.878351155182)", "	2201 Neptune Avenue Brooklyn, NY 11224 (40.578488319967, -73.989497148121)"))
+  
+  hospital_data <- hospital_data %>% 
+    mutate(
+      latitude = as.numeric(str_extract(location_1, "(?<=\\()[^,]+")),
+      longitude = as.numeric(str_extract(location_1, "(?<=, ).+?(?=\\))"))
+    )
+    
+  
+head(hospital_data)
+```
+
