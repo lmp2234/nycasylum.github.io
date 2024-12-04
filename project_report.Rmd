@@ -19,9 +19,25 @@ Here are some of the main topics we researcherd for this project: [shelters](htt
 
 ## Initial questions: 
 
-What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
+Initially, the questions we were trying to answer were: 
+(1)	How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
+(2)	What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
+(3)	Are these resources equitably distributed across the boroughs of NYC?
+
+As the project progressed, we refined these questions to focus more on identifying gaps in resource availability and accessibility. Our questions included: 
+(1)	Are the current shelters sufficient to meet the needs of asylum seekers?
+(2)	Do certain boroughs have fewer medical facilities relative to the immigrant population density?
+(3)	How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
+
+During our analysis, additional questions emerged:
+(1)	Are there patterns of resource utilization among asylum seekers that might highlight barriers (e.g., language, transportation)?
+(2)	How do the services available in NYC compare to other cities with significant asylum-seeking populations?
+(3)	What are the policy implications of our findings for improving resource allocation for asylum seekers?
+
 
 ## Data
+
+### Codebook 
 
 
 
@@ -35,5 +51,12 @@ We conducted a regression analysis to assess whether being a first-generation im
 
 ## Discussion
 
-What were your findings? Are they what you expect? What insights into the data can you make?
+Our analysis highlights several key findings regarding health trends and resources available to asylum seekers in New York City. Our analysis of the ADD HEALTH dataset revealed interesting health trends among immigrant populations. We found that first-generation immigrants were statistically associated with lower systolic blood pressure (2.49 mmHg decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease, p = 0.0026) compared to second- and third-generation individuals, even after controlling for demographic and socioeconomic factors. Also, first-generation immigrants exhibited a 1.20 decrease in BMI (p = 0.0112), aligning with earlier findings that many first-generation immigrants are classified as underweight.These health trends highlight the nuanced relationship between immigrant status and health outcomes. While the lower blood pressure and BMI may initially appear to be protective factors, they could also reflect underlying vulnerabilities such as food insecurity, limited access to healthcare, or stressors related to immigration status. For first-generation immigrants, these factors might manifest as a mix of both health benefits (due to lifestyle factors from their country of origin) and risks (due to systemic barriers in accessing resources in their host country). These trends underscore the need for culturally competent healthcare services that can address the unique needs of immigrant populations.
+
+When it comes to healthcare facilities, the distribution across the five boroughs is very uneven. Boroughs with higher immigrant populations, like Queens and the Bronx, have noticeably fewer medical facilities compared to others. For example, Brooklyn has 26 major healthcare facilities, but Queens, which is home to many immigrant families, has just 11. This uneven distribution makes healthcare access a major burden for asylum seekers in those areas. Families needing medical care in these boroughs might end up having to travel long distances for facilities with appointment availabilities or might face overcrowded emergency rooms or urgent care facilities in the centers near them. For immigrants already dealing with language barriers and limited financial resources, these extra obstacles can be overwhelming. Addressing this gap means not only increasing the number of facilities but also making sure they are located where they are needed most.
+
+While investigating shelter usage in NYC, we saw that there has been a dramatic increase in recent years, with the total number of individuals utilizing shelters rising from 46,521 in 2022 to 90,798 in 2024. A significant proportion of shelter users are families with children, which contrasts with the smaller amount of single adults using these services. This tells us that the need for family-specific shelter resources is growing rapidly. At the same time, it highlights how overburdened the current shelter system has become. For asylum seekers who may be new to the city and navigating an unfamiliar system, this could make finding shelter even more challenging. Addressing these trends will require more than just expanding capacity. It calls for targeted solutions that meet the unique needs of families and vulnerable newcomers.
+
+One of the biggest issues we encountered during this project was the lack of clear data on other resources available to asylum seekers. Services like translation assistance or immigrant health centers are crucial, but finding detailed information about them was surprisingly difficult to find. This reflects a broader systemic problem in that  if we struggled to locate this data as researchers, imagine how much harder it must be for someone new to the city and unfamiliar with its systems. For asylum seekers, who may already be dealing with language barriers and a lack of documentation, this gap in information can make it nearly impossible to find the support they need. The lack of transparency and centralized information is a glaring issue. Addressing it will require better documentation of available services and a stronger effort to make this information accessible to those who need it most.
+
 
