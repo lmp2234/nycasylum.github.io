@@ -259,23 +259,29 @@ bmi_first_gen_plot
 #Analyses
 
 ```{r}
-bmi_table <- filtered_df %>%
-  count(h4bmicls, first_generation) %>%
-  spread(key = first_generation, value = n, fill = 0)
+filtered_df <- 
+  filtered_df %>% 
+  mutate(age = 2008 - h4od1y, 
+         age_standardized = scale(age)) %>% 
+    rename(sex = bio_sex4, 
+           race = h1gi8)
 
-chi_square_bmi <- chisq.test(bmi_table)
-summary(chi_square_bmi)
+filtered_df |>
+  lm(h4bmi ~ first_generation + age_standardized + sex + race, data = _) |> 
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
 
+```
+```{r}
+filtered_df |>
+  lm(h4sbp ~ first_generation + age_standardized + bio_sex4 + h1gi8, data = _) |> 
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
 
-chi_square_bmi$expected
-
-
-fisher_test_bmi <- fisher.test(bmi_table, simulate.p.value = TRUE)
-summary(fisher_test_bmi)
-
-fisher_test_bmi$p.value
-
-
+filtered_df |>
+  lm(h4dbp ~ first_generation + age_standardized + bio_sex4 + h1gi8, data = _) |> 
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
 ```
 
 # Nasiha: Hospital Data 
