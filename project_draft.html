@@ -796,48 +796,286 @@ bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
 bmi_first_gen_plot</code></pre>
 <p><img src="project_draft_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 #Analyses</p>
-<pre class="r"><code>bmi_table &lt;- filtered_df %&gt;%
-  count(h4bmicls, first_generation) %&gt;%
-  spread(key = first_generation, value = n, fill = 0)
+<pre class="r"><code>filtered_df &lt;- 
+  filtered_df %&gt;% 
+  mutate(age = 2008 - h4od1y, 
+         age_standardized = scale(age)) %&gt;% 
+    rename(sex = bio_sex4, 
+           race = h1gi8, 
+           education = h4ec1, 
+           income = h4ed2)
 
-chi_square_bmi &lt;- chisq.test(bmi_table)</code></pre>
-<pre><code>## Warning in stats::chisq.test(x, y, ...): Chi-squared approximation may be
-## incorrect</code></pre>
-<pre class="r"><code>summary(chi_square_bmi)</code></pre>
-<pre><code>##           Length Class  Mode     
-## statistic  1     -none- numeric  
-## parameter  1     -none- numeric  
-## p.value    1     -none- numeric  
-## method     1     -none- character
-## data.name  1     -none- character
-## observed  18     -none- numeric  
-## expected  18     -none- numeric  
-## residuals 18     -none- numeric  
-## stdres    18     -none- numeric</code></pre>
-<pre class="r"><code>chi_square_bmi$expected</code></pre>
-<pre><code>##       h4bmicls          0        1
-## [1,] 0.3177966   70.95944  3.72276
-## [2,] 6.6059322 1475.01029 77.38378
-## [3,] 6.2627119 1398.37409 73.36320
-## [4,] 3.9194915  875.16646 45.91404
-## [5,] 2.1186441  473.06295 24.81840
-## [6,] 1.7754237  396.42676 20.79782</code></pre>
-<pre class="r"><code>fisher_test_bmi &lt;- fisher.test(bmi_table, simulate.p.value = TRUE)
-summary(fisher_test_bmi)</code></pre>
-<pre><code>##             Length Class  Mode     
-## p.value     1      -none- numeric  
-## alternative 1      -none- character
-## method      1      -none- character
-## data.name   1      -none- character</code></pre>
-<pre class="r"><code>fisher_test_bmi$p.value</code></pre>
-<pre><code>## [1] 0.00149925</code></pre>
+filtered_df |&gt;
+  lm(h4bmi ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt; 
+  broom::tidy()  |&gt; 
+  knitr::kable(digits = 4)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">31.1549</td>
+<td align="right">0.7565</td>
+<td align="right">41.1836</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-1.2040</td>
+<td align="right">0.4746</td>
+<td align="right">-2.5368</td>
+<td align="right">0.0112</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">0.4337</td>
+<td align="right">0.1035</td>
+<td align="right">4.1903</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">0.5135</td>
+<td align="right">0.2082</td>
+<td align="right">2.4659</td>
+<td align="right">0.0137</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">-0.1844</td>
+<td align="right">0.0949</td>
+<td align="right">-1.9433</td>
+<td align="right">0.0520</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">-0.0034</td>
+<td align="right">0.0045</td>
+<td align="right">-0.7461</td>
+<td align="right">0.4556</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.2748</td>
+<td align="right">0.0402</td>
+<td align="right">-6.8443</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>filtered_df |&gt;
+  lm(h4sbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
+  broom::tidy()  |&gt; 
+  knitr::kable(digits = 4)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">140.8767</td>
+<td align="right">1.3224</td>
+<td align="right">106.5324</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-2.4865</td>
+<td align="right">0.8297</td>
+<td align="right">-2.9970</td>
+<td align="right">0.0027</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">0.7605</td>
+<td align="right">0.1809</td>
+<td align="right">4.2034</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">-10.0826</td>
+<td align="right">0.3640</td>
+<td align="right">-27.6972</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">0.1199</td>
+<td align="right">0.1659</td>
+<td align="right">0.7230</td>
+<td align="right">0.4697</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">0.0069</td>
+<td align="right">0.0079</td>
+<td align="right">0.8748</td>
+<td align="right">0.3817</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.2862</td>
+<td align="right">0.0702</td>
+<td align="right">-4.0779</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>filtered_df |&gt;
+  lm(h4dbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
+  broom::tidy()  |&gt; 
+  knitr::kable(digits = 4)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">87.1321</td>
+<td align="right">1.0417</td>
+<td align="right">83.6479</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-1.9677</td>
+<td align="right">0.6535</td>
+<td align="right">-3.0108</td>
+<td align="right">0.0026</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">1.1147</td>
+<td align="right">0.1425</td>
+<td align="right">7.8212</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">-4.7905</td>
+<td align="right">0.2868</td>
+<td align="right">-16.7061</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">0.0799</td>
+<td align="right">0.1307</td>
+<td align="right">0.6114</td>
+<td align="right">0.5410</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">-0.0024</td>
+<td align="right">0.0063</td>
+<td align="right">-0.3828</td>
+<td align="right">0.7019</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.1919</td>
+<td align="right">0.0553</td>
+<td align="right">-3.4697</td>
+<td align="right">0.0005</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>filtered_df |&gt;
+  lm(h4map ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
+  broom::tidy()  |&gt; 
+  knitr::kable(digits = 4)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">105.0493</td>
+<td align="right">1.0702</td>
+<td align="right">98.1608</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-2.1415</td>
+<td align="right">0.6714</td>
+<td align="right">-3.1894</td>
+<td align="right">0.0014</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">0.9962</td>
+<td align="right">0.1464</td>
+<td align="right">6.8035</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">-6.5552</td>
+<td align="right">0.2946</td>
+<td align="right">-22.2509</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">0.0932</td>
+<td align="right">0.1343</td>
+<td align="right">0.6940</td>
+<td align="right">0.4877</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">0.0007</td>
+<td align="right">0.0064</td>
+<td align="right">0.1108</td>
+<td align="right">0.9118</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.2234</td>
+<td align="right">0.0568</td>
+<td align="right">-3.9328</td>
+<td align="right">0.0001</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="nasiha-hospital-data" class="section level1">
 <h1>Nasiha: Hospital Data</h1>
 <pre class="r"><code>hospital_data =
   read_csv(file = &quot;./data/Hospitals.csv&quot;)</code></pre>
 <pre><code>## Rows: 78 Columns: 6
-## ── Column specification ──────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): Facility Type, Borough, Facility Name, Cross Streets, Phone, Locati...
 ## 
@@ -863,7 +1101,7 @@ ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill =
   geom_bar(stat = &quot;identity&quot;) +
   theme_minimal() +
   labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;)</code></pre>
-<p><img src="project_draft_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="yucheng-shelter-data" class="section level1">
 <h1>Yucheng: Shelter Data</h1>
@@ -872,7 +1110,7 @@ ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill =
   filter(agency != &quot;total&quot;) |&gt; 
   mutate(category = ifelse(category == &quot;Population - Individuals&quot;, &quot;Individuals&quot;, category))</code></pre>
 <pre><code>## Rows: 42 Columns: 6
-## ── Column specification ──────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (5): category, date, table, population, agency
 ## num (1): count
@@ -898,7 +1136,7 @@ ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
   labs(title = &quot;Total Counts of Asylum Seekers by Category&quot;, x = &quot;Category&quot;, y = &quot;Count&quot;) +
   scale_fill_viridis_d() +
   theme_minimal()</code></pre>
-<p><img src="project_draft_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="project_draft_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>counts_by_cat_agen = 
   ggplot(as_df, aes(x = category, y = count, fill = agency)) +
   geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
@@ -907,8 +1145,8 @@ ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = category)) +
   theme_minimal()
 
 ggplotly(counts_by_cat_agen)</code></pre>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-f3fbdec49c55fb226362" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-f3fbdec49c55fb226362">{"x":{"data":[{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997],"y":[31316,28880,748,1688,8143,354,1688],"text":["category: Individuals<br />count: 31316<br />agency: DHS","category: Families with Children<br />count: 28880<br />agency: DHS","category: Adult Families<br />count:   748<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS","category: Families with Children<br />count:  8143<br />agency: DHS","category: Adult Families<br />count:   354<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DHS","legendgroup":"DHS","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998],"y":[44,0,0,44,0,0,44],"text":["category: Individuals<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(59,82,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DYCD","legendgroup":"DYCD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3,2,1,4,2,1,4],"y":[20856,14900,1239,4717,4256,611,4717],"text":["category: Individuals<br />count: 20856<br />agency: H+H","category: Families with Children<br />count: 14900<br />agency: H+H","category: Adult Families<br />count:  1239<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H","category: Families with Children<br />count:  4256<br />agency: H+H","category: Adult Families<br />count:   611<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(33,144,140,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"H+H","legendgroup":"H+H","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.1800000000000002,2.1800000000000002,1.1799999999999999,4.1799999999999997,2.1800000000000002,1.1799999999999999,4.1799999999999997],"y":[6409,4078,309,2022,1151,159,2022],"text":["category: Individuals<br />count:  6409<br />agency: HPD","category: Families with Children<br />count:  4078<br />agency: HPD","category: Adult Families<br />count:   309<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD","category: Families with Children<br />count:  1151<br />agency: HPD","category: Adult Families<br />count:   159<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(93,200,99,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"HPD","legendgroup":"HPD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003],"y":[4390,6,444,3940,3,221,3940],"text":["category: Individuals<br />count:  4390<br />agency: NYCEM","category: Families with Children<br />count:     6<br />agency: NYCEM","category: Adult Families<br />count:   444<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM","category: Families with Children<br />count:     3<br />agency: NYCEM","category: Adult Families<br />count:   221<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"NYCEM","legendgroup":"NYCEM","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":54.794520547945211},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Counts by Category and Agency","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,4.5999999999999996],"tickmode":"array","ticktext":["Adult Families","Families with Children","Individuals","Single Adults"],"tickvals":[1,2,3,4],"categoryorder":"array","categoryarray":["Adult Families","Families with Children","Individuals","Single Adults"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Category","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1565.8000000000002,32881.800000000003],"tickmode":"array","ticktext":["0","10000","20000","30000"],"tickvals":[0,10000,20000,30000],"categoryorder":"array","categoryarray":["0","10000","20000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"agency","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1590e539c681c":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"1590e539c681c","visdat":{"1590e539c681c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-b86546eb902b982beacd" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-b86546eb902b982beacd">{"x":{"data":[{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997,1.6399999999999999,0.6399999999999999,3.6399999999999997],"y":[31316,28880,748,1688,8143,354,1688],"text":["category: Individuals<br />count: 31316<br />agency: DHS","category: Families with Children<br />count: 28880<br />agency: DHS","category: Adult Families<br />count:   748<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS","category: Families with Children<br />count:  8143<br />agency: DHS","category: Adult Families<br />count:   354<br />agency: DHS","category: Single Adults<br />count:  1688<br />agency: DHS"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DHS","legendgroup":"DHS","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972,0.18000000000000016,0.17999999999999994,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[2.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998,1.8199999999999998,0.81999999999999995,3.8199999999999998],"y":[44,0,0,44,0,0,44],"text":["category: Individuals<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD","category: Families with Children<br />count:     0<br />agency: DYCD","category: Adult Families<br />count:     0<br />agency: DYCD","category: Single Adults<br />count:    44<br />agency: DYCD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(59,82,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"DYCD","legendgroup":"DYCD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972,0.17999999999999994,0.18000000000000005,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3,2,1,4,2,1,4],"y":[20856,14900,1239,4717,4256,611,4717],"text":["category: Individuals<br />count: 20856<br />agency: H+H","category: Families with Children<br />count: 14900<br />agency: H+H","category: Adult Families<br />count:  1239<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H","category: Families with Children<br />count:  4256<br />agency: H+H","category: Adult Families<br />count:   611<br />agency: H+H","category: Single Adults<br />count:  4717<br />agency: H+H"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(33,144,140,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"H+H","legendgroup":"H+H","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.1800000000000002,2.1800000000000002,1.1799999999999999,4.1799999999999997,2.1800000000000002,1.1799999999999999,4.1799999999999997],"y":[6409,4078,309,2022,1151,159,2022],"text":["category: Individuals<br />count:  6409<br />agency: HPD","category: Families with Children<br />count:  4078<br />agency: HPD","category: Adult Families<br />count:   309<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD","category: Families with Children<br />count:  1151<br />agency: HPD","category: Adult Families<br />count:   159<br />agency: HPD","category: Single Adults<br />count:  2022<br />agency: HPD"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(93,200,99,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"HPD","legendgroup":"HPD","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972,0.17999999999999972,0.18000000000000016,0.17999999999999972],"base":[0,0,0,0,0,0,0],"x":[3.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003,2.3600000000000003,1.3600000000000001,4.3600000000000003],"y":[4390,6,444,3940,3,221,3940],"text":["category: Individuals<br />count:  4390<br />agency: NYCEM","category: Families with Children<br />count:     6<br />agency: NYCEM","category: Adult Families<br />count:   444<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM","category: Families with Children<br />count:     3<br />agency: NYCEM","category: Adult Families<br />count:   221<br />agency: NYCEM","category: Single Adults<br />count:  3940<br />agency: NYCEM"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"NYCEM","legendgroup":"NYCEM","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":54.794520547945211},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Counts by Category and Agency","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,4.5999999999999996],"tickmode":"array","ticktext":["Adult Families","Families with Children","Individuals","Single Adults"],"tickvals":[1,2,3,4],"categoryorder":"array","categoryarray":["Adult Families","Families with Children","Individuals","Single Adults"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Category","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1565.8000000000002,32881.800000000003],"tickmode":"array","ticktext":["0","10000","20000","30000"],"tickvals":[0,10000,20000,30000],"categoryorder":"array","categoryarray":["0","10000","20000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"agency","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"10f802d985972":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"10f802d985972","visdat":{"10f802d985972":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 
 
