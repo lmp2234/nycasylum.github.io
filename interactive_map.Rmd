@@ -1,5 +1,5 @@
 ---
-title: "Shelter Locations"
+title: "Hospital Locations"
 output: html_document
 ---
 <details> <summary>Code</summary>
