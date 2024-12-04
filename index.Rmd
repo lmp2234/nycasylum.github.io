@@ -5,6 +5,9 @@ output: html_document
 
 ## Addressing the Complex Needs of Asylum Seekers
 
+![](image/coverpagephoto.webp)
+
+
 Asylum seekers face a range of challenges when entering the United States and New York City is known to house people from across the world. Some of the barriers asylum seekers encounter include securing housing, accessing healthcare, obtaining food, and understanding legal rights. Many newcomers do not speak English fluently or are unfamiliar with the city's infrastructure and social services, making it even more difficult to access the help they need. A centralized resource tool can serve as a critical gateway to navigate these obstacles, offering accessible information about where and how to access resources across various categories like healthcare, housing, food, and legal support.
 
 ## Project Overview 
