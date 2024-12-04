@@ -264,22 +264,31 @@ filtered_df <-
   mutate(age = 2008 - h4od1y, 
          age_standardized = scale(age)) %>% 
     rename(sex = bio_sex4, 
-           race = h1gi8)
+           race = h1gi8, 
+           education = h4ec1, 
+           income = h4ed2)
 
 filtered_df |>
-  lm(h4bmi ~ first_generation + age_standardized + sex + race, data = _) |> 
+  lm(h4bmi ~ first_generation + age_standardized + sex + race + education + income, data = _) |> 
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 
 ```
 ```{r}
 filtered_df |>
-  lm(h4sbp ~ first_generation + age_standardized + bio_sex4 + h1gi8, data = _) |> 
+  lm(h4sbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |>  
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 
 filtered_df |>
-  lm(h4dbp ~ first_generation + age_standardized + bio_sex4 + h1gi8, data = _) |> 
+  lm(h4dbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |>  
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
+```
+
+```{r}
+filtered_df |>
+  lm(h4map ~ first_generation + age_standardized + sex + race + education + income, data = _) |>  
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 ```
