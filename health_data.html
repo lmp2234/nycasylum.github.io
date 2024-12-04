@@ -11,7 +11,7 @@
 
 
 
-<title>health_data</title>
+<title>Health Outcomes</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -291,21 +291,11 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">health_data</h1>
+<h1 class="title toc-ignore">Health Outcomes</h1>
 
 </div>
 
 
-<pre class="r"><code>library(haven)
-library(janitor)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(dplyr)
-library(knitr)
-library(tidyr)</code></pre>
 <p>The National Longitudinal Study of Adolescent to Adult Health (Add
 Health) is a large and nationally representative longitudinal study that
 follows a cohort of U.S. adolescents from adolescence to adulthood. This
@@ -316,10 +306,30 @@ first generation immigrants in particular, this dataset enables us to
 analyze how immigrant generation status influences their health outcomes
 over time to highlight health disparities across immigrant groups to
 better target the needs asylum seekers and refugees commonly face.</p>
-<p>Note: The datasets used for this analyis are publically available,
+<p>Note: The datasets used for this analysis are publicly available,
 thus the sample size is much larger than for the private use data that
 is available on a secure data enclave that requires an IRB.</p>
-<p>In this data set, there are 257 first generation immigrants.</p>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>library(haven)
+library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(dplyr)
+library(knitr)
+library(tidyr)</code></pre>
+</details>
+<div id="demographic-characteristics" class="section level2">
+<h2>Demographic Characteristics</h2>
+<details>
+<summary>
+Code
+</summary>
 <pre class="r"><code>w1data &lt;- read.csv(&quot;w1inhome.csv&quot;) %&gt;%
   clean_names() %&gt;% 
   select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
@@ -366,9 +376,13 @@ generation_counts &lt;- merged_df %&gt;%
     second_generation = sum(second_generation, na.rm = TRUE),
     third_generation = sum(third_generation, na.rm = TRUE)
   ) %&gt;%
-  pivot_longer(everything(), names_to = &quot;Generation&quot;, values_to = &quot;Count&quot;)
-
-generation_counts %&gt;% 
+  pivot_longer(everything(), names_to = &quot;Generation&quot;, values_to = &quot;Count&quot;)</code></pre>
+</details>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>generation_counts %&gt;% 
   kable(
     caption = &quot;Individuals by Generation Status&quot;,
     col.names = c(&quot;Generation Status&quot;, &quot;Count&quot;), 
@@ -398,8 +412,45 @@ generation_counts %&gt;%
 </tr>
 </tbody>
 </table>
+</details>
+<pre class="r"><code>generation_counts %&gt;% 
+  kable(
+    caption = &quot;Individuals by Generation Status&quot;,
+    col.names = c(&quot;Generation Status&quot;, &quot;Count&quot;), 
+    align = &quot;lc&quot;,
+    format = &quot;markdown&quot;
+  )</code></pre>
+<table>
+<caption>Individuals by Generation Status</caption>
+<thead>
+<tr class="header">
+<th align="left">Generation Status</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">first_generation</td>
+<td align="center">257</td>
+</tr>
+<tr class="even">
+<td align="left">second_generation</td>
+<td align="center">189</td>
+</tr>
+<tr class="odd">
+<td align="left">third_generation</td>
+<td align="center">4730</td>
+</tr>
+</tbody>
+</table>
+<p>In this data set, there are 257 first generation immigrants.</p>
+</div>
 <div id="blood-pressure" class="section level2">
 <h2>Blood Pressure</h2>
+<details>
+<summary>
+Code
+</summary>
 <pre class="r"><code>filtered_df &lt;- merged_df %&gt;%
   mutate(across(
     c(h4bpcls, h4id5b, h4bmicls),
@@ -515,57 +566,72 @@ Hypertension II
 </tr>
 </tbody>
 </table>
+</details>
+<details>
+<summary>
+Code
+</summary>
 <pre class="r"><code>bp_first_gen &lt;- bp_table %&gt;%
   pivot_longer(cols = c(`First Generation`), 
                names_to = &quot;Generation&quot;, 
                values_to = &quot;Count&quot;) %&gt;%
-  filter(Generation == &quot;First Generation&quot;)  
+  filter(Generation == &quot;First Generation&quot;)</code></pre>
+</details>
+<pre><code>
 
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
 
+``` r
 bp_first_gen_plot &lt;- bp_first_gen %&gt;%
-  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
-  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
-  labs(
-    title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
-    x = &quot;Blood Pressure Classification&quot;,
-    y = &quot;Count&quot;,
-    fill = &quot;Blood Pressure&quot;
-  ) +
-  scale_x_discrete(labels = c(&quot;Normal&quot;, &quot;Prehypertension&quot;, &quot;Hypertension I&quot;, &quot;Hypertension II&quot;)) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1), 
-    legend.position = &quot;none&quot;  
-  )
+ ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+ geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+ labs(
+   title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
+   x = &quot;Blood Pressure Classification&quot;,
+   y = &quot;Count&quot;,
+   fill = &quot;Blood Pressure&quot;
+ ) +
+ scale_x_discrete(labels = c(&quot;Normal&quot;, &quot;Prehypertension&quot;, &quot;Hypertension I&quot;, &quot;Hypertension II&quot;)) +
+ theme_minimal() +
+ theme(
+   axis.text.x = element_text(angle = 45, hjust = 1), 
+   legend.position = &quot;none&quot;  
+ )
 
 bp_first_gen_plot</code></pre>
-<p><img src="health_data_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Among first-generation immigrants, the highest counts of blood
-pressure classification were in the Hypertension I and Hypertension II
-categories.</p>
-<div
-id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-blood-pressure-outcome"
-class="section level3">
-<h3>Research Question: Is there a relationship between first-generation
-immigrant status and blood pressure outcome?</h3>
-<p>Generalized Linear Models Exposure: First-Generation Immigrant
+<img src="health_data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+</details>
+<pre><code>
+Among first-generation immigrants, the highest counts of blood pressure classification were in the Hypertension I and Hypertension II categories. 
+
+### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
+
+
+Generalized Linear Models
+Exposure: First-Generation Immigrant 
 Outcomes of Interest: Systolic Blood Pressure (SBP) &amp; DBP
-Covariates: Age (standardized), Sex, Education, Income</p>
-<p>Model 1: Relationship between first-generation immigrant status and
-systolic blood pressure, controlling for standardized age, sex,
-race/ethnicity, education, and income.</p>
-<p>Model 2: Relationship between first-generation immigrant status and
-diastolic blood pressure, controlling for standardized age, sex,
-race/ethnicity, education, and income.</p>
-<pre class="r"><code>filtered_df &lt;- 
+Covariates: Age (standardized), Sex, Education, Income 
+
+Model 1: Relationship between first-generation immigrant status and systolic blood pressure, controlling for standardized age, sex, race/ethnicity, education, and income. 
+
+Model 2: Relationship between first-generation immigrant status and diastolic blood pressure, controlling for standardized age, sex, race/ethnicity, education, and income. 
+
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+filtered_df &lt;- 
   filtered_df %&gt;% 
   mutate(age = 2008 - h4od1y, 
          age_standardized = scale(age)) %&gt;% 
     rename(sex = bio_sex4, 
            race = h1gi8, 
            education = h4ec1, 
-           income = h4ed2)
+           income = h4ed2)</code></pre>
+</details>
+<pre><code>
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
 
+``` r
 filtered_df |&gt;
   lm(h4sbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
   broom::tidy()  |&gt; 
@@ -632,7 +698,12 @@ filtered_df |&gt;
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>filtered_df |&gt;
+</details>
+<pre><code>
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+filtered_df |&gt;
   lm(h4dbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
   broom::tidy()  |&gt; 
   knitr::kable(digits = 4)</code></pre>
@@ -698,23 +769,18 @@ filtered_df |&gt;
 </tr>
 </tbody>
 </table>
-<p>There is a statistically significant relationship between being a
-first-generation immigrant and systolic blood pressure (p-value =
-0.0027). The intercept of -2.4865 indicates that being a
-first-generation immigrant is associated with a 2.49 mmHg decrease in
-systolic blood pressure compared to second or third generation
-individuals, controlling for age, sex, race, education, and income.
-There is a statistically significant relationship between being a
-first-generation immigrant and diastolic blood pressure (p-value =
-0.0026). The intercept of -1.9677 indicates that being a
-first-generation immigrant is associated with a 1.97 mmHg decrease in
-diastolic blood pressure compared to second or third generation
-individuals, controlling for age, sex, race, education, and income.</p>
-</div>
-</div>
-<div id="body-mass-index" class="section level2">
-<h2>Body Mass Index</h2>
-<pre class="r"><code>bmi_table &lt;- filtered_df %&gt;% 
+</details>
+<pre><code>
+There is a statistically significant relationship between being a first-generation immigrant and systolic blood pressure (p-value = 0.0027). The intercept of -2.4865 indicates that being a first-generation immigrant is associated with a 2.49 mmHg decrease in systolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
+There is a statistically significant relationship between being a first-generation immigrant and diastolic blood pressure (p-value = 0.0026). The intercept of -1.9677 indicates that being a first-generation immigrant is associated with a 1.97 mmHg decrease in diastolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
+ 
+
+## Body Mass Index 
+
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+bmi_table &lt;- filtered_df %&gt;% 
   count(h4bmicls, first_generation, second_generation, third_generation) %&gt;% 
   filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)) %&gt;% 
   mutate(
@@ -848,13 +914,21 @@ Obese III: 40+
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>bmi_first_gen &lt;- bmi_table %&gt;%
+</details>
+<pre><code>
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+bmi_first_gen &lt;- bmi_table %&gt;%
   pivot_longer(cols = c(`First Generation`), 
                names_to = &quot;Generation&quot;, 
                values_to = &quot;Count&quot;) %&gt;%
-  filter(Generation == &quot;First Generation&quot;)  
+  filter(Generation == &quot;First Generation&quot;)</code></pre>
+</details>
+<pre><code>
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
 
-
+``` r
 bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
   ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.6) +
@@ -872,22 +946,26 @@ bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
   )
 
 bmi_first_gen_plot</code></pre>
-<p><img src="health_data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>The BMI classification table yields important findings to consider.
-Many first-generation immigrants in the sample fall into the Underweight
-or Obese II categories.</p>
-<div
-id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-body-mass-index-bmi"
-class="section level3">
-<h3>Research Question: Is there a relationship between first-generation
-immigrant status and body mass index (BMI)?</h3>
-<p>Generalized Linear Models Exposure: First-Generation Immigrant
-Outcomes of Interest: BMI Covariates: Age (standardized), Sex,
-Education, Income</p>
-<p>Model 1: Relationship between first-generation immigrant status and
-BMI, controlling for standardized age, sex, race/ethnicity, education,
-and income.</p>
-<pre class="r"><code>filtered_df |&gt;
+<img src="health_data_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+</details>
+<pre><code>
+The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Underweight or Obese II categories.  
+
+### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
+
+
+Generalized Linear Models
+Exposure: First-Generation Immigrant 
+Outcomes of Interest: BMI 
+Covariates: Age (standardized), Sex, Education, Income 
+
+Model 1: Relationship between first-generation immigrant status and BMI, controlling for standardized age, sex, race/ethnicity, education, and income. 
+
+
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+filtered_df |&gt;
   lm(h4bmi ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt; 
   broom::tidy()  |&gt; 
   knitr::kable(digits = 4)</code></pre>
@@ -953,18 +1031,16 @@ and income.</p>
 </tr>
 </tbody>
 </table>
-<p>There is a statistically significant relationship between being a
-first-generation immigrant and BMI (p-value = 0.0112). The intercept of
--1.2040 indicates that being a first-generation immigrant is associated
-with a 1.20 decrease in BMI compared to second or third generation
-individuals, controlling for age, sex, race, education, and income. This
-supports the previous visualization of many first-generation immigrants
-being classified as underweight.</p>
-</div>
-</div>
-<div id="blood-cholesterol" class="section level2">
-<h2>Blood Cholesterol</h2>
-<pre class="r"><code>cholesterol_table &lt;- filtered_df %&gt;% 
+</details>
+<pre><code>
+There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income. This supports the previous visualization of many first-generation immigrants being classified as underweight. 
+
+## Blood Cholesterol 
+
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+cholesterol_table &lt;- filtered_df %&gt;% 
   count(h4id5b, first_generation, second_generation, third_generation) %&gt;% 
   filter(!(h4id5b == 6 | h4id5b == 8)) %&gt;% 
   mutate(
@@ -1037,7 +1113,12 @@ Yes
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cholesterol_first_gen &lt;- cholesterol_table %&gt;%
+</details>
+<pre><code>
+&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
+
+``` r
+cholesterol_first_gen &lt;- cholesterol_table %&gt;%
   pivot_longer(cols = c(`First Generation`), 
                names_to = &quot;Generation&quot;, 
                values_to = &quot;Count&quot;) %&gt;%
@@ -1061,7 +1142,9 @@ cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
   )
 
 cholesterol_first_gen_plot</code></pre>
-<p><img src="health_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<img src="health_data_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+</details>
+<p>```</p>
 </div>
 
 
