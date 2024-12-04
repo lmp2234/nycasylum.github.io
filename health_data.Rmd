@@ -69,11 +69,9 @@ generation_counts <- merged_df %>%
 ```
 </details>
 
-
 <details>
   <summary>Code</summary>
-
-```{r, echo=TRUE}
+```{r}
 generation_counts %>% 
   kable(
     caption = "Individuals by Generation Status",
@@ -84,6 +82,18 @@ generation_counts %>%
 ```
 </details>
 
+```{r, echo=FALSE}
+generation_counts %>% 
+  kable(
+    caption = "Individuals by Generation Status",
+    col.names = c("Generation Status", "Count"), 
+    align = "lc",
+    format = "markdown"
+  )
+```
+
+<details>
+  <summary>Code</summary>
 ```{r}
 generation_counts %>% 
   kable(
@@ -94,7 +104,19 @@ generation_counts %>%
   )
 
 ```
-  
+</details>
+
+```{r, echo = FALSE}
+generation_counts %>% 
+  kable(
+    caption = "Individuals by Generation Status",
+    col.names = c("Generation Status", "Count"), 
+    align = "lc",
+    format = "markdown"
+  )
+
+```
+
 In this data set, there are 257 first generation immigrants. 
 
 
@@ -113,8 +135,12 @@ filtered_df <- merged_df %>%
               NA)
   )) %>%
   drop_na(h4bpcls, h4id5b, h4bmicls)
+```
+</details>
 
-
+<details>
+  <summary>Code</summary>
+```{r}
 bp_table <- filtered_df %>%
   count(h4bpcls, first_generation, second_generation, third_generation) %>%
   filter(!(h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) %>%
@@ -142,6 +168,12 @@ bp_table %>%
 ```
 </details> 
 
+```{r, echo = FALSE}
+bp_table %>% 
+  kable(caption = "Blood Pressure Classification by Immigrant Generation Status", format = "html")
+```
+
+
 <details> <summary>Code</summary>
 ```{r}
 bp_first_gen <- bp_table %>%
@@ -150,8 +182,15 @@ bp_first_gen <- bp_table %>%
                values_to = "Count") %>%
   filter(Generation == "First Generation")
 ```
-</details> ```
+</details> 
 
+```{r, echo = FALSE}
+bp_first_gen <- bp_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")
+```
 
 <details> <summary>Code</summary>
 ```{r}
@@ -174,12 +213,32 @@ bp_first_gen_plot <- bp_first_gen %>%
 bp_first_gen_plot
 
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+bp_first_gen_plot <- bp_first_gen %>%
+  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  labs(
+    title = "Blood Pressure Classification for First Generation Immigrants",
+    x = "Blood Pressure Classification",
+    y = "Count",
+    fill = "Blood Pressure"
+  ) +
+  scale_x_discrete(labels = c("Normal", "Prehypertension", "Hypertension I", "Hypertension II")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none"  
+  )
+
+bp_first_gen_plot
+```
+
 
 Among first-generation immigrants, the highest counts of blood pressure classification were in the Hypertension I and Hypertension II categories. 
 
 ### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
-
 
 Generalized Linear Models
 Exposure: First-Generation Immigrant 
@@ -201,7 +260,7 @@ filtered_df <-
            education = h4ec1, 
            income = h4ed2)
 ```
-</details> ```
+</details> 
 
 <details> <summary>Code</summary>
 ```{r}
@@ -210,7 +269,15 @@ filtered_df |>
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+filtered_df |>
+  lm(h4sbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |>  
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
+```
+
 
 <details> <summary>Code</summary>
 ```{r}
@@ -219,7 +286,15 @@ filtered_df |>
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+filtered_df |>
+  lm(h4dbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |>  
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
+```
+
 
 There is a statistically significant relationship between being a first-generation immigrant and systolic blood pressure (p-value = 0.0027). The intercept of -2.4865 indicates that being a first-generation immigrant is associated with a 2.49 mmHg decrease in systolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
 There is a statistically significant relationship between being a first-generation immigrant and diastolic blood pressure (p-value = 0.0026). The intercept of -1.9677 indicates that being a first-generation immigrant is associated with a 1.97 mmHg decrease in diastolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
@@ -257,7 +332,13 @@ bmi_table <- filtered_df %>%
 bmi_table %>% 
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+bmi_table %>% 
+  kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
+```
+
 
 <details> <summary>Code</summary>
 ```{r}
@@ -267,7 +348,16 @@ bmi_first_gen <- bmi_table %>%
                values_to = "Count") %>%
   filter(Generation == "First Generation")
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+bmi_first_gen <- bmi_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")
+```
+
 
 <details> <summary>Code</summary>
 ```{r}
@@ -289,7 +379,12 @@ bmi_first_gen_plot <- bmi_first_gen %>%
 
 bmi_first_gen_plot
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+bmi_first_gen_plot
+```
+
 
 The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Underweight or Obese II categories.  
 
@@ -311,7 +406,15 @@ filtered_df |>
   broom::tidy()  |> 
   knitr::kable(digits = 4)
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+filtered_df |>
+  lm(h4bmi ~ first_generation + age_standardized + sex + race + education + income, data = _) |> 
+  broom::tidy()  |> 
+  knitr::kable(digits = 4)
+```
+
 
 There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income. This supports the previous visualization of many first-generation immigrants being classified as underweight. 
 
@@ -342,7 +445,13 @@ cholesterol_table <- filtered_df %>%
 cholesterol_table %>% 
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 ```
-</details> ```
+</details> 
+
+```{r, echo = FALSE}
+cholesterol_table %>% 
+  kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
+```
+
 
 <details> <summary>Code</summary>
 ```{r}
@@ -371,5 +480,9 @@ cholesterol_first_gen_plot <- cholesterol_first_gen %>%
 
 cholesterol_first_gen_plot
 ```
-</details> ```
+</details> 
  
+```{r, echo = FALSE}
+cholesterol_first_gen_plot
+```
+
