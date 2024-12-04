@@ -25,9 +25,6 @@ head(hospital_data)
 library(leaflet)
 library(dplyr)
 
-library(leaflet)
-library(dplyr)
-
 
 
 hospital_map <- leaflet(hospital_data) %>%
@@ -41,6 +38,7 @@ hospital_map <- leaflet(hospital_data) %>%
       Borough == "Queens" ~ "green",
       Borough == "Brooklyn" ~ "purple",
       Borough == "Bronx" ~ "red",
+      Borough == "Staten Island" ~ "orange",
       TRUE ~ "gray"
     ),
     stroke = FALSE,
@@ -48,12 +46,13 @@ hospital_map <- leaflet(hospital_data) %>%
     popup = ~paste(
       "<b>Facility Name:</b> ", facility_name, "<br>",
       "<b>Facility Type:</b> ", facility_type, "<br>",
-      "<b>Borough:</b> ", Borough
+      "<b>Borough:</b> ", Borough, "<br>",
+      "<b>Phone:</b> ", Phone
     ),
     group = ~Borough
   ) %>%
   addLayersControl(
-    overlayGroups = c("Manhattan", "Queens", "Brooklyn", "Bronx"),
+    overlayGroups = c("Manhattan", "Queens", "Brooklyn", "Bronx", "Staten Island"),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
   setView(lng = -73.935242, lat = 40.730610, zoom = 10)
