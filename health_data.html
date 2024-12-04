@@ -271,6 +271,9 @@ $(document).ready(function () {
 <li>
   <a href="project_report.html">Project Report</a>
 </li>
+<li>
+  <a href="https://yuchengzhao.shinyapps.io/shiny_dashboard_template/">Shiny App</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -511,10 +514,13 @@ Code
               (cur_column() == &quot;h4bmicls&quot; &amp; (h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)),
               NA)
   )) %&gt;%
-  drop_na(h4bpcls, h4id5b, h4bmicls)
-
-
-bp_table &lt;- filtered_df %&gt;%
+  drop_na(h4bpcls, h4id5b, h4bmicls)</code></pre>
+</details>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>bp_table &lt;- filtered_df %&gt;%
   count(h4bpcls, first_generation, second_generation, third_generation) %&gt;%
   filter(!(h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) %&gt;%
   mutate(
@@ -618,6 +624,85 @@ Hypertension II
 </tbody>
 </table>
 </details>
+<table>
+<caption>
+Blood Pressure Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4bpcls
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Normal
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+1557
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prehypertension
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+2148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hypertension I
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+680
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hypertension II
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+</tbody>
+</table>
 <details>
 <summary>
 Code
@@ -628,49 +713,52 @@ Code
                values_to = &quot;Count&quot;) %&gt;%
   filter(Generation == &quot;First Generation&quot;)</code></pre>
 </details>
-<pre><code>
-
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-bp_first_gen_plot &lt;- bp_first_gen %&gt;%
- ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
- geom_bar(stat = &quot;identity&quot;, width = 0.6) +
- labs(
-   title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
-   x = &quot;Blood Pressure Classification&quot;,
-   y = &quot;Count&quot;,
-   fill = &quot;Blood Pressure&quot;
- ) +
- scale_x_discrete(labels = c(&quot;Normal&quot;, &quot;Prehypertension&quot;, &quot;Hypertension I&quot;, &quot;Hypertension II&quot;)) +
- theme_minimal() +
- theme(
-   axis.text.x = element_text(angle = 45, hjust = 1), 
-   legend.position = &quot;none&quot;  
- )
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>bp_first_gen_plot &lt;- bp_first_gen %&gt;%
+  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  labs(
+    title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
+    x = &quot;Blood Pressure Classification&quot;,
+    y = &quot;Count&quot;,
+    fill = &quot;Blood Pressure&quot;
+  ) +
+  scale_x_discrete(labels = c(&quot;Normal&quot;, &quot;Prehypertension&quot;, &quot;Hypertension I&quot;, &quot;Hypertension II&quot;)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = &quot;none&quot;  
+  )
 
 bp_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 </details>
-<pre><code>
-Among first-generation immigrants, the highest counts of blood pressure classification were in the Hypertension I and Hypertension II categories. 
-
-### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
-
-
-Generalized Linear Models
-Exposure: First-Generation Immigrant 
+<p><img src="health_data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Among first-generation immigrants, the highest counts of blood
+pressure classification were in the Hypertension I and Hypertension II
+categories.</p>
+<div
+id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-blood-pressure-outcome"
+class="section level3">
+<h3>Research Question: Is there a relationship between first-generation
+immigrant status and blood pressure outcome?</h3>
+<p>Generalized Linear Models Exposure: First-Generation Immigrant
 Outcomes of Interest: Systolic Blood Pressure (SBP) &amp; DBP
-Covariates: Age (standardized), Sex, Education, Income 
-
-Model 1: Relationship between first-generation immigrant status and systolic blood pressure, controlling for standardized age, sex, race/ethnicity, education, and income. 
-
-Model 2: Relationship between first-generation immigrant status and diastolic blood pressure, controlling for standardized age, sex, race/ethnicity, education, and income. 
-
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-filtered_df &lt;- 
+Covariates: Age (standardized), Sex, Education, Income</p>
+<p>Model 1: Relationship between first-generation immigrant status and
+systolic blood pressure, controlling for standardized age, sex,
+race/ethnicity, education, and income.</p>
+<p>Model 2: Relationship between first-generation immigrant status and
+diastolic blood pressure, controlling for standardized age, sex,
+race/ethnicity, education, and income.</p>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>filtered_df &lt;- 
   filtered_df %&gt;% 
   mutate(age = 2008 - h4od1y, 
          age_standardized = scale(age)) %&gt;% 
@@ -679,11 +767,11 @@ filtered_df &lt;-
            education = h4ec1, 
            income = h4ed2)</code></pre>
 </details>
-<pre><code>
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-filtered_df |&gt;
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>filtered_df |&gt;
   lm(h4sbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
   broom::tidy()  |&gt; 
   knitr::kable(digits = 4)</code></pre>
@@ -750,11 +838,73 @@ filtered_df |&gt;
 </tbody>
 </table>
 </details>
-<pre><code>
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-filtered_df |&gt;
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">140.8767</td>
+<td align="right">1.3224</td>
+<td align="right">106.5324</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-2.4865</td>
+<td align="right">0.8297</td>
+<td align="right">-2.9970</td>
+<td align="right">0.0027</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">0.7605</td>
+<td align="right">0.1809</td>
+<td align="right">4.2034</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">-10.0826</td>
+<td align="right">0.3640</td>
+<td align="right">-27.6972</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">0.1199</td>
+<td align="right">0.1659</td>
+<td align="right">0.7230</td>
+<td align="right">0.4697</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">0.0069</td>
+<td align="right">0.0079</td>
+<td align="right">0.8748</td>
+<td align="right">0.3817</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.2862</td>
+<td align="right">0.0702</td>
+<td align="right">-4.0779</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>filtered_df |&gt;
   lm(h4dbp ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt;  
   broom::tidy()  |&gt; 
   knitr::kable(digits = 4)</code></pre>
@@ -821,17 +971,89 @@ filtered_df |&gt;
 </tbody>
 </table>
 </details>
-<pre><code>
-There is a statistically significant relationship between being a first-generation immigrant and systolic blood pressure (p-value = 0.0027). The intercept of -2.4865 indicates that being a first-generation immigrant is associated with a 2.49 mmHg decrease in systolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
-There is a statistically significant relationship between being a first-generation immigrant and diastolic blood pressure (p-value = 0.0026). The intercept of -1.9677 indicates that being a first-generation immigrant is associated with a 1.97 mmHg decrease in diastolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
- 
-
-## Body Mass Index 
-
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-bmi_table &lt;- filtered_df %&gt;% 
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">87.1321</td>
+<td align="right">1.0417</td>
+<td align="right">83.6479</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-1.9677</td>
+<td align="right">0.6535</td>
+<td align="right">-3.0108</td>
+<td align="right">0.0026</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">1.1147</td>
+<td align="right">0.1425</td>
+<td align="right">7.8212</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">-4.7905</td>
+<td align="right">0.2868</td>
+<td align="right">-16.7061</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">0.0799</td>
+<td align="right">0.1307</td>
+<td align="right">0.6114</td>
+<td align="right">0.5410</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">-0.0024</td>
+<td align="right">0.0063</td>
+<td align="right">-0.3828</td>
+<td align="right">0.7019</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.1919</td>
+<td align="right">0.0553</td>
+<td align="right">-3.4697</td>
+<td align="right">0.0005</td>
+</tr>
+</tbody>
+</table>
+<p>There is a statistically significant relationship between being a
+first-generation immigrant and systolic blood pressure (p-value =
+0.0027). The intercept of -2.4865 indicates that being a
+first-generation immigrant is associated with a 2.49 mmHg decrease in
+systolic blood pressure compared to second or third generation
+individuals, controlling for age, sex, race, education, and income.
+There is a statistically significant relationship between being a
+first-generation immigrant and diastolic blood pressure (p-value =
+0.0026). The intercept of -1.9677 indicates that being a
+first-generation immigrant is associated with a 1.97 mmHg decrease in
+diastolic blood pressure compared to second or third generation
+individuals, controlling for age, sex, race, education, and income.</p>
+</div>
+</div>
+<div id="body-mass-index" class="section level2">
+<h2>Body Mass Index</h2>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>bmi_table &lt;- filtered_df %&gt;% 
   count(h4bmicls, first_generation, second_generation, third_generation) %&gt;% 
   filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)) %&gt;% 
   mutate(
@@ -966,21 +1188,128 @@ Obese III: 40+
 </tbody>
 </table>
 </details>
-<pre><code>
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-bmi_first_gen &lt;- bmi_table %&gt;%
+<table>
+<caption>
+Blood Cholesterol Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4bmicls
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Underweight &lt;18.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Normal 18.5 - &lt; 25
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+1440
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Overweight 25 - &lt;30
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+1360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese I 30-&lt;35
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+842
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese II: 35-&lt;40
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+461
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Obese III: 40+
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+393
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>bmi_first_gen &lt;- bmi_table %&gt;%
   pivot_longer(cols = c(`First Generation`), 
                names_to = &quot;Generation&quot;, 
                values_to = &quot;Count&quot;) %&gt;%
   filter(Generation == &quot;First Generation&quot;)</code></pre>
 </details>
-<pre><code>
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
   ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.6) +
   labs(
@@ -997,26 +1326,28 @@ bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
   )
 
 bmi_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 </details>
-<pre><code>
-The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Underweight or Obese II categories.  
-
-### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
-
-
-Generalized Linear Models
-Exposure: First-Generation Immigrant 
-Outcomes of Interest: BMI 
-Covariates: Age (standardized), Sex, Education, Income 
-
-Model 1: Relationship between first-generation immigrant status and BMI, controlling for standardized age, sex, race/ethnicity, education, and income. 
-
-
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-filtered_df |&gt;
+<p><img src="health_data_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The BMI classification table yields important findings to consider.
+Many first-generation immigrants in the sample fall into the Underweight
+or Obese II categories.</p>
+<div
+id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-body-mass-index-bmi"
+class="section level3">
+<h3>Research Question: Is there a relationship between first-generation
+immigrant status and body mass index (BMI)?</h3>
+<p>Generalized Linear Models Exposure: First-Generation Immigrant
+Outcomes of Interest: BMI Covariates: Age (standardized), Sex,
+Education, Income</p>
+<p>Model 1: Relationship between first-generation immigrant status and
+BMI, controlling for standardized age, sex, race/ethnicity, education,
+and income.</p>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>filtered_df |&gt;
   lm(h4bmi ~ first_generation + age_standardized + sex + race + education + income, data = _) |&gt; 
   broom::tidy()  |&gt; 
   knitr::kable(digits = 4)</code></pre>
@@ -1083,15 +1414,84 @@ filtered_df |&gt;
 </tbody>
 </table>
 </details>
-<pre><code>
-There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income. This supports the previous visualization of many first-generation immigrants being classified as underweight. 
-
-## Blood Cholesterol 
-
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-cholesterol_table &lt;- filtered_df %&gt;% 
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">31.1549</td>
+<td align="right">0.7565</td>
+<td align="right">41.1836</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">first_generation</td>
+<td align="right">-1.2040</td>
+<td align="right">0.4746</td>
+<td align="right">-2.5368</td>
+<td align="right">0.0112</td>
+</tr>
+<tr class="odd">
+<td align="left">age_standardized</td>
+<td align="right">0.4337</td>
+<td align="right">0.1035</td>
+<td align="right">4.1903</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">0.5135</td>
+<td align="right">0.2082</td>
+<td align="right">2.4659</td>
+<td align="right">0.0137</td>
+</tr>
+<tr class="odd">
+<td align="left">race</td>
+<td align="right">-0.1844</td>
+<td align="right">0.0949</td>
+<td align="right">-1.9433</td>
+<td align="right">0.0520</td>
+</tr>
+<tr class="even">
+<td align="left">education</td>
+<td align="right">-0.0034</td>
+<td align="right">0.0045</td>
+<td align="right">-0.7461</td>
+<td align="right">0.4556</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">-0.2748</td>
+<td align="right">0.0402</td>
+<td align="right">-6.8443</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+<p>There is a statistically significant relationship between being a
+first-generation immigrant and BMI (p-value = 0.0112). The intercept of
+-1.2040 indicates that being a first-generation immigrant is associated
+with a 1.20 decrease in BMI compared to second or third generation
+individuals, controlling for age, sex, race, education, and income. This
+supports the previous visualization of many first-generation immigrants
+being classified as underweight.</p>
+</div>
+</div>
+<div id="blood-cholesterol" class="section level2">
+<h2>Blood Cholesterol</h2>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>cholesterol_table &lt;- filtered_df %&gt;% 
   count(h4id5b, first_generation, second_generation, third_generation) %&gt;% 
   filter(!(h4id5b == 6 | h4id5b == 8)) %&gt;% 
   mutate(
@@ -1165,11 +1565,62 @@ Yes
 </tbody>
 </table>
 </details>
-<pre><code>
-&lt;details&gt; &lt;summary&gt;Code&lt;/summary&gt;
-
-``` r
-cholesterol_first_gen &lt;- cholesterol_table %&gt;%
+<table>
+<caption>
+Blood Cholesterol Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4id5b
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+119
+</td>
+<td style="text-align:right;">
+4190
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+375
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>cholesterol_first_gen &lt;- cholesterol_table %&gt;%
   pivot_longer(cols = c(`First Generation`), 
                names_to = &quot;Generation&quot;, 
                values_to = &quot;Count&quot;) %&gt;%
@@ -1193,9 +1644,9 @@ cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
   )
 
 cholesterol_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 </details>
-<p>```</p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
 
 

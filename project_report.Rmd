@@ -23,15 +23,15 @@ What questions are you trying to answer? How did these questions evolve over the
 
 ## Data
 
-Source, scraping method, cleaning, etc.
+
 
 ## Exploratory analysis
 
 Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
-## Additional analysis
+## Regression Analysis Models
 
-If you undertake formal statistical analyses, describe these in detail
+We conducted a regression analysis to assess whether being a first-generation immigrant was associated with the following health outcomes: blood pressure (systolic and diastolic), body mass index (BMI), and mean arterial pressure which were available health measures in the Add Health data set. We adjusted for the following covariates to isolate the variable of interest and control for potential confounders: age (i.e., standardized), race/ethnicity, education, sex, and income. 
 
 ## Discussion
 

@@ -1,7 +1,5 @@
 ---
-title: "p8105_final_shelter"
-author: "Yucheng Zhao"
-date: "2024-11-26"
+title: "NYC Shelters"
 output: html_document
 ---
 
@@ -11,8 +9,9 @@ library(viridis)
 library(plotly)
 ```
 
-# Yucheng: Shelter Data 
 
+<details>
+  <summary>Code</summary>
 ```{r}
 as_df = read_csv("./data/asylum_seekers_report.csv") |> 
   janitor::clean_names() |> 
@@ -20,8 +19,7 @@ as_df = read_csv("./data/asylum_seekers_report.csv") |>
   mutate(category = ifelse(category == "Population - Individuals", "Individuals", category))
 
 head(as_df)
-```
-```{r}
+
 count_by_cat = as_df |> 
   group_by(category) |> 
   summarize(count_by_cat = sum(count, na.rm = TRUE), .groups = "drop")
@@ -33,6 +31,14 @@ total_counts = ggplot(count_by_cat, aes(x = category, y = count_by_cat, fill = c
   theme_minimal()
 ggplotly(total_counts)
 ```
+</details>
+
+```{r, echo = FALSE}
+ggplotly(total_counts)
+```
+
+<details>
+  <summary>Code</summary>
 ```{r}
 counts_by_cat_agen = 
   ggplot(as_df, aes(x = category, y = count, fill = agency)) +
@@ -43,7 +49,14 @@ counts_by_cat_agen =
 
 ggplotly(counts_by_cat_agen)
 ```
+</details>
 
+```{r, echo = FALSE}
+ggplotly(counts_by_cat_agen)
+```
+
+<details>
+  <summary>Code</summary>
 ```{r}
 daily_df = read_csv("./data/dhs_daily_report.csv", na = "NA")
 head(daily_df)
@@ -55,8 +68,11 @@ daily_df = daily_df |>
 unique(daily_df$measure)
 unique(daily_df$table)
 ```
+</details>
 
 
+<details>
+  <summary>Code</summary>
 ```{r}
 count_by_table = daily_df |> 
   group_by(table) |> 
@@ -70,10 +86,15 @@ count_by_table = daily_df |>
 
 ggplotly(count_by_table)
 ```
+</details>
+
+```{r, echo = FALSE}
+ggplotly(count_by_table)
+```
 
 
-
-
+<details>
+  <summary>Code</summary>
 ```{r}
 # trends in key individual variables
 key_individual_tables <- daily_df |> 
@@ -95,6 +116,14 @@ key_individual_plot =
 
 ggplotly(key_individual_plot)
 ```
+</details>
+
+```{r, echo = FALSE}
+ggplotly(key_individual_plot)
+```
+
+<details>
+  <summary>Code</summary>
 ```{r}
 # total individuals in shelter over time
 total_individuals_df = daily_df |> 
@@ -108,8 +137,14 @@ total_individuals_df = daily_df |>
 
 ggplotly(total_individuals_df)
 ```
+</details>
 
+```{r, echo = FALSE}
+ggplotly(total_individuals_df)
+```
 
+<details>
+  <summary>Code</summary>
 ```{r}
 # monthly trends in total individuals
 monthly_df = daily_df |> 
@@ -129,6 +164,14 @@ monthly_plot =
 
 ggplotly(monthly_plot)
 ```
+</details>
+
+```{r, echo = FALSE}
+ggplotly(monthly_plot)
+```
+
+<details>
+  <summary>Code</summary>
 ```{r}
 # daily trends in total individuals
 daily_trends_df = daily_df |> 
@@ -148,30 +191,11 @@ daily_trends_plot =
 
 ggplotly(daily_trends_plot)
 ```
+</details>
 
-
-```{r}
-
+```{r, echo = FALSE}
+ggplotly(daily_trends_plot)
 ```
-
-
-
-```{r}
-
-```
-
-
-
-```{r}
-
-```
-
-
-
-```{r}
-
-```
-
 
 
 

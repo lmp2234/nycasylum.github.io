@@ -11,7 +11,7 @@
 
 
 
-<title>hospital_data</title>
+<title>Hospital Data</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -271,6 +271,9 @@ $(document).ready(function () {
 <li>
   <a href="project_report.html">Project Report</a>
 </li>
+<li>
+  <a href="https://yuchengzhao.shinyapps.io/shiny_dashboard_template/">Shiny App</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -291,43 +294,246 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">hospital_data</h1>
+<h1 class="title toc-ignore">Hospital Data</h1>
 
 </div>
 
 
-<pre class="r"><code>library(tidyverse)
-library(haven)</code></pre>
-<pre class="r"><code>hospital_data =
-  read_csv(file = &quot;./data/Hospitals.csv&quot;) </code></pre>
-<pre><code>## Rows: 78 Columns: 6
-## ── Column specification ──────────────
-## Delimiter: &quot;,&quot;
-## chr (6): Facility Type, Borough, Facility Name, Cross Streets, Phone, Locati...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>According to NYC Health, every New Yorker, regardless of immigration
+status or ability to pay has the right to quality healthcare. However,
+access to healthcare facilities is not equitably distributed across New
+York. Immigrants and asylum seekers in particular might experience
+difficulties in getting to the care that they need when their options
+are limited.</p>
+<p><strong>Healthcare Facility by NYC Borough</strong></p>
+<p>In New York City, there is a vastly higher amount of healthcare
+facilities in Manhattan and Brooklyn than there is in the Bronx and
+Queens. Brooklyn, for example has 26 major healthcare facilities, while
+Queens only has 11. While immigrant populations are spread out across
+all 5 boroughs, many tend to reside in Queens and the Bronx.</p>
+<details>
+<summary>
+Code
+</summary>
 <pre class="r"><code>facilities_by_borough = 
   hospital_data %&gt;%
   group_by(Borough) %&gt;%
   summarise(Facility_Count = n())
 
-hospitals_by_type = 
+ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill = Borough)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  theme_minimal() +
+  labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;) +
+   scale_fill_brewer(palette = &quot;Set2&quot;) </code></pre>
+<img src="hospital_data_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+</details>
+<p><img src="hospital_data_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><strong>Healthcare Facilities by Facility Type</strong></p>
+<p>In NYC, there are a surprisingly high amount of Child Health Centers
+available to immigrant populations, especially in comparison to other
+healthcare facility types. There are 56 Child Health Centers, while
+there are only 11 Acute Care Hospitals, and 5 Nursing Home Facilities.
+While it is good that children have a lot of options for receiving care,
+adults have relatively fewer options making it more difficult to get the
+services they need. The amount of nursing home options that can serve
+immigrants and asylum seekers is concerning, especially as the need
+increases over time.</p>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>hospitals_by_type = 
   hospital_data %&gt;% 
   group_by(`Facility Type`) %&gt;% 
   summarise(Facility_Count = n())
 
-facility_type_by_borough =
+ggplot(data = hospitals_by_type, aes(x = `Facility Type`, y = Facility_Count, fill = `Facility Type`)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  theme_minimal() +
+  labs(title = &quot;Number of Facilities Types by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;) +
+theme_minimal() +
+   scale_fill_brewer(palette = &quot;Set2&quot;) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )</code></pre>
+<img src="hospital_data_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+</details>
+<p><img src="hospital_data_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>Healthcare Facility Type by Borough</strong></p>
+<p>Looking further into the data, it is clear that while each borough in
+NYC des have a decent amount of Child Health Centers, Acute Care
+Hospitals, Diagnostic and Treatment Centers, and Nursing Homes are very
+limited for immigrant populations. Queens in particular doesn’t have any
+diagnotic treatment centers or nursing homes. So, asylum seekers or
+immigrants seeking these services in Queens would have to travel to get
+to these facilities, which is not always an option for these
+families.</p>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>facility_type_by_borough =
   hospital_data %&gt;%
   group_by(Borough, `Facility Type`) %&gt;%
   summarise(Facility_Count = n(), .groups = &quot;drop&quot;) %&gt;%
   pivot_wider(names_from = `Facility Type`, values_from = Facility_Count, values_fill = 0)
 
-ggplot(data = facilities_by_borough, aes(x = Borough, y = Facility_Count, fill = Borough)) +
+facility_type_borough_long &lt;- facility_type_by_borough %&gt;%
+  pivot_longer(
+    cols = -Borough,          
+    names_to = &quot;Facility_Type&quot;, 
+    values_to = &quot;Count&quot;         
+  )
+
+facility_type_by_borough %&gt;%
+  knitr::kable(
+    col.names = c(&quot;Borough&quot;, &quot;Acute Care Hospital&quot;, &quot;Child Health Center&quot;,
+                  &quot;Diagnostic &amp; Treatment Center&quot;, &quot;Nursing Home&quot;),
+    caption = &quot;Healthcare Facilities by Borough in NYC&quot;
+  ) </code></pre>
+<table>
+<caption>Healthcare Facilities by Borough in NYC</caption>
+<colgroup>
+<col width="14%" />
+<col width="20%" />
+<col width="20%" />
+<col width="30%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Borough</th>
+<th align="right">Acute Care Hospital</th>
+<th align="right">Child Health Center</th>
+<th align="right">Diagnostic &amp; Treatment Center</th>
+<th align="right">Nursing Home</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bronx</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Brooklyn</td>
+<td align="right">3</td>
+<td align="right">20</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Manhattan</td>
+<td align="right">3</td>
+<td align="right">16</td>
+<td align="right">2</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Queens</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Staten Island</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</details>
+<table>
+<caption>Healthcare Facilities by Borough in NYC</caption>
+<colgroup>
+<col width="14%" />
+<col width="20%" />
+<col width="20%" />
+<col width="30%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Borough</th>
+<th align="right">Acute Care Hospital</th>
+<th align="right">Child Health Center</th>
+<th align="right">Diagnostic &amp; Treatment Center</th>
+<th align="right">Nursing Home</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bronx</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Brooklyn</td>
+<td align="right">3</td>
+<td align="right">20</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Manhattan</td>
+<td align="right">3</td>
+<td align="right">16</td>
+<td align="right">2</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Queens</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Staten Island</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Code
+</summary>
+<pre class="r"><code>ggplot(facility_type_borough_long, aes(x = Borough, y = Count, fill = Facility_Type)) +
   geom_bar(stat = &quot;identity&quot;) +
+  labs(
+    title = &quot;Healthcare Facilities by Borough in NYC&quot;,
+    x = &quot;Borough&quot;,
+    y = &quot;Count of Facilities&quot;,
+    fill = &quot;Facility Type&quot;
+  ) +
   theme_minimal() +
-  labs(title = &quot;Number of Facilities by Borough&quot;, x = &quot;Borough&quot;, y = &quot;Facility Count&quot;)</code></pre>
-<p><img src="hospital_data_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+  scale_fill_brewer(palette = &quot;Set2&quot;) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )</code></pre>
+<img src="hospital_data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+</details>
+<p><img src="hospital_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><strong>Resources</strong></p>
+<p>While this data shows stark disparities that need to be addressed
+through policy changes and interventions, there are resources in NYC
+that asylum seekers can utilize. There is an NYC Immigrant Affairs
+Hotline at 212-788-7654 that people can call to find information
+regarding low or no-cost city services, including healthcare services.
+Families can also take advantage of the <a
+href="https://www.nyc.gov/site/doh/health/health-topics/immigrant-health.page#:~:text=Every%20New%20Yorker%2C%20regardless%20of,at%20any%20hospital%20in%20NYC">NYC
+Cares platform online</a>, which has information in many different
+languages regarding insurance eligibility, and no-cost services.</p>
 
 
 
