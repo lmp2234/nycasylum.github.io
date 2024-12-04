@@ -17,6 +17,8 @@ navbar:
       href: interactive_map.html
     - text: "Project Report"
       href: project_report.html
+    - text: "Shiny App"
+      href: https://yuchengzhao.shinyapps.io/shiny_dashboard_template/
 
   right:
     - text: "About the Team"
