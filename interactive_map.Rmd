@@ -2,7 +2,7 @@
 title: "interactive_map"
 output: html_document
 ---
-
+<details> <summary>Code</summary>
 ```{r}
 hospital_data =
   read_csv(file = "./data/Hospitals.csv") %>% 
@@ -21,11 +21,12 @@ hospital_data =
   
 head(hospital_data)
 ```
+</details>
+
+<details> <summary>Code</summary>
 ```{r}
 library(leaflet)
 library(dplyr)
-
-
 
 hospital_map <- leaflet(hospital_data) %>%
   addProviderTiles("CartoDB.Positron") %>%
@@ -61,5 +62,10 @@ hospital_map
 
 
 
+```
+</details>
+
+```{r, echo = FALSE}
+hospital_map
 ```
 
