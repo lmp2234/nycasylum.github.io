@@ -543,11 +543,11 @@ bp_first_gen_plot</code></pre>
 <p>Among first-generation immigrants, the highest counts of blood
 pressure classification were in the Hypertension I and Hypertension II
 categories.</p>
-</div>
-<div id="research-question" class="section level1">
-<h1>Research Question</h1>
-<p>Is there a relationship between first-generation immigrant status and
-blood pressure outcome?</p>
+<div
+id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-blood-pressure-outcome"
+class="section level3">
+<h3>Research Question: Is there a relationship between first-generation
+immigrant status and blood pressure outcome?</h3>
 <p>Generalized Linear Models Exposure: First-Generation Immigrant
 Outcomes of Interest: Systolic Blood Pressure (SBP) &amp; DBP
 Covariates: Age (standardized), Sex, Education, Income</p>
@@ -710,6 +710,8 @@ first-generation immigrant and diastolic blood pressure (p-value =
 first-generation immigrant is associated with a 1.97 mmHg decrease in
 diastolic blood pressure compared to second or third generation
 individuals, controlling for age, sex, race, education, and income.</p>
+</div>
+</div>
 <div id="body-mass-index" class="section level2">
 <h2>Body Mass Index</h2>
 <pre class="r"><code>bmi_table &lt;- filtered_df %&gt;% 
@@ -874,12 +876,11 @@ bmi_first_gen_plot</code></pre>
 <p>The BMI classification table yields important findings to consider.
 Many first-generation immigrants in the sample fall into the Underweight
 or Obese II categories.</p>
-</div>
-</div>
-<div id="research-question-1" class="section level1">
-<h1>Research Question</h1>
-<p>Is there a relationship between first-generation immigrant status and
-body mass index (BMI)?</p>
+<div
+id="research-question-is-there-a-relationship-between-first-generation-immigrant-status-and-body-mass-index-bmi"
+class="section level3">
+<h3>Research Question: Is there a relationship between first-generation
+immigrant status and body mass index (BMI)?</h3>
 <p>Generalized Linear Models Exposure: First-Generation Immigrant
 Outcomes of Interest: BMI Covariates: Age (standardized), Sex,
 Education, Income</p>
@@ -959,6 +960,108 @@ with a 1.20 decrease in BMI compared to second or third generation
 individuals, controlling for age, sex, race, education, and income. This
 supports the previous visualization of many first-generation immigrants
 being classified as underweight.</p>
+</div>
+</div>
+<div id="blood-cholesterol" class="section level2">
+<h2>Blood Cholesterol</h2>
+<pre class="r"><code>cholesterol_table &lt;- filtered_df %&gt;% 
+  count(h4id5b, first_generation, second_generation, third_generation) %&gt;% 
+  filter(!(h4id5b == 6 | h4id5b == 8)) %&gt;% 
+  mutate(
+    h4id5b = recode(h4id5b, 
+                    `0` = &quot;No&quot;, 
+                    `1` = &quot;Yes&quot;)
+  ) %&gt;%
+  pivot_wider(
+    names_from = c(&quot;first_generation&quot;, &quot;second_generation&quot;, &quot;third_generation&quot;),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %&gt;%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %&gt;%
+  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+
+cholesterol_table %&gt;% 
+  kable(caption = &quot;Blood Cholesterol Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
+<table>
+<caption>
+Blood Cholesterol Classification by Immigrant Generation Status
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+h4id5b
+</th>
+<th style="text-align:right;">
+First Generation
+</th>
+<th style="text-align:right;">
+Second Generation
+</th>
+<th style="text-align:right;">
+Third Generation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+119
+</td>
+<td style="text-align:right;">
+4190
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+375
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cholesterol_first_gen &lt;- cholesterol_table %&gt;%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = &quot;Generation&quot;, 
+               values_to = &quot;Count&quot;) %&gt;%
+  filter(Generation == &quot;First Generation&quot;)  
+
+
+cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
+  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  labs(
+    title = &quot;Blood Cholesterol Classification for First Generation Immigrants&quot;,
+    x = &quot;Blood Cholesterol Classification&quot;,
+    y = &quot;Count&quot;,
+    fill = &quot;Blood Cholesterol&quot;
+  ) +
+  scale_x_discrete(labels = c(&quot;No&quot;, &quot;Yes&quot;)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = &quot;none&quot;  
+  )
+
+cholesterol_first_gen_plot</code></pre>
+<p><img src="health_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 
 

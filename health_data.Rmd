@@ -142,8 +142,7 @@ bp_first_gen_plot
 
 Among first-generation immigrants, the highest counts of blood pressure classification were in the Hypertension I and Hypertension II categories. 
 
-# Research Question 
-Is there a relationship between first-generation immigrant status and blood pressure outcome? 
+### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
 
 
 Generalized Linear Models
@@ -239,8 +238,7 @@ bmi_first_gen_plot
 
 The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Underweight or Obese II categories.  
 
-# Research Question 
-Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
+### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
 
 
 Generalized Linear Models
@@ -259,5 +257,58 @@ filtered_df |>
 
 There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income. This supports the previous visualization of many first-generation immigrants being classified as underweight. 
 
+## Blood Cholesterol 
+
+```{r}
+
+cholesterol_table <- filtered_df %>% 
+  count(h4id5b, first_generation, second_generation, third_generation) %>% 
+  filter(!(h4id5b == 6 | h4id5b == 8)) %>% 
+  mutate(
+    h4id5b = recode(h4id5b, 
+                    `0` = "No", 
+                    `1` = "Yes")
+  ) %>%
+  pivot_wider(
+    names_from = c("first_generation", "second_generation", "third_generation"),
+    values_from = n,
+    values_fill = list(n = 0)
+  ) %>%
+  rename(
+    `First Generation` = `1_0_0`,
+    `Second Generation` = `0_1_0`,  
+    `Third Generation` = `0_0_1`    
+  ) %>%
+  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+
+cholesterol_table %>% 
+  kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
+
+
+cholesterol_first_gen <- cholesterol_table %>%
+  pivot_longer(cols = c(`First Generation`), 
+               names_to = "Generation", 
+               values_to = "Count") %>%
+  filter(Generation == "First Generation")  
+
+
+cholesterol_first_gen_plot <- cholesterol_first_gen %>%
+  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  labs(
+    title = "Blood Cholesterol Classification for First Generation Immigrants",
+    x = "Blood Cholesterol Classification",
+    y = "Count",
+    fill = "Blood Cholesterol"
+  ) +
+  scale_x_discrete(labels = c("No", "Yes")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none"  
+  )
+
+cholesterol_first_gen_plot
+```
 
  
