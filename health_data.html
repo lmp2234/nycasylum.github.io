@@ -325,7 +325,8 @@ library(janitor)</code></pre>
 ##     chisq.test, fisher.test</code></pre>
 <pre class="r"><code>library(dplyr)
 library(knitr)
-library(tidyr)</code></pre>
+library(tidyr)
+library(ggplot2)</code></pre>
 </details>
 <div id="demographic-characteristics" class="section level2">
 <h2>Demographic Characteristics</h2>
@@ -439,64 +440,6 @@ Code
 </tr>
 </tbody>
 </table>
-<details>
-<summary>
-Code
-</summary>
-<pre class="r"><code>generation_counts %&gt;% 
-  kable(
-    caption = &quot;Individuals by Generation Status&quot;,
-    col.names = c(&quot;Generation Status&quot;, &quot;Count&quot;), 
-    align = &quot;lc&quot;,
-    format = &quot;markdown&quot;
-  )</code></pre>
-<table>
-<caption>Individuals by Generation Status</caption>
-<thead>
-<tr class="header">
-<th align="left">Generation Status</th>
-<th align="center">Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">first_generation</td>
-<td align="center">257</td>
-</tr>
-<tr class="even">
-<td align="left">second_generation</td>
-<td align="center">189</td>
-</tr>
-<tr class="odd">
-<td align="left">third_generation</td>
-<td align="center">4730</td>
-</tr>
-</tbody>
-</table>
-</details>
-<table>
-<caption>Individuals by Generation Status</caption>
-<thead>
-<tr class="header">
-<th align="left">Generation Status</th>
-<th align="center">Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">first_generation</td>
-<td align="center">257</td>
-</tr>
-<tr class="even">
-<td align="left">second_generation</td>
-<td align="center">189</td>
-</tr>
-<tr class="odd">
-<td align="left">third_generation</td>
-<td align="center">4730</td>
-</tr>
-</tbody>
-</table>
 <p>In this data set, there are 257 first generation immigrants.</p>
 </div>
 <div id="blood-pressure" class="section level2">
@@ -538,9 +481,10 @@ Code
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`,
+    `Blood Pressure Classification` = h4bpcls
   ) %&gt;%
-  select(h4bpcls, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`Blood Pressure Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 
 bp_table %&gt;% 
   kable(caption = &quot;Blood Pressure Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
@@ -551,7 +495,7 @@ Blood Pressure Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4bpcls
+Blood Pressure Classification
 </th>
 <th style="text-align:right;">
 First Generation
@@ -631,7 +575,7 @@ Blood Pressure Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4bpcls
+Blood Pressure Classification
 </th>
 <th style="text-align:right;">
 First Generation
@@ -718,7 +662,7 @@ Code
 Code
 </summary>
 <pre class="r"><code>bp_first_gen_plot &lt;- bp_first_gen %&gt;%
-  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  ggplot(aes(x = `Blood Pressure Classification`, y = Count, fill = `Blood Pressure Classification`)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.6) +
   labs(
     title = &quot;Blood Pressure Classification for First Generation Immigrants&quot;,
@@ -734,9 +678,9 @@ Code
   )
 
 bp_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Among first-generation immigrants, the highest counts of blood
 pressure classification were in the Hypertension I and Hypertension II
 categories.</p>
@@ -1074,9 +1018,10 @@ Code
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`, 
+    `BMI Classification` = `h4bmicls`
   ) %&gt;%
-  select(h4bmicls, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`BMI Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 
 bmi_table %&gt;% 
   kable(caption = &quot;Blood Cholesterol Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
@@ -1087,7 +1032,7 @@ Blood Cholesterol Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4bmicls
+BMI Classification
 </th>
 <th style="text-align:right;">
 First Generation
@@ -1195,7 +1140,7 @@ Blood Cholesterol Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4bmicls
+BMI Classification
 </th>
 <th style="text-align:right;">
 First Generation
@@ -1310,7 +1255,7 @@ Code
 Code
 </summary>
 <pre class="r"><code>bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
-  ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
+  ggplot(aes(x =  `BMI Classification`, y = Count, fill =  `BMI Classification`)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.6) +
   labs(
     title = &quot;BMI Classification for First Generation Immigrants&quot;,
@@ -1326,9 +1271,9 @@ Code
   )
 
 bmi_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>The BMI classification table yields important findings to consider.
 Many first-generation immigrants in the sample fall into the Underweight
 or Obese II categories.</p>
@@ -1507,9 +1452,10 @@ Code
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`, 
+    `High Cholesterol` = `h4id5b`
   ) %&gt;%
-  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`High Cholesterol`, `First Generation`, `Second Generation`, `Third Generation`)
 
 cholesterol_table %&gt;% 
   kable(caption = &quot;Blood Cholesterol Classification by Immigrant Generation Status&quot;, format = &quot;html&quot;)</code></pre>
@@ -1520,7 +1466,7 @@ Blood Cholesterol Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4id5b
+High Cholesterol
 </th>
 <th style="text-align:right;">
 First Generation
@@ -1572,7 +1518,7 @@ Blood Cholesterol Classification by Immigrant Generation Status
 <thead>
 <tr>
 <th style="text-align:left;">
-h4id5b
+High Cholesterol
 </th>
 <th style="text-align:right;">
 First Generation
@@ -1628,7 +1574,7 @@ Code
 
 
 cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
-  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  ggplot(aes(x = `High Cholesterol`, y = Count, fill = `High Cholesterol`)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.6) +
   labs(
     title = &quot;Blood Cholesterol Classification for First Generation Immigrants&quot;,
@@ -1644,9 +1590,9 @@ cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
   )
 
 cholesterol_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 
 

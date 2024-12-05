@@ -315,13 +315,13 @@ user-friendly tool to help them find essential services is crucial.</p>
 <p>A huge contributing factor we’ve observed in public health is how
 health disparities and social determinants shape the narrative behind
 many asylum seekers in NYC. There is a significantly high prevalence of
-aslyum seekers not getting the care they need and that raises concern on
+asylum seekers not getting the care they need and that raises concern on
 what ways we can minimize this barrier. One of the findings we
 discovered is underweight asylum seekers and how that reveals lack of
 accessible food banks, services, etc. that can provide nutrition to
 struggling asylum seekers. This represents our reasoning on exploring
 this issue.</p>
-<p>Here are some of the main topics we researcherd for this project: <a
+<p>Here are some of the main topics we researched for this project: <a
 href="https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format.">shelters</a>,
 <a
 href="https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx">medical
@@ -333,12 +333,58 @@ banks</a>.</p>
 </div>
 <div id="initial-questions" class="section level2">
 <h2>Initial questions:</h2>
-<p>What questions are you trying to answer? How did these questions
-evolve over the course of the project? What new questions did you
-consider in the course of your analysis?</p>
+<p>Initially, the questions we were trying to answer were: (1) How do
+the health-related and demographic trends of immigrants compare to
+non-immigrants based on ADD HEALTH data? (2) What resources (e.g.,
+shelters, medical facilities) are available to asylum seekers in NYC?
+(3) Are these resources equitably distributed across the boroughs of
+NYC?</p>
+<p>As the project progressed, we refined these questions to focus more
+on identifying gaps in resource availability and accessibility. Our
+questions included: (1) Are the current shelters sufficient to meet the
+needs of asylum seekers? (2) Do certain boroughs have fewer medical
+facilities relative to the immigrant population density? (3) How do the
+observed demographic and health-related trends inform the specific needs
+of asylum seekers in NYC?</p>
+<p>During our analysis, additional questions emerged: (1) Are there
+patterns of resource utilization among asylum seekers that might
+highlight barriers (e.g., language, transportation)? (2) How do the
+services available in NYC compare to other cities with significant
+asylum-seeking populations? (3) What are the policy implications of our
+findings for improving resource allocation for asylum seekers?</p>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
+<div id="codebook" class="section level3">
+<h3>Codebook</h3>
+<p>The following variables were included for the health outcome
+analyses. <code>aid</code> : Respondent identifier number
+<code>h1gi14</code>: Born a United States Citizen <code>h1gi14</code>:
+Born in the United States <code>h1gi13m</code>: Month [and year]
+Individual First Moved to the United States <code>h1gi4</code>: Hispanic
+or Latino Origin <code>h1gi8</code>: Category that Best Describes Racial
+Background <code>h1nm6</code>: Biological Mother Born in the United
+States <code>h1nf6</code>: Biological Father Born in the United States
+<code>first_generation</code>: Created based on whether the individual
+was not born in the U.S. nor a U.S. Citizen
+<code>second_generation</code> Created based on whether the individuals
+biological mother or biological father were born in the U.S.or not
+<code>third_generation</code>: Created based on whether the individual
+was born in the U.S. or a U.S. citizen and if both biological mother and
+father were born in the U.S. <code>h4bpcls</code>: Blood Pressure
+Classification <code>h4id5b</code>: Been Told by a Doctor, Nurse, or
+Other Health Care Provider That You Have or Had High Blood Cholesterol
+or Triglycerides or Lipids <code>h4bmicls</code>: Body Mass Index
+Classification <code>h4od1y</code>: Respondent’s Date of Birth Year
+<code>age</code>: Created based on respondents date of birth subtracted
+from the year the interview took place <code>age_standardized</code>:
+Standardized age with mean of 0 and standard deviation of 1
+<code>bio_sex4</code>: Respondent’s Gender <code>h4ec1</code>: Total
+Household Income <code>h4ed2</code>: Highest Level of Education Achieved
+<code>h4sbp</code>: Systolic Blood Pressure (mmHg) <code>h4dbp</code>:
+Diastolic Blood Pressure (mmHg) <code>h4bmi</code>: Body Mass Index
+<code>h4map</code>: Mean Arterial Pulse Pressure (mmHg)</p>
+</div>
 </div>
 <div id="exploratory-analysis" class="section level2">
 <h2>Exploratory analysis</h2>
@@ -359,8 +405,67 @@ income.</p>
 </div>
 <div id="discussion" class="section level2">
 <h2>Discussion</h2>
-<p>What were your findings? Are they what you expect? What insights into
-the data can you make?</p>
+<p>Our analysis highlights several key findings regarding health trends
+and resources available to asylum seekers in New York City. Our analysis
+of the ADD HEALTH dataset revealed interesting health trends among
+immigrant populations. We found that first-generation immigrants were
+statistically associated with lower systolic blood pressure (2.49 mmHg
+decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease,
+p = 0.0026) compared to second- and third-generation individuals, even
+after controlling for demographic and socioeconomic factors. Also,
+first-generation immigrants exhibited a 1.20 decrease in BMI (p =
+0.0112), aligning with earlier findings that many first-generation
+immigrants are classified as underweight.These health trends highlight
+the nuanced relationship between immigrant status and health outcomes.
+While the lower blood pressure and BMI may initially appear to be
+protective factors, they could also reflect underlying vulnerabilities
+such as food insecurity, limited access to healthcare, or stressors
+related to immigration status. For first-generation immigrants, these
+factors might manifest as a mix of both health benefits (due to
+lifestyle factors from their country of origin) and risks (due to
+systemic barriers in accessing resources in their host country). These
+trends underscore the need for culturally competent healthcare services
+that can address the unique needs of immigrant populations.</p>
+<p>When it comes to healthcare facilities, the distribution across the
+five boroughs is very uneven. Boroughs with higher immigrant
+populations, like Queens and the Bronx, have noticeably fewer medical
+facilities compared to others. For example, Brooklyn has 26 major
+healthcare facilities, but Queens, which is home to many immigrant
+families, has just 11. This uneven distribution makes healthcare access
+a major burden for asylum seekers in those areas. Families needing
+medical care in these boroughs might end up having to travel long
+distances for facilities with appointment availability or might face
+overcrowded emergency rooms or urgent care facilities in the centers
+near them. For immigrants already dealing with language barriers and
+limited financial resources, these extra obstacles can be overwhelming.
+Addressing this gap means not only increasing the number of facilities
+but also making sure they are located where they are needed most.</p>
+<p>While investigating shelter usage in NYC, we saw that there has been
+a dramatic increase in recent years, with the total number of
+individuals utilizing shelters rising from 46,521 in 2022 to 90,798 in
+2024. A significant proportion of shelter users are families with
+children, which contrasts with the smaller amount of single adults using
+these services. This tells us that the need for family-specific shelter
+resources is growing rapidly. At the same time, it highlights how
+overburdened the current shelter system has become. For asylum seekers
+who may be new to the city and navigating an unfamiliar system, this
+could make finding shelter even more challenging. Addressing these
+trends will require more than just expanding capacity. It calls for
+targeted solutions that meet the unique needs of families and vulnerable
+newcomers.</p>
+<p>One of the biggest issues we encountered during this project was the
+lack of clear data on other resources available to asylum seekers.
+Services like translation assistance or immigrant health centers are
+crucial, but finding detailed information about them was surprisingly
+difficult to find. This reflects a broader systemic problem in that if
+we struggled to locate this data as researchers, imagine how much harder
+it must be for someone new to the city and unfamiliar with its systems.
+For asylum seekers, who may already be dealing with language barriers
+and a lack of documentation, this gap in information can make it nearly
+impossible to find the support they need. The lack of transparency and
+centralized information is a glaring issue. Addressing it will require
+better documentation of available services and a stronger effort to make
+this information accessible to those who need it most.</p>
 </div>
 
 

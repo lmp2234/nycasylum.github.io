@@ -173,7 +173,7 @@ bp_first_gen <- bp_table %>%
 <details> <summary>Code</summary>
 ```{r}
 bp_first_gen_plot <- bp_first_gen %>%
-  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  ggplot(aes(x = `Blood Pressure Classification`, y = Count, fill = `Blood Pressure Classification`)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(
     title = "Blood Pressure Classification for First Generation Immigrants",
@@ -195,7 +195,7 @@ bp_first_gen_plot
 
 ```{r, echo = FALSE}
 bp_first_gen_plot <- bp_first_gen %>%
-  ggplot(aes(x = h4bpcls, y = Count, fill = h4bpcls)) +
+  ggplot(aes(x = `Blood Pressure Classification`, y = Count, fill = `Blood Pressure Classification`)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(
     title = "Blood Pressure Classification for First Generation Immigrants",
@@ -341,7 +341,7 @@ bmi_first_gen <- bmi_table %>%
 <details> <summary>Code</summary>
 ```{r}
 bmi_first_gen_plot <- bmi_first_gen %>%
-  ggplot(aes(x = h4bmicls, y = Count, fill = h4bmicls)) +
+  ggplot(aes(x =  `BMI Classification`, y = Count, fill =  `BMI Classification`)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(
     title = "BMI Classification for First Generation Immigrants",
@@ -417,9 +417,10 @@ cholesterol_table <- filtered_df %>%
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`, 
+    `High Cholesterol` = `h4id5b`
   ) %>%
-  select(h4id5b, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`High Cholesterol`, `First Generation`, `Second Generation`, `Third Generation`)
 
 cholesterol_table %>% 
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
@@ -442,7 +443,7 @@ cholesterol_first_gen <- cholesterol_table %>%
 
 
 cholesterol_first_gen_plot <- cholesterol_first_gen %>%
-  ggplot(aes(x = h4id5b, y = Count, fill = h4id5b)) +
+  ggplot(aes(x = `High Cholesterol`, y = Count, fill = `High Cholesterol`)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(
     title = "Blood Cholesterol Classification for First Generation Immigrants",
