@@ -346,25 +346,25 @@ banks</a>.</p>
 </div>
 <div id="initial-questions" class="section level2">
 <h2>Initial questions:</h2>
-<p>Initially, the questions we were trying to answer were: - (1) How do
-the health-related and demographic trends of immigrants compare to
-non-immigrants based on ADD HEALTH data? - (2) What resources (e.g.,
+<p>Initially, the questions we were trying to answer were: - How do the
+health-related and demographic trends of immigrants compare to
+non-immigrants based on ADD HEALTH data? - What resources (e.g.,
 shelters, medical facilities) are available to asylum seekers in NYC? -
-(3) Are these resources equitably distributed across the boroughs of
+Are these resources equitably distributed across the boroughs of
 NYC?</p>
 <p>As the project progressed, we refined these questions to focus more
 on identifying gaps in resource availability and accessibility. Our
-questions included: - (1) Are the current shelters sufficient to meet
-the needs of asylum seekers? - (2) Do certain boroughs have fewer
-medical facilities relative to the immigrant population density? - (3)
-How do the observed demographic and health-related trends inform the
-specific needs of asylum seekers in NYC?</p>
-<p>During our analysis, additional questions emerged: - (1) Are there
+questions included: - Are the current shelters sufficient to meet the
+needs of asylum seekers? - Do certain boroughs have fewer medical
+facilities relative to the immigrant population density? - How do the
+observed demographic and health-related trends inform the specific needs
+of asylum seekers in NYC?</p>
+<p>During our analysis, additional questions emerged: - Are there
 patterns of resource utilization among asylum seekers that might
-highlight barriers (e.g., language, transportation)? - (2) How do the
+highlight barriers (e.g., language, transportation)? - How do the
 services available in NYC compare to other cities with significant
-asylum-seeking populations? - (3) What are the policy implications of
-our findings for improving resource allocation for asylum seekers?</p>
+asylum-seeking populations? - What are the policy implications of our
+findings for improving resource allocation for asylum seekers?</p>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
@@ -403,18 +403,18 @@ father were not born in the U.S. and 0 if both were born in the U.S.;
 <code>third_generation</code> was coded as 1 if the criteria for either
 <code>first_generation</code> or <code>second_generation</code> was not
 true.</p>
-<p>The dataset contains 4935 observations and
-<code>ncol(filtered_df)</code> variables that explore demographic
-characteristics, social context, psychological factors, physical health,
-and behavioral patterns. We selected the following health indicators to
-study: blood pressure (BP), body mass index (BMI), and high blood
-cholesterol. Before beginning the exploratory analysis, the variables
-for the health outcomes, <code>h4bpcls</code>, <code>h4bmicls</code>,
-and <code>h4id5b</code> needed to be filtered to ensure that any of the
-values that corresponded to “unknown” or “skipped” in the codebook,
-appeared as NA instead and dropping the NA values (i.e, we checked for
-missingness in the data and ensured the variables did not possess a lot
-of missing values prior to dropping).</p>
+<p>The dataset contains 4935 observations and 934 variables that explore
+demographic characteristics, social context, psychological factors,
+physical health, and behavioral patterns. We selected the following
+health indicators to study: blood pressure (BP), body mass index (BMI),
+and high blood cholesterol. Before beginning the exploratory analysis,
+the variables for the health outcomes, <code>h4bpcls</code>,
+<code>h4bmicls</code>, and <code>h4id5b</code> needed to be filtered to
+ensure that any of the values that corresponded to “unknown” or
+“skipped” in the codebook, appeared as NA instead and dropping the NA
+values (i.e, we checked for missingness in the data and ensured the
+variables did not possess a lot of missing values prior to
+dropping).</p>
 <p>After performing the exploratory analysis for the visualizations of
 each health outcome, we needed to further clean the dataset for the
 regression analysis. That is, we created an age variable and had to

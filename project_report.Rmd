@@ -22,16 +22,19 @@ The main topics we researched for this project: [shelters](https://citylimits.or
 ## Initial questions: 
 
 Initially, the questions we were trying to answer were: 
+
 - How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
 - What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
 - Are these resources equitably distributed across the boroughs of NYC?
 
 As the project progressed, we refined these questions to focus more on identifying gaps in resource availability and accessibility. Our questions included: 
+
 - Are the current shelters sufficient to meet the needs of asylum seekers?
 - Do certain boroughs have fewer medical facilities relative to the immigrant population density?
 - How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
 
 During our analysis, additional questions emerged:
+
 - Are there patterns of resource utilization among asylum seekers that might highlight barriers (e.g., language, transportation)?
 - How do the services available in NYC compare to other cities with significant asylum-seeking populations?
 - What are the policy implications of our findings for improving resource allocation for asylum seekers?
@@ -88,7 +91,7 @@ We conducted a regression analysis to assess whether being a first-generation im
 
 ## Discussion
 
-Our analysis highlights several key findings regarding health trends and resources available to asylum seekers in New York City. Our analysis of the ADD HEALTH dataset revealed interesting health trends among immigrant populations. We found that first-generation immigrants were statistically associated with lower systolic blood pressure (2.49 mmHg decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease, p = 0.0026) compared to second- and third-generation individuals, even after controlling for demographic and socioeconomic factors. Also, first-generation immigrants exhibited a 1.20 decrease in BMI (p = 0.0112), aligning with earlier findings that many first-generation immigrants are classified as underweight.These health trends highlight the nuanced relationship between immigrant status and health outcomes. While the lower blood pressure and BMI may initially appear to be protective factors, they could also reflect underlying vulnerabilities such as food insecurity, limited access to healthcare, or stressors related to immigration status. For first-generation immigrants, these factors might manifest as a mix of both health benefits (due to lifestyle factors from their country of origin) and risks (due to systemic barriers in accessing resources in their host country). These trends underscore the need for culturally competent healthcare services that can address the unique needs of immigrant populations.
+Our analysis highlights several key findings regarding health trends and resources available to asylum seekers in New York City. Our analysis of the Add Health dataset revealed interesting health trends among immigrant populations. We found that first-generation immigrants were statistically associated with lower systolic blood pressure (2.49 mmHg decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease, p = 0.0026) compared to second- and third-generation individuals, even after controlling for demographic and socioeconomic factors. Also, first-generation immigrants exhibited a 1.20 decrease in BMI (p = 0.0112), aligning with earlier findings that many first-generation immigrants are classified as underweight.These health trends highlight the nuanced relationship between immigrant status and health outcomes. While the lower blood pressure and BMI may initially appear to be protective factors, they could also reflect underlying vulnerabilities such as food insecurity, limited access to healthcare, or stressors related to immigration status. For first-generation immigrants, these factors might manifest as a mix of both health benefits (due to lifestyle factors from their country of origin) and risks (due to systemic barriers in accessing resources in their host country). These trends underscore the need for culturally competent healthcare services that can address the unique needs of immigrant populations.
 
 When it comes to healthcare facilities, the distribution across the five boroughs is very uneven. Boroughs with higher immigrant populations, like Queens and the Bronx, have noticeably fewer medical facilities compared to others. For example, Brooklyn has 26 major healthcare facilities, but Queens, which is home to many immigrant families, has just 11. This uneven distribution makes healthcare access a major burden for asylum seekers in those areas. Families needing medical care in these boroughs might end up having to travel long distances for facilities with appointment availability or might face overcrowded emergency rooms or urgent care facilities in the centers near them. For immigrants already dealing with language barriers and limited financial resources, these extra obstacles can be overwhelming. Addressing this gap means not only increasing the number of facilities but also making sure they are located where they are needed most.
 
