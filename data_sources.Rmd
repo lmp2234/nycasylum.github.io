@@ -35,8 +35,14 @@ Data on migrant health outcomes was obtained from the National Longitudinal Stud
 - `h4map`: Mean Arterial Pulse Pressure (mmHg)
 
 # Source 2: Shelter Data
+Data on NYC shelters was obtained from the Department of Homeless Services reports and Asylum Seekers reports. The data was obtained in a cleaned format from the City Limits News [platform](https://citylimits.org/nyc-shelter-count/#:~:text=The%20new%20report%2C%20Local%20Law,city%20standardizes%20their%20reporting%20format.). 
 
-
+- `Category` : asylum seeker group type
+- `Date` : date of report
+- `Table`: categorization of group type
+- `Population`: population served 
+- `Agency`: shelter agency 
+- `Count`: total number of asylum seekers by shelter
 
 #Source 3: Hospital Data 
 
