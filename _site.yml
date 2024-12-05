@@ -10,7 +10,7 @@ navbar:
       - text: "Health Data"
         href: health_data.html
       - text: "Shelter Data"
-        href: p8105_shelter_visuals.html
+        href: shelter_data.html
       - text: "Hospital Data"
         href: hospital_data.html
     - text: "Interactive Map"
