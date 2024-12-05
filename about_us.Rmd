@@ -8,6 +8,7 @@ Here is a little background information about the team.
 [Cindy Ho](https://cjh2248.github.io/) is a 2nd yr MPH candidate in Sociomedical Sciences with a certificate in Infectious Disease Epidemiology. 
 
 # Yucheng Zhao 
+[Yucheng Zhao](https://github.com/YuchengZhao15) is a 2nd year MS candidate in Biostatistics, Public Health Data Science track. 
 
 # Lisa Pardee 
 [Lisa Pardee](https://github.com/lmp2234) is a 2nd year MPH candidate in the Epidemiology Department with a certificate in Applied Biostatistics and Data Science.
