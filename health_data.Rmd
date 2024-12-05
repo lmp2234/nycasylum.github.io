@@ -16,6 +16,7 @@ library(janitor)
 library(dplyr)
 library(knitr)
 library(tidyr)
+library(ggplot2)
 ```
 </details>
 
@@ -92,30 +93,6 @@ generation_counts %>%
   )
 ```
 
-<details>
-  <summary>Code</summary>
-```{r}
-generation_counts %>% 
-  kable(
-    caption = "Individuals by Generation Status",
-    col.names = c("Generation Status", "Count"), 
-    align = "lc",
-    format = "markdown"
-  )
-
-```
-</details>
-
-```{r, echo = FALSE}
-generation_counts %>% 
-  kable(
-    caption = "Individuals by Generation Status",
-    col.names = c("Generation Status", "Count"), 
-    align = "lc",
-    format = "markdown"
-  )
-
-```
 
 In this data set, there are 257 first generation immigrants. 
 
@@ -159,9 +136,10 @@ bp_table <- filtered_df %>%
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`,
+    `Blood Pressure Classification` = h4bpcls
   ) %>%
-  select(h4bpcls, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`Blood Pressure Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 
 bp_table %>% 
   kable(caption = "Blood Pressure Classification by Immigrant Generation Status", format = "html")
@@ -325,9 +303,10 @@ bmi_table <- filtered_df %>%
   rename(
     `First Generation` = `1_0_0`,
     `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`    
+    `Third Generation` = `0_0_1`, 
+    `BMI Classification` = `h4bmicls`
   ) %>%
-  select(h4bmicls, `First Generation`, `Second Generation`, `Third Generation`)
+  select(`BMI Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 
 bmi_table %>% 
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
