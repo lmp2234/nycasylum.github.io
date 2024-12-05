@@ -80,6 +80,9 @@ unique(daily_df$table)
 ```
 </details>
 
+**Total Counts by Table**
+
+This bar chart summarizes the total counts of individuals recorded in the different tables of the DHS daily report. the Families with Children group represents the largest share of individuals in the shelter system, emphasizing the need for family-focused resources.
 
 <details>
   <summary>Code</summary>
@@ -102,6 +105,9 @@ ggplotly(count_by_table)
 ggplotly(count_by_table)
 ```
 
+**Trends in Key Individual Variables**
+
+This visualization examines shelter usage trends for specific demographics, including single adults, families with children, and adult families.
 
 <details>
   <summary>Code</summary>
