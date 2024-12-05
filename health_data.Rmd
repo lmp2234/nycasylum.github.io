@@ -8,9 +8,8 @@ The National Longitudinal Study of Adolescent to Adult Health (Add Health) is a 
 Note: The datasets used for this analysis are publicly available, thus the sample size is much larger than for the private use data that is available on a secure data enclave that requires an IRB.
 
 ## Demographic Characteristics 
-<details>
-  <summary>Code</summary>
-```{r}
+
+```{r, echo = FALSE, message = FALSE}
 library(haven)
 library(janitor)
 library(dplyr)
@@ -20,6 +19,11 @@ library(ggplot2)
 library(readr)
 library(tidyverse)
 library(stringr)
+```
+
+<details>
+  <summary>Code</summary>
+```{r}
 
 w1data <- read.csv("w1inhome.csv") %>%
   clean_names() %>% 
@@ -60,12 +64,7 @@ generation_counts <- merged_df %>%
     third_generation = sum(third_generation, na.rm = TRUE)
   ) %>%
   pivot_longer(everything(), names_to = "Generation", values_to = "Count")
-```
-</details>
 
-<details>
-  <summary>Code</summary>
-```{r}
 generation_counts %>% 
   kable(
     caption = "Individuals by Generation Status",
@@ -75,6 +74,8 @@ generation_counts %>%
   )
 ```
 </details>
+
+
 
 
 ```{r, echo=FALSE}
@@ -135,6 +136,9 @@ bp_table <- bp_table %>%
   select(`Blood Pressure Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 ```
 </details> 
+
+Among first-generation immigrants, 18 are classified as Hypertension I, 6 as Hypertension II, 78 as Hypertension III, and 84 as Prehypertensive. Compared to second-generation immigrants, there were higher counts of among all-groups,notably, prehypertension. 
+
 
 ```{r, echo = FALSE}
 bp_table %>% 
@@ -216,7 +220,7 @@ filtered_df |>
   knitr::kable(digits = 4)
 ```
 
-#### There is a statistically significant relationship between being a first-generation immigrant and systolic blood pressure (p-value = 0.0027). The intercept of -2.4865 indicates that being a first-generation immigrant is associated with a 2.49 mmHg decrease in systolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
+There is a statistically significant relationship between being a first-generation immigrant and systolic blood pressure (p-value = 0.0027). The intercept of -2.4865 indicates that being a first-generation immigrant is associated with a 2.49 mmHg decrease in systolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
 
 
 <details> <summary>Code</summary>
@@ -235,7 +239,7 @@ filtered_df |>
   knitr::kable(digits = 4)
 ```
 
-#### There is a statistically significant relationship between being a first-generation immigrant and diastolic blood pressure (p-value = 0.0026). The intercept of -1.9677 indicates that being a first-generation immigrant is associated with a 1.97 mmHg decrease in diastolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
+There is a statistically significant relationship between being a first-generation immigrant and diastolic blood pressure (p-value = 0.0026). The intercept of -1.9677 indicates that being a first-generation immigrant is associated with a 1.97 mmHg decrease in diastolic blood pressure compared to second or third generation individuals, controlling for age, sex, race, education, and income. 
  
 
 ## Body Mass Index 
@@ -276,6 +280,7 @@ bmi_table %>%
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 ```
 
+Among first-generation immigrants, higher counts appear in the Normal, Overweight, and Obese I categories. 
 
 <details> <summary>Code</summary>
 ```{r}
@@ -335,7 +340,7 @@ filtered_df |>
 ```
 
 
-#### There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The estimate of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income.  
+There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The estimate of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income.  
 
 ## Blood Cholesterol 
 
@@ -370,6 +375,7 @@ cholesterol_table %>%
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 ```
 
+While mosst first-generation immigrants reported no high blood cholesterol, more first-generation immigrants reported yes compared to second-generation immigrants. 
 
 <details> <summary>Code</summary>
 ```{r}
@@ -424,5 +430,5 @@ filtered_df |>
 ```
 
 
-#### There is a statistically significant relationship between first-generation immigrant status and mean arterial pressure (p-value = 0.0014). The estimate of -2.1415 indicates that being a first-generation immigrant is associated with a 2.1415 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income.  
+There is a statistically significant relationship between first-generation immigrant status and mean arterial pressure (p-value = 0.0014). The estimate of -2.1415 indicates that being a first-generation immigrant is associated with a 2.1415 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income.  
 
