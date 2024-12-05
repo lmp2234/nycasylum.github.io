@@ -50,7 +50,7 @@ hospital_map <- leaflet(hospital_data) %>%
       "<b>Facility Type:</b> ", facility_type, "<br>",
       "<b>Borough:</b> ", Borough, "<br>",
       "<b>Phone:</b> ", Phone, "<br>",
-      "<b>Address:</b> ", location_1
+      "<b>Address:</b> ", location
     ),
     group = ~Borough
   ) %>%

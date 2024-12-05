@@ -3,7 +3,7 @@ title: "NYC Refugee & Asylum Seeker Resource Hub"
 output: html_document
 ---
 
-## Addressing the Complex Needs of Migrants, Including Refugees and Asylum Seekers
+### Addressing the Complex Needs of Asylum Seekers and Refugees
 
 ![](image/coverpagephoto.webp)
 
