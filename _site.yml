@@ -3,8 +3,8 @@ output_dir: "."
 navbar:
   title: "Home"
   left: 
-    - text: "Data Processing"
-      href: data_processing.html
+    - text: "Data Sources"
+      href: data_sources.html
     - text: "Analyses"
       menu:
       - text: "Health Data"
