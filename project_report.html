@@ -397,17 +397,17 @@ cholesterol.</p>
 Management Core and imported as csv files. Wave 1 was cleaned and only
 the variables of interest were needed for demographics and the creation
 of the generation variables. The following 9 variables were selected
-aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6. These
-variables include the respondent identifier number, U.S. citizenship
-status, birth in the U.S., month and year of migration, race/ethnicity,
-and whether their biological mother or father was born in the United
-States. Wave 4 data was cleaned similarly to Wave 1 and the column names
-were converted to character columns to ensure R would interpret them
-correctly. Wave 1 and Wave 4 datasets were merged based on the common
-identifier <code>aid</code>. Binary immigrant generation variables were
-created: <code>first_generation</code> was coded as 0 if the individual
-was born in the U.S. or born a U.S. citizen, and coded as 1 if the
-individual was not born in the U.S or a U.S. citizen;
+<code>aid</code>,<code>h1gi14</code>,<code>h1gi14</code>,<code>h1gi13m</code>,<code>h1gi4</code>,<code>h1gi8</code>,<code>h1nm6</code>,<code>h1nf6</code>.
+These variables include the respondent identifier number, U.S.
+citizenship status, birth in the U.S., month and year of migration,
+race/ethnicity, and whether their biological mother or father was born
+in the United States. Wave 4 data was cleaned similarly to Wave 1 and
+the column names were converted to character columns to ensure R would
+interpret them correctly. Wave 1 and Wave 4 datasets were merged based
+on the common identifier <code>aid</code>. Binary immigrant generation
+variables were created: <code>first_generation</code> was coded as 0 if
+the individual was born in the U.S. or born a U.S. citizen, and coded as
+1 if the individual was not born in the U.S or a U.S. citizen;
 <code>second_generation</code> was coded as 1 if the the individuals
 biological mother or biological father were not born in the U.S. and 0
 if both were born in the U.S.; <code>third_generation</code> was coded
@@ -435,8 +435,10 @@ interest for our linear models: sex, race, education, and income were
 properly formatted.</p>
 <div id="codebook" class="section level3">
 <h3>Codebook</h3>
-<p>The following variables were included for the health outcome
-analyses:</p>
+<p>The following variables were included for the health outcomes,
+shelters, and hospital data analyses.</p>
+<div id="health-outcome-variables" class="section level4">
+<h4>Health Outcome Variables</h4>
 <ul>
 <li><code>aid</code>: Respondent identifier number</li>
 <li><code>h1gi14</code>: Born a United States Citizen</li>
@@ -474,6 +476,13 @@ standard deviation of 1</li>
 <li><code>h4bmi</code>: Body Mass Index</li>
 <li><code>h4map</code>: Mean Arterial Pulse Pressure (mmHg)</li>
 </ul>
+</div>
+<div id="shelter-variables" class="section level4">
+<h4>Shelter Variables</h4>
+</div>
+<div id="hospital-variables" class="section level4">
+<h4>Hospital Variables</h4>
+</div>
 </div>
 </div>
 <div id="exploratory-analysis" class="section level2">

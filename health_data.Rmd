@@ -347,7 +347,7 @@ filtered_df |>
 ```
 
 
-There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income. This supports the previous visualization of many first-generation immigrants being classified as underweight. 
+There is a statistically significant relationship between being a first-generation immigrant and BMI (p-value = 0.0112). The intercept of -1.2040 indicates that being a first-generation immigrant is associated with a 1.20 decrease in BMI compared to second or third generation individuals, controlling for age, sex, race, education, and income.  
 
 ## Blood Cholesterol 
 
