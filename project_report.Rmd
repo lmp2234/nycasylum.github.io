@@ -22,14 +22,14 @@ The main topics we researched for this project: [shelters](https://citylimits.or
 ## Initial questions: 
 
 Initially, the questions we were trying to answer were: 
-(1)	How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
-(2)	What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
-(3)	Are these resources equitably distributed across the boroughs of NYC?
+- (1)	How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
+- (2)	What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
+- (3)	Are these resources equitably distributed across the boroughs of NYC?
 
 As the project progressed, we refined these questions to focus more on identifying gaps in resource availability and accessibility. Our questions included: 
-(1)	Are the current shelters sufficient to meet the needs of asylum seekers?
-(2)	Do certain boroughs have fewer medical facilities relative to the immigrant population density?
-(3)	How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
+- (1)	Are the current shelters sufficient to meet the needs of asylum seekers?
+- (2)	Do certain boroughs have fewer medical facilities relative to the immigrant population density?
+- (3)	How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
 
 During our analysis, additional questions emerged:
 (1)	Are there patterns of resource utilization among asylum seekers that might highlight barriers (e.g., language, transportation)?
