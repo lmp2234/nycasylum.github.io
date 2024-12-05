@@ -17,6 +17,9 @@ library(dplyr)
 library(knitr)
 library(tidyr)
 library(ggplot2)
+library(readr)
+library(tidyverse)
+library(stringr)
 ```
 </details>
 

@@ -258,7 +258,7 @@ $(document).ready(function () {
       <a href="health_data.html">Health Data</a>
     </li>
     <li>
-      <a href="p8105_shelter_visuals.html">Shelter Data</a>
+      <a href="shelter_data.html">Shelter Data</a>
     </li>
     <li>
       <a href="hospital_data.html">Hospital Data</a>
@@ -487,20 +487,96 @@ standard deviation of 1</li>
 </div>
 <div id="exploratory-analysis" class="section level2">
 <h2>Exploratory analysis</h2>
-<p>Visualizations, summaries, and exploratory statistical analyses.
-Justify the steps you took, and show any major changes to your
-ideas.</p>
+<p>For the Add Health data, we first created a table of counts in the
+dataset by immigrant generation status. The final dataset contained 257
+first generation immigrants, 189 second generation immigrants, and 4730
+third generation plus immigrants. For the BP exploratory analysis, we
+created a table that breaks down the counts of BP classification by
+immigrant-generation status. BP was classified as Normal,
+Prehypertension, Hypertension I, and Hypertension II. Using ggplot, we
+plotted BP classification for first generation immigrants only to
+visualize which categories most fell under. The bar plot displays that
+most first-generation immigrants were classified as Hypertension I and
+Hypertension II, highlighting an important health outcome that many
+migrants may experience. 84 first-generation immigrants were classified
+as prehypertensive, higher than 59 second generation immigrants in the
+sample. Additionally, 18 first generation immigrants were classified as
+Hypertension I while 17 second-generation immigrants were classified as
+Hypertension II. Although the small sample sizes for first and second
+generation are small, the highest count of first-generation immigrants
+being classified as prehypertensive is important to note.
+Prehypertension is a warning sign of being at increased risk for
+hypertension or other cardiovascular health outcomes. Given the sample
+at this time period was 24 to 32, it is noteworthy that a high number of
+individuals are prehypertensive.</p>
+<p>For the BMI exploratory analysis, a summary table was created for BMI
+categories by immigrant generation status and a bar plot was created to
+visualize the classification for first-generation immigrants. Among
+first-generation immigrants, while the highest count is in the Normal
+BMI category with 68, the second highest classification is in the
+Overweight 25 &lt; 30 BMI category with 57 individuals, and Obese I with
+33 individuals. The counts for overweight, obese I, and obese II are
+higher among first-generation immigrants compared with second-generation
+immigrants. Being overweight or obese are important risk factors for
+numerous chronic health conditions, and these findings highlight another
+migrant health need to address.</p>
+<p>Additionally, we looked at blood cholesterol, a binary variable was
+coded in response to whether the individual answered yes or no to ever
+having been told that they had high blood cholesterol by a health
+professional. The summary table highlights that more first-generation
+immigrants responded yes compared to second-generation immigrants.
+However, most of the sample of first-generation immigrants responded no.
+Given this variable was self-reported and the age of respondents was
+between 24 and 32 this may have affected the results.</p>
 </div>
 <div id="regression-analysis-models" class="section level2">
 <h2>Regression Analysis Models</h2>
-<p>We conducted a regression analysis to assess whether being a
+<p>We conducted a linear regression analysis to assess whether being a
 first-generation immigrant was associated with the following health
 outcomes: blood pressure (systolic and diastolic), body mass index
 (BMI), and mean arterial pressure which were available health measures
-in the Add Health data set. We adjusted for the following covariates to
-isolate the variable of interest and control for potential confounders:
-age (i.e., standardized), race/ethnicity, education, sex, and
-income.</p>
+in the Add Health data set. For BP, we constructed two models for
+systolic blood pressure (SBP) and diastolic blood pressure (DBP). The
+variables for BP measures in the dataset were <code>h4sbp</code> and
+<code>h4dbp</code>.For BMI, we constructed one model with
+<code>h4bmi</code> as the outcome .We adjusted for the following
+covariates to isolate the variable of main effect and control for
+potential confounders: age (i.e., standardized), race/ethnicity,
+education, sex, and income.</p>
+<p>In the model that assessed SBP, we found a statistically significant
+relationship between being a first-generation immigrant and SBP ( β =
+-2.485, p-value = 0.0027). The intercept of -2.4865 indicates that being
+a first-generation immigrant is associated with a 2.49 mmHg decrease in
+systolic blood pressure compared to second or third generation
+individuals, controlling for age, sex, race, education, and income. For
+the DBP model, we found a statistically significant relationship between
+being a first-generation immigrant and diastolic blood pressure ( β =
+-1.9677, p-value = 0.0026). The intercept of -1.9677 indicates that
+being a first-generation immigrant is associated with a 1.97 mmHg
+decrease in diastolic blood pressure compared to second or third
+generation individuals, controlling for age, sex, race, education, and
+income. These significant findings are important to be classified as
+either normal or prehypertensive compared to second or third generation
+migrants.</p>
+<p>For the model with BMI, we found a statistically significant
+relationship between being a first-generation immigrant and BMI (β =
+-1.020, p-value = 0.0112). The intercept of -1.2040 indicates that being
+a first-generation immigrant is associated with a 1.20 decrease in BMI
+compared to second or third generation individuals, controlling for age,
+sex, race, education, and income. This supports the exploratory analyses
+findings in that many first-generation immigrants were classified into
+the lower BMI categories, and some were categorized as being underweight
+as well.</p>
+<p>Both of the regression models highlight the differential effects of
+first-generation immigrant status on BP and BMI. That is, this supports
+the healthy migrant paradox where migrants often experience better
+health outcomes compared to their native-born counterparts. Despite the
+intercepts for first-generation immigrants being negative in the models,
+these findings may not be generalizable to the entire migrant
+population, but provide insights as this paradox does not apply in all
+areas of health nor to all migrants. Overall, our findings support that
+being a first-generation migrant is associated with important health
+risk factors and providing care to this population is critical.</p>
 </div>
 <div id="discussion" class="section level2">
 <h2>Discussion</h2>
@@ -513,18 +589,19 @@ decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease,
 p = 0.0026) compared to second- and third-generation individuals, even
 after controlling for demographic and socioeconomic factors. Also,
 first-generation immigrants exhibited a 1.20 decrease in BMI (p =
-0.0112), aligning with earlier findings that many first-generation
-immigrants are classified as underweight.These health trends highlight
-the nuanced relationship between immigrant status and health outcomes.
-While the lower blood pressure and BMI may initially appear to be
-protective factors, they could also reflect underlying vulnerabilities
-such as food insecurity, limited access to healthcare, or stressors
-related to immigration status. For first-generation immigrants, these
-factors might manifest as a mix of both health benefits (due to
-lifestyle factors from their country of origin) and risks (due to
-systemic barriers in accessing resources in their host country). These
-trends underscore the need for culturally competent healthcare services
-that can address the unique needs of immigrant populations.</p>
+0.0112), aligning with earlier findings that some first-generation
+immigrants in the sample were classified as underweight.These health
+trends highlight the nuanced relationship between immigrant status and
+health outcomes. While the lower blood pressure and BMI may initially
+appear to be protective factors, they could also reflect underlying
+vulnerabilities such as food insecurity, limited access to healthcare,
+or stressors related to immigration status. For first-generation
+immigrants, these factors might manifest as a mix of both health
+benefits (due to lifestyle factors from their country of origin) and
+risks (due to systemic barriers in accessing resources in their host
+country). These trends underscore the need for culturally competent
+healthcare services that can address the unique needs of immigrant
+populations.</p>
 <p>When it comes to healthcare facilities, the distribution across the
 five boroughs is very uneven. Boroughs with higher immigrant
 populations, like Queens and the Bronx, have noticeably fewer medical

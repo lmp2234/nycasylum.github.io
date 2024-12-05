@@ -258,7 +258,7 @@ $(document).ready(function () {
       <a href="health_data.html">Health Data</a>
     </li>
     <li>
-      <a href="p8105_shelter_visuals.html">Shelter Data</a>
+      <a href="shelter_data.html">Shelter Data</a>
     </li>
     <li>
       <a href="hospital_data.html">Hospital Data</a>
@@ -326,7 +326,10 @@ library(janitor)</code></pre>
 <pre class="r"><code>library(dplyr)
 library(knitr)
 library(tidyr)
-library(ggplot2)</code></pre>
+library(ggplot2)
+library(readr)
+library(tidyverse)
+library(stringr)</code></pre>
 </details>
 <div id="demographic-characteristics" class="section level2">
 <h2>Demographic Characteristics</h2>
@@ -1406,9 +1409,7 @@ Code
 first-generation immigrant and BMI (p-value = 0.0112). The intercept of
 -1.2040 indicates that being a first-generation immigrant is associated
 with a 1.20 decrease in BMI compared to second or third generation
-individuals, controlling for age, sex, race, education, and income. This
-supports the previous visualization of many first-generation immigrants
-being classified as underweight.</p>
+individuals, controlling for age, sex, race, education, and income.</p>
 </div>
 </div>
 <div id="blood-cholesterol" class="section level2">
