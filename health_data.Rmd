@@ -183,7 +183,7 @@ bp_first_gen_plot
 ```
 
 
-Among first-generation immigrants, the highest counts of blood pressure classification were in the prehypertensiob category. 
+Among first-generation immigrants, the highest counts of blood pressure classification were in the prehypertension category. 
 
 ### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
 
@@ -292,7 +292,7 @@ bmi_table %>%
 
 <details> <summary>Code</summary>
 ```{r}
-bmi_first_gen <- bmi_table_pivoted %>%
+bmi_first_gen <- bmi_table %>%
   pivot_longer(cols = `First Generation`, names_to = "Generation", values_to = "Count") %>%
   filter(Generation == "First Generation")
 
