@@ -176,9 +176,9 @@ bp_first_gen_plot
 ```
 
 
-#### Among first-generation immigrants, the highest counts of blood pressure classification were in the prehypertension category. 
+Among first-generation immigrants, the highest counts of blood pressure classification were in the prehypertension category. 
 
-## Relationship between First Generation Immigrant Status and Blood Pressure 
+# Relationship between First Generation Immigrant Status and Blood Pressure 
 
 #### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
 
@@ -308,11 +308,11 @@ bmi_first_gen_plot <- bmi_first_gen %>%
 bmi_first_gen_plot 
 ```
 
-#### The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Obese I or Overweight categories.  
+The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Obese I or Overweight categories.  
 
-## Relationship between First Generation Immigrant Status and Body Mass Index
+# Relationship between First Generation Immigrant Status and Body Mass Index
 
-### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
+#### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
 
 
 Generalized Linear Models
