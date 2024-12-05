@@ -349,15 +349,7 @@ w4data &lt;- read_sas(&quot;w4inhome.sas7bdat&quot;) %&gt;%
     )
   )
 
-first_gen_count &lt;- w4data %&gt;% 
-  count(first_gen, name = &quot;count&quot;)
-print(first_gen_count)</code></pre>
-<pre><code>## # A tibble: 2 × 2
-##   first_gen count
-##       &lt;dbl&gt; &lt;int&gt;
-## 1         0  4937
-## 2         1   177</code></pre>
-<pre class="r"><code>merged_df &lt;- w1data %&gt;%
+merged_df &lt;- w1data %&gt;%
   inner_join(w4data, by = &quot;aid&quot;) %&gt;% 
   mutate(
     first_generation = case_when(
@@ -440,7 +432,8 @@ Code
 </tr>
 </tbody>
 </table>
-<p>In this data set, there are 257 first generation immigrants.</p>
+<p>In this data set, there are 257 first generation immigrants, 189
+second generation immigrants, and 4720 third generation immigrants.</p>
 </div>
 <div id="blood-pressure" class="section level2">
 <h2>Blood Pressure</h2>

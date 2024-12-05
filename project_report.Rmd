@@ -22,19 +22,19 @@ The main topics we researched for this project: [shelters](https://citylimits.or
 ## Initial questions: 
 
 Initially, the questions we were trying to answer were: 
-- (1)	How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
-- (2)	What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
-- (3)	Are these resources equitably distributed across the boroughs of NYC?
+- How do the health-related and demographic trends of immigrants compare to non-immigrants based on ADD HEALTH data?
+- What resources (e.g., shelters, medical facilities) are available to asylum seekers in NYC?
+- Are these resources equitably distributed across the boroughs of NYC?
 
 As the project progressed, we refined these questions to focus more on identifying gaps in resource availability and accessibility. Our questions included: 
-- (1)	Are the current shelters sufficient to meet the needs of asylum seekers?
-- (2)	Do certain boroughs have fewer medical facilities relative to the immigrant population density?
-- (3)	How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
+- Are the current shelters sufficient to meet the needs of asylum seekers?
+- Do certain boroughs have fewer medical facilities relative to the immigrant population density?
+- How do the observed demographic and health-related trends inform the specific needs of asylum seekers in NYC?
 
 During our analysis, additional questions emerged:
-- (1)	Are there patterns of resource utilization among asylum seekers that might highlight barriers (e.g., language, transportation)?
-- (2)	How do the services available in NYC compare to other cities with significant asylum-seeking populations?
-- (3)	What are the policy implications of our findings for improving resource allocation for asylum seekers?
+- Are there patterns of resource utilization among asylum seekers that might highlight barriers (e.g., language, transportation)?
+- How do the services available in NYC compare to other cities with significant asylum-seeking populations?
+- What are the policy implications of our findings for improving resource allocation for asylum seekers?
 
 
 ## Data
@@ -42,7 +42,7 @@ To explore migrant health outcomes, we used the Add Health publicly available da
 
 Wave 1 and Wave 4 data were obtained from the UNC Research Data Management Core and imported as csv files. Wave 1 was cleaned and only the variables of interest were needed for demographics and the creation of the generation variables. The following 9 variables were selected `colnames(w1data)`. These variables include the respondent identifier number, U.S. citizenship status, birth in the U.S., month and year of migration, race/ethnicity, and whether their biological mother or father was born in the United States. Wave 4 data was cleaned similarly to Wave 1 and the column names were converted to character columns to ensure R would interpret them correctly. Wave 1 and Wave 4 datasets were merged based on the common identifier `aid`. Binary immigrant generation variables were created: `first_generation` was coded as 0 if the individual was born in the U.S. or born a U.S. citizen, and coded as 1 if the individual was not born in the U.S or a U.S. citizen; `second_generation` was coded as 1 if the the individuals biological mother or biological father were not born in the U.S. and 0 if both were born in the U.S.; `third_generation` was coded as 1 if the criteria for either `first_generation` or `second_generation` was not true. 
 
-The dataset contains `r nrow(filtered_df)` observations and `ncol(filtered_df)` variables that explore demographic characteristics, social context, psychological factors, physical health, and behavioral patterns. We selected the following health indicators to study: blood pressure (BP), body mass index (BMI), and high blood cholesterol. Before beginning the exploratory analysis, the variables for the health outcomes, `h4bpcls`, `h4bmicls`, and  `h4id5b` needed to be filtered to ensure that any of the values that corresponded to “unknown” or “skipped” in the codebook, appeared as NA instead and dropping the NA values (i.e, we checked for missingness in the data and ensured the variables did not possess a lot of missing values prior to dropping). 
+The dataset contains `r nrow(filtered_df)` observations and `r ncol(filtered_df)` variables that explore demographic characteristics, social context, psychological factors, physical health, and behavioral patterns. We selected the following health indicators to study: blood pressure (BP), body mass index (BMI), and high blood cholesterol. Before beginning the exploratory analysis, the variables for the health outcomes, `h4bpcls`, `h4bmicls`, and  `h4id5b` needed to be filtered to ensure that any of the values that corresponded to “unknown” or “skipped” in the codebook, appeared as NA instead and dropping the NA values (i.e, we checked for missingness in the data and ensured the variables did not possess a lot of missing values prior to dropping). 
 
 After performing the exploratory analysis for the visualizations of each health outcome, we needed to further clean the dataset for the regression analysis. That is, we created an age variable and had to standardize this since age is a continuous predictor and we wanted to ensure it was on the same scale for the analysis (i.e, contributing equally to the analysis). We then ensured that the other covariates of interest for our linear models: sex, race, education, and income were properly formatted. 
 
