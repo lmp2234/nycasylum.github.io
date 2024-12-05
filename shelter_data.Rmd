@@ -8,7 +8,13 @@ library(tidyverse)
 library(viridis)
 library(plotly)
 ```
+New York City has long been a hub for individuals seeking refuge, and the city’s shelter system plays a critical role in providing asylum seekers and other vulnerable populations with temporary housing. Analyzing this shelter data from City Limits reveals trends and disparities that highlight the system’s complexity and the challenges faced by those relying on it.
 
+
+**Total Asylum Seekers by Category**
+
+
+The total number of asylum seekers in NYC shelters can be divided into several key categories, including individuals, families with children, and adult families. These distinctions are essential for understanding the specific needs of different demographic groups. According to the data, individuals represent the largest group utilizing shelters in NYC. Families with children also make up a significant portion, underscoring the importance of family-oriented resources within the shelter system.
 
 <details>
   <summary>Code</summary>
@@ -36,6 +42,10 @@ ggplotly(total_counts)
 ```{r, echo = FALSE}
 ggplotly(total_counts)
 ```
+
+**Asylum Seekers by Category and Agency**
+
+Different NYC agencies handle specific categories of asylum seekers. This chart compares the number of asylum seekers across categories and agencies, such as the Department of Homeless Services (DHS) and other supporting organizations. The plot indicates that the DHS plays a central role in managing shelter populations for individuals and families, and the workload distribution between agencies varies significantly.
 
 <details>
   <summary>Code</summary>
@@ -122,6 +132,11 @@ ggplotly(key_individual_plot)
 ggplotly(key_individual_plot)
 ```
 
+**Trends in Shelter Utilization Over Time**
+
+The total number of individuals in shelters has fluctuated over time, with notable spikes that may be attributed to policy changes or external factors like weather conditions. The overall trend of total individuals in shelters is increasing from the year 2022 to the end of 2024. 
+
+
 <details>
   <summary>Code</summary>
 ```{r}
@@ -142,6 +157,15 @@ ggplotly(total_individuals_df)
 ```{r, echo = FALSE}
 ggplotly(total_individuals_df)
 ```
+
+**Monthly and Daily Trends of Total Shelter Populations**
+
+Monthly Trends:
+Shelter populations peak in May and August, potentially due to seasonal factors. The chart shows aggregated totals for each month, highlighting long-term patterns.
+
+Daily trends:
+The daily shelter usage exhibits relatively consistent patterns, with minor fluctuations that may reflect operational adjustments or external factors. 
+
 
 <details>
   <summary>Code</summary>
