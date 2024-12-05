@@ -7,8 +7,37 @@ output: html_document
 
 Data on migrant health outcomes was obtained from the National Longitudinal Study of Adolescent to Adult Health (Add Health) publicly available data set obtained from [UNC Research Data Management Core](https://researchdata.unc.edu/).
 
+#### Health Outcome Variables
+
+- `aid`: Respondent identifier number
+- `h1gi14`: Born a United States Citizen
+- `h1gi14`: Born in the United States
+- `h1gi13m`: Month [and year] Individual First Moved to the United States
+- `h1gi4`: Hispanic or Latino Origin
+- `h1gi8`: Category that Best Describes Racial Background
+- `h1nm6`: Biological Mother Born in the United States
+- `h1nf6`: Biological Father Born in the United States
+- `first_generation`: Created based on whether the individual was not born in the U.S. nor a U.S. Citizen
+- `second_generation`: Created based on whether the individual's biological mother or biological father were born in the U.S.or not
+- `third_generation`: Created based on whether the individual was born in the U.S. or a U.S. citizen and if both biological mother and father were born in the U.S.
+- `h4bpcls`: Blood Pressure Classification
+- `h4id5b`: Been Told by a Doctor, Nurse, or Other Health Care Provider That You Have or Had High Blood Cholesterol or Triglycerides or Lipids
+- `h4bmicls`: Body Mass Index Classification
+- `h4od1y`: Respondent's Date of Birth Year
+- `age`: Created based on respondent's date of birth subtracted from the year the interview took place
+- `age_standardized`: Standardized age with mean of 0 and standard deviation of 1
+- `bio_sex4`: Respondent's Gender
+- `h4ec1`: Total Household Income
+- `h4ed2`: Highest Level of Education Achieved
+- `h4sbp`: Systolic Blood Pressure (mmHg)
+- `h4dbp`: Diastolic Blood Pressure (mmHg)
+- `h4bmi`: Body Mass Index
+- `h4map`: Mean Arterial Pulse Pressure (mmHg)
+
 # Source 2: Shelter Data
 
 
 
 #Source 3: Hospital Data 
+
+

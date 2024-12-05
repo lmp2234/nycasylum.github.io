@@ -83,6 +83,13 @@ The following variables were included for the health outcomes, shelters, and hos
 #### Shelter Variables
 
 #### Hospital Variables
+`Borough`: Indicates which of the five boroughs in NYC the facility is located in
+`Facility Type`: Indicates the type of facility, including acute care, nursing, child health, and diagnostic&treatment center.
+`Facility Name`: Indicates facility’s name
+`Cross Streets`: Indicates the cross street that the facility is located on
+`Phone`: Indicates the contact information for the facility
+`Location 1`: Indicates exact address and longitude and latitude of facility
+
 
 ## Exploratory analysis
 

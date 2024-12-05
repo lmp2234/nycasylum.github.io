@@ -67,7 +67,7 @@ hospital_map
 ```
 </details>
 
-This map provides locations of healthcare facilities NYC migrants may access including the type of name of the facility, facility type, borough, address, and phone number. 
+### This map provides locations of healthcare facilities NYC migrants may access including the type of name of the facility, facility type, borough, address, and phone number. 
 
 ```{r, echo = FALSE}
 hospital_map
