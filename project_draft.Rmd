@@ -11,7 +11,7 @@ library(viridis)
 library(plotly)
 library(haven)
 library(readr)
-install.packages("nnet")
+#install.packages("nnet")
 library(nnet)
 ```
 
