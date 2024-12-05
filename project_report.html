@@ -479,17 +479,31 @@ standard deviation of 1</li>
 </div>
 <div id="shelter-variables" class="section level4">
 <h4>Shelter Variables</h4>
+<ul>
+<li><code>Category</code> : asylum seeker group type</li>
+<li><code>Date</code> : date of report</li>
+<li><code>Table</code>: categorization of group type</li>
+<li><code>Population</code>: population served</li>
+<li><code>Agency</code>: shelter agency</li>
+<li><code>Count</code>: total number of asylum seekers by shelter</li>
+</ul>
 </div>
 <div id="hospital-variables" class="section level4">
 <h4>Hospital Variables</h4>
-<p>-<code>Borough</code>: Indicates which of the five boroughs in NYC
-the facility is located in -<code>Facility Type</code>: Indicates the
-type of facility, including acute care, nursing, child health, and
-diagnostic&amp;treatment center. -<code>Facility Name</code>: Indicates
-facility’s name -<code>Cross Streets</code>: Indicates the cross street
-that the facility is located on -<code>Phone</code>: Indicates the
-contact information for the facility -<code>Location 1</code>: Indicates
-exact address and longitude and latitude of facility</p>
+<ul>
+<li><code>Borough</code>: Indicates which of the five boroughs in NYC
+the facility is located in</li>
+<li><code>Facility Type</code>: Indicates the type of facility,
+including acute care, nursing, child health, and
+diagnostic&amp;treatment center.</li>
+<li><code>Facility Name</code>: Indicates facility’s name</li>
+<li><code>Cross Streets</code>: Indicates the cross street that the
+facility is located on</li>
+<li><code>Phone</code>: Indicates the contact information for the
+facility</li>
+<li><code>Location 1</code>: Indicates exact address and longitude and
+latitude of facility</li>
+</ul>
 </div>
 </div>
 </div>
@@ -498,25 +512,25 @@ exact address and longitude and latitude of facility</p>
 <p>For the Add Health data, we first created a table of counts in the
 dataset by immigrant generation status. The final dataset contained 257
 first generation immigrants, 189 second generation immigrants, and 4730
-third generation plus immigrants. For the BP exploratory analysis, we
-created a table that breaks down the counts of BP classification by
-immigrant-generation status. BP was classified as Normal,
-Prehypertension, Hypertension I, and Hypertension II. Using ggplot, we
-plotted BP classification for first generation immigrants only to
-visualize which categories most fell under. The bar plot displays that
-most first-generation immigrants were classified as Hypertension I and
-Hypertension II, highlighting an important health outcome that many
-migrants may experience. 84 first-generation immigrants were classified
-as prehypertensive, higher than 59 second generation immigrants in the
-sample. Additionally, 18 first generation immigrants were classified as
-Hypertension I while 17 second-generation immigrants were classified as
-Hypertension II. Although the small sample sizes for first and second
-generation are small, the highest count of first-generation immigrants
-being classified as prehypertensive is important to note.
-Prehypertension is a warning sign of being at increased risk for
-hypertension or other cardiovascular health outcomes. Given the sample
-at this time period was 24 to 32, it is noteworthy that a high number of
-individuals are prehypertensive.</p>
+third generation plus immigrants.</p>
+<p>For the BP exploratory analysis, we created a table that breaks down
+the counts of BP classification by immigrant-generation status. BP was
+classified as Normal, Prehypertension, Hypertension I, and Hypertension
+II. Using ggplot, we plotted BP classification for first generation
+immigrants only to visualize which categories most fell under. The bar
+plot displays that most first-generation immigrants were classified as
+Hypertension I and Hypertension II, highlighting an important health
+outcome that many migrants may experience. 84 first-generation
+immigrants were classified as prehypertensive, higher than 59 second
+generation immigrants in the sample. Additionally, 18 first generation
+immigrants were classified as Hypertension I while 17 second-generation
+immigrants were classified as Hypertension II. Although the small sample
+sizes for first and second generation are small, the highest count of
+first-generation immigrants being classified as prehypertensive is
+important to note. Prehypertension is a warning sign of being at
+increased risk for hypertension or other cardiovascular health outcomes.
+Given the sample at this time period was 24 to 32, it is noteworthy that
+a high number of individuals are prehypertensive.</p>
 <p>For the BMI exploratory analysis, a summary table was created for BMI
 categories by immigrant generation status and a bar plot was created to
 visualize the classification for first-generation immigrants. Among

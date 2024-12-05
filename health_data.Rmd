@@ -7,9 +7,9 @@ The National Longitudinal Study of Adolescent to Adult Health (Add Health) is a 
 
 Note: The datasets used for this analysis are publicly available, thus the sample size is much larger than for the private use data that is available on a secure data enclave that requires an IRB.
 
+## Demographic Characteristics 
 <details>
   <summary>Code</summary>
-  
 ```{r}
 library(haven)
 library(janitor)
@@ -20,13 +20,7 @@ library(ggplot2)
 library(readr)
 library(tidyverse)
 library(stringr)
-```
-</details>
 
-## Demographic Characteristics 
-<details>
-  <summary>Code</summary>
-```{r}
 w1data <- read.csv("w1inhome.csv") %>%
   clean_names() %>% 
   select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
@@ -82,6 +76,7 @@ generation_counts %>%
 ```
 </details>
 
+
 ```{r, echo=FALSE}
 generation_counts %>% 
   kable(
@@ -93,7 +88,7 @@ generation_counts %>%
 ```
 
 
-In this data set, there are 257 first generation immigrants, 189 second generation immigrants, and 4720 third generation immigrants. 
+#### In this data set, there are 257 first generation immigrants, 189 second generation immigrants, and 4730 third generation immigrants. 
 
 
 ## Blood Pressure 

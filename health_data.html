@@ -312,6 +312,8 @@ better target the needs asylum seekers and refugees commonly face.</p>
 <p>Note: The datasets used for this analysis are publicly available,
 thus the sample size is much larger than for the private use data that
 is available on a secure data enclave that requires an IRB.</p>
+<div id="demographic-characteristics" class="section level2">
+<h2>Demographic Characteristics</h2>
 <details>
 <summary>
 Code
@@ -329,15 +331,9 @@ library(tidyr)
 library(ggplot2)
 library(readr)
 library(tidyverse)
-library(stringr)</code></pre>
-</details>
-<div id="demographic-characteristics" class="section level2">
-<h2>Demographic Characteristics</h2>
-<details>
-<summary>
-Code
-</summary>
-<pre class="r"><code>w1data &lt;- read.csv(&quot;w1inhome.csv&quot;) %&gt;%
+library(stringr)
+
+w1data &lt;- read.csv(&quot;w1inhome.csv&quot;) %&gt;%
   clean_names() %&gt;% 
   select(aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6) 
 
@@ -412,6 +408,9 @@ Code
 </tbody>
 </table>
 </details>
+<div id="individuals-in-add-health-by-immigration-status"
+class="section level3">
+<h3>Individuals in Add Health by Immigration Status</h3>
 <table>
 <caption>Individuals by Generation Status</caption>
 <thead>
@@ -435,8 +434,13 @@ Code
 </tr>
 </tbody>
 </table>
-<p>In this data set, there are 257 first generation immigrants, 189
-second generation immigrants, and 4720 third generation immigrants.</p>
+<div
+id="in-this-data-set-there-are-257-first-generation-immigrants-189-second-generation-immigrants-and-4720-third-generation-immigrants."
+class="section level4">
+<h4>In this data set, there are 257 first generation immigrants, 189
+second generation immigrants, and 4720 third generation immigrants.</h4>
+</div>
+</div>
 </div>
 <div id="blood-pressure" class="section level2">
 <h2>Blood Pressure</h2>
@@ -670,9 +674,9 @@ bp_first_gen_plot &lt;- bp_first_gen %&gt;%
   )
 
 bp_first_gen_plot </code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Among first-generation immigrants, the highest counts of blood
 pressure classification were in the prehypertension category.</p>
 <div
@@ -1255,9 +1259,9 @@ bmi_first_gen_plot &lt;- bmi_first_gen %&gt;%
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = &quot;none&quot;)
 
 bmi_first_gen_plot </code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>The BMI classification table yields important findings to consider.
 Many first-generation immigrants in the sample fall into the Obese I or
 Overweight categories.</p>
@@ -1572,9 +1576,9 @@ cholesterol_first_gen_plot &lt;- cholesterol_first_gen %&gt;%
   )
 
 cholesterol_first_gen_plot</code></pre>
-<img src="health_data_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="health_data_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 </details>
-<p><img src="health_data_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="health_data_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 
 
