@@ -115,15 +115,17 @@ filtered_df <- merged_df %>%
   <summary>Code</summary>
 ```{r}
 bp_table <- filtered_df %>%
-  count(h4bpcls, first_generation, second_generation, third_generation) %>%
   filter(!(h4bpcls == 6 | h4bpcls == 7 | h4bpcls == 9)) %>%
   mutate(
     h4bpcls = recode(h4bpcls,
                      `1` = "Normal",
                      `2` = "Prehypertension",
                      `3` = "Hypertension I",
-                     `4` = "Hypertension II")
-  ) %>%
+                     `4` = "Hypertension II")) %>%
+    group_by(h4bpcls, first_generation, second_generation, third_generation) %>%
+  summarize(n = n(), .groups = 'drop')
+
+bp_table <- bp_table %>%
   pivot_wider(
     names_from = c("first_generation", "second_generation", "third_generation"),
     values_from = n,
@@ -151,23 +153,9 @@ bp_table %>%
 <details> <summary>Code</summary>
 ```{r}
 bp_first_gen <- bp_table %>%
-  pivot_longer(cols = c(`First Generation`), 
-               names_to = "Generation", 
-               values_to = "Count") %>%
+  pivot_longer(cols = `First Generation`, names_to = "Generation", values_to = "Count") %>%
   filter(Generation == "First Generation")
-```
-</details> 
 
-```{r, echo = FALSE}
-bp_first_gen <- bp_table %>%
-  pivot_longer(cols = c(`First Generation`), 
-               names_to = "Generation", 
-               values_to = "Count") %>%
-  filter(Generation == "First Generation")
-```
-
-<details> <summary>Code</summary>
-```{r}
 bp_first_gen_plot <- bp_first_gen %>%
   ggplot(aes(x = `Blood Pressure Classification`, y = Count, fill = `Blood Pressure Classification`)) +
   geom_bar(stat = "identity", width = 0.6) +
@@ -177,40 +165,25 @@ bp_first_gen_plot <- bp_first_gen %>%
     y = "Count",
     fill = "Blood Pressure"
   ) +
-  scale_x_discrete(labels = c("Normal", "Prehypertension", "Hypertension I", "Hypertension II")) +
+  scale_x_discrete(labels = c("Hypertension I", "Hypertension II", "Normal", "Prehypertension")) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none"  
   )
 
-bp_first_gen_plot
+bp_first_gen_plot 
 
 ```
 </details> 
 
-```{r, echo = FALSE}
-bp_first_gen_plot <- bp_first_gen %>%
-  ggplot(aes(x = `Blood Pressure Classification`, y = Count, fill = `Blood Pressure Classification`)) +
-  geom_bar(stat = "identity", width = 0.6) +
-  labs(
-    title = "Blood Pressure Classification for First Generation Immigrants",
-    x = "Blood Pressure Classification",
-    y = "Count",
-    fill = "Blood Pressure"
-  ) +
-  scale_x_discrete(labels = c("Normal", "Prehypertension", "Hypertension I", "Hypertension II")) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1), 
-    legend.position = "none"  
-  )
 
+```{r, echo = FALSE}
 bp_first_gen_plot
 ```
 
 
-Among first-generation immigrants, the highest counts of blood pressure classification were in the Hypertension I and Hypertension II categories. 
+Among first-generation immigrants, the highest counts of blood pressure classification were in the prehypertensiob category. 
 
 ### Research Question: Is there a relationship between first-generation immigrant status and blood pressure outcome? 
 
@@ -278,19 +251,20 @@ There is a statistically significant relationship between being a first-generati
 
 <details> <summary>Code</summary>
 ```{r}
-bmi_table <- filtered_df %>% 
-  count(h4bmicls, first_generation, second_generation, third_generation) %>% 
-  filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96 | h4bmicls == 97 | h4bmicls == 99)) %>% 
-  mutate(
-    h4bmicls = recode(h4bmicls, 
-                    `1` = "Underweight <18.5", 
-                    `2` = "Normal 18.5 - < 25", 
-                    `3` = "Overweight 25 - <30", 
-                    `4` = "Obese I 30-<35", 
-                    `5` = "Obese II: 35-<40", 
-                    `6` = "Obese III: 40+",
-                    )
-  ) %>%
+bmi_table <- filtered_df %>%
+  filter(!(h4bmicls == 88 | h4bmicls == 89 | h4bmicls == 96| h4bmicls == 97 | h4bmicls == 99)) %>%
+  mutate(h4bmicls = recode(h4bmicls, 
+                           `1` = "Underweight <18.5", 
+                           `2` = "Normal 18.5 - < 25", 
+                           `3` = "Overweight 25 - <30", 
+                           `4` = "Obese I 30-<35", 
+                           `5` = "Obese II: 35-<40", 
+                           `6` = "Obese III: 40+")) %>%
+  group_by(h4bmicls, first_generation, second_generation, third_generation) %>%
+  summarize(n = n(), .groups = 'drop')
+
+
+bmi_table <- bmi_table %>%
   pivot_wider(
     names_from = c("first_generation", "second_generation", "third_generation"),
     values_from = n,
@@ -298,12 +272,13 @@ bmi_table <- filtered_df %>%
   ) %>%
   rename(
     `First Generation` = `1_0_0`,
-    `Second Generation` = `0_1_0`,  
-    `Third Generation` = `0_0_1`, 
+    `Second Generation` = `0_1_0`,
+    `Third Generation` = `0_0_1`,
     `BMI Classification` = `h4bmicls`
   ) %>%
   select(`BMI Classification`, `First Generation`, `Second Generation`, `Third Generation`)
 
+
 bmi_table %>% 
   kable(caption = "Blood Cholesterol Classification by Immigrant Generation Status", format = "html")
 ```
@@ -317,27 +292,12 @@ bmi_table %>%
 
 <details> <summary>Code</summary>
 ```{r}
-bmi_first_gen <- bmi_table %>%
-  pivot_longer(cols = c(`First Generation`), 
-               names_to = "Generation", 
-               values_to = "Count") %>%
+bmi_first_gen <- bmi_table_pivoted %>%
+  pivot_longer(cols = `First Generation`, names_to = "Generation", values_to = "Count") %>%
   filter(Generation == "First Generation")
-```
-</details> 
 
-```{r, echo = FALSE}
-bmi_first_gen <- bmi_table %>%
-  pivot_longer(cols = c(`First Generation`), 
-               names_to = "Generation", 
-               values_to = "Count") %>%
-  filter(Generation == "First Generation")
-```
-
-
-<details> <summary>Code</summary>
-```{r}
 bmi_first_gen_plot <- bmi_first_gen %>%
-  ggplot(aes(x =  `BMI Classification`, y = Count, fill =  `BMI Classification`)) +
+  ggplot(aes(x = `BMI Classification`, y = Count, fill = `BMI Classification`)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(
     title = "BMI Classification for First Generation Immigrants",
@@ -345,23 +305,19 @@ bmi_first_gen_plot <- bmi_first_gen %>%
     y = "Count",
     fill = "BMI"
   ) +
-  scale_x_discrete(labels = c("Underweight <18.5", "Normal 18.5 - < 25", "Overweight 25 - <30","Obese I 30-<35", "Obese II: 35-<40","Obese III: 40+" )) +
+  scale_x_discrete(labels = c("Normal 18.5 - < 25", "Obese I 30-<35", "Obese II: 35-<40","Obese III: 40+", "Overweight 25 - <30","Underweight <18.5")) +
   theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1), 
-    legend.position = "none"  
-  )
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
 
-bmi_first_gen_plot
+bmi_first_gen_plot 
 ```
 </details> 
 
 ```{r, echo = FALSE}
-bmi_first_gen_plot
+bmi_first_gen_plot 
 ```
 
-
-The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Underweight or Obese II categories.  
+The BMI classification table yields important findings to consider. Many first-generation immigrants in the sample fall into the Obese I or Overweight categories.  
 
 ### Research Question: Is there a relationship between first-generation immigrant status and body mass index (BMI)? 
 

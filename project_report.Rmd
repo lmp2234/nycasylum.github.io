@@ -43,15 +43,16 @@ During our analysis, additional questions emerged:
 ## Data
 To explore migrant health outcomes, we used the Add Health publicly available dataset. Add Health is a nationally representative longitudinal cohort study that follows individuals from adolescence into adulthood. Participants are interviewed at multiple time points (i.e., waves). The study design and diversity of the sample in this study enables health disparity research for immigrant populations as researchers sampled first-generation, second-generation, and third-generation immigrants. While Add Health consists of five waves of data collection, the publicly available dataset contains up to Wave 4. For our analysis, we utilized Wave 1 data to obtain demographic characteristics and construct the generation variables, and Wave 4 for the health outcome data. Wave 4 interviews were completed in 2008 when the sample was between the ages of 24 and 32. Wave 4 was also the first wave to explore biological measures such as blood pressure and blood cholesterol. 
 
-Wave 1 and Wave 4 data were obtained from the UNC Research Data Management Core and imported as csv files. Wave 1 was cleaned and only the variables of interest were needed for demographics and the creation of the generation variables. The following 9 variables were selected `colnames(w1data)`. These variables include the respondent identifier number, U.S. citizenship status, birth in the U.S., month and year of migration, race/ethnicity, and whether their biological mother or father was born in the United States. Wave 4 data was cleaned similarly to Wave 1 and the column names were converted to character columns to ensure R would interpret them correctly. Wave 1 and Wave 4 datasets were merged based on the common identifier `aid`. Binary immigrant generation variables were created: `first_generation` was coded as 0 if the individual was born in the U.S. or born a U.S. citizen, and coded as 1 if the individual was not born in the U.S or a U.S. citizen; `second_generation` was coded as 1 if the the individuals biological mother or biological father were not born in the U.S. and 0 if both were born in the U.S.; `third_generation` was coded as 1 if the criteria for either `first_generation` or `second_generation` was not true. 
+Wave 1 and Wave 4 data were obtained from the UNC Research Data Management Core and imported as csv files. Wave 1 was cleaned and only the variables of interest were needed for demographics and the creation of the generation variables. The following 9 variables were selected `aid`,`h1gi14`,`h1gi14`,`h1gi13m`,`h1gi4`,`h1gi8`,`h1nm6`,`h1nf6`. These variables include the respondent identifier number, U.S. citizenship status, birth in the U.S., month and year of migration, race/ethnicity, and whether their biological mother or father was born in the United States. Wave 4 data was cleaned similarly to Wave 1 and the column names were converted to character columns to ensure R would interpret them correctly. Wave 1 and Wave 4 datasets were merged based on the common identifier `aid`. Binary immigrant generation variables were created: `first_generation` was coded as 0 if the individual was born in the U.S. or born a U.S. citizen, and coded as 1 if the individual was not born in the U.S or a U.S. citizen; `second_generation` was coded as 1 if the the individuals biological mother or biological father were not born in the U.S. and 0 if both were born in the U.S.; `third_generation` was coded as 1 if the criteria for either `first_generation` or `second_generation` was not true. 
 
 The dataset contains `r nrow(filtered_df)` observations and `r ncol(filtered_df)` variables that explore demographic characteristics, social context, psychological factors, physical health, and behavioral patterns. We selected the following health indicators to study: blood pressure (BP), body mass index (BMI), and high blood cholesterol. Before beginning the exploratory analysis, the variables for the health outcomes, `h4bpcls`, `h4bmicls`, and  `h4id5b` needed to be filtered to ensure that any of the values that corresponded to “unknown” or “skipped” in the codebook, appeared as NA instead and dropping the NA values (i.e, we checked for missingness in the data and ensured the variables did not possess a lot of missing values prior to dropping). 
 
 After performing the exploratory analysis for the visualizations of each health outcome, we needed to further clean the dataset for the regression analysis. That is, we created an age variable and had to standardize this since age is a continuous predictor and we wanted to ensure it was on the same scale for the analysis (i.e, contributing equally to the analysis). We then ensured that the other covariates of interest for our linear models: sex, race, education, and income were properly formatted. 
 
 ### Codebook 
+The following variables were included for the health outcomes, shelters, and hospital data analyses.
 
-The following variables were included for the health outcome analyses:
+#### Health Outcome Variables
 
 - `aid`: Respondent identifier number
 - `h1gi14`: Born a United States Citizen
@@ -79,7 +80,9 @@ The following variables were included for the health outcome analyses:
 - `h4map`: Mean Arterial Pulse Pressure (mmHg)
 
 
+#### Shelter Variables
 
+#### Hospital Variables
 
 ## Exploratory analysis
 

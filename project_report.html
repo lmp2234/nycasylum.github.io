@@ -346,25 +346,35 @@ banks</a>.</p>
 </div>
 <div id="initial-questions" class="section level2">
 <h2>Initial questions:</h2>
-<p>Initially, the questions we were trying to answer were: - How do the
-health-related and demographic trends of immigrants compare to
-non-immigrants based on ADD HEALTH data? - What resources (e.g.,
-shelters, medical facilities) are available to asylum seekers in NYC? -
-Are these resources equitably distributed across the boroughs of
-NYC?</p>
+<p>Initially, the questions we were trying to answer were:</p>
+<ul>
+<li>How do the health-related and demographic trends of immigrants
+compare to non-immigrants based on ADD HEALTH data?</li>
+<li>What resources (e.g., shelters, medical facilities) are available to
+asylum seekers in NYC?</li>
+<li>Are these resources equitably distributed across the boroughs of
+NYC?</li>
+</ul>
 <p>As the project progressed, we refined these questions to focus more
 on identifying gaps in resource availability and accessibility. Our
-questions included: - Are the current shelters sufficient to meet the
-needs of asylum seekers? - Do certain boroughs have fewer medical
-facilities relative to the immigrant population density? - How do the
-observed demographic and health-related trends inform the specific needs
-of asylum seekers in NYC?</p>
-<p>During our analysis, additional questions emerged: - Are there
-patterns of resource utilization among asylum seekers that might
-highlight barriers (e.g., language, transportation)? - How do the
-services available in NYC compare to other cities with significant
-asylum-seeking populations? - What are the policy implications of our
-findings for improving resource allocation for asylum seekers?</p>
+questions included:</p>
+<ul>
+<li>Are the current shelters sufficient to meet the needs of asylum
+seekers?</li>
+<li>Do certain boroughs have fewer medical facilities relative to the
+immigrant population density?</li>
+<li>How do the observed demographic and health-related trends inform the
+specific needs of asylum seekers in NYC?</li>
+</ul>
+<p>During our analysis, additional questions emerged:</p>
+<ul>
+<li>Are there patterns of resource utilization among asylum seekers that
+might highlight barriers (e.g., language, transportation)?</li>
+<li>How do the services available in NYC compare to other cities with
+significant asylum-seeking populations?</li>
+<li>What are the policy implications of our findings for improving
+resource allocation for asylum seekers?</li>
+</ul>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
@@ -387,22 +397,22 @@ cholesterol.</p>
 Management Core and imported as csv files. Wave 1 was cleaned and only
 the variables of interest were needed for demographics and the creation
 of the generation variables. The following 9 variables were selected
-<code>colnames(w1data)</code>. These variables include the respondent
-identifier number, U.S. citizenship status, birth in the U.S., month and
-year of migration, race/ethnicity, and whether their biological mother
-or father was born in the United States. Wave 4 data was cleaned
-similarly to Wave 1 and the column names were converted to character
-columns to ensure R would interpret them correctly. Wave 1 and Wave 4
-datasets were merged based on the common identifier <code>aid</code>.
-Binary immigrant generation variables were created:
-<code>first_generation</code> was coded as 0 if the individual was born
-in the U.S. or born a U.S. citizen, and coded as 1 if the individual was
-not born in the U.S or a U.S. citizen; <code>second_generation</code>
-was coded as 1 if the the individuals biological mother or biological
-father were not born in the U.S. and 0 if both were born in the U.S.;
-<code>third_generation</code> was coded as 1 if the criteria for either
-<code>first_generation</code> or <code>second_generation</code> was not
-true.</p>
+aid, h1gi14, h1gi11, h1gi12, h1gi13m, h1gi4, h1gi8, h1nm6, h1nf6. These
+variables include the respondent identifier number, U.S. citizenship
+status, birth in the U.S., month and year of migration, race/ethnicity,
+and whether their biological mother or father was born in the United
+States. Wave 4 data was cleaned similarly to Wave 1 and the column names
+were converted to character columns to ensure R would interpret them
+correctly. Wave 1 and Wave 4 datasets were merged based on the common
+identifier <code>aid</code>. Binary immigrant generation variables were
+created: <code>first_generation</code> was coded as 0 if the individual
+was born in the U.S. or born a U.S. citizen, and coded as 1 if the
+individual was not born in the U.S or a U.S. citizen;
+<code>second_generation</code> was coded as 1 if the the individuals
+biological mother or biological father were not born in the U.S. and 0
+if both were born in the U.S.; <code>third_generation</code> was coded
+as 1 if the criteria for either <code>first_generation</code> or
+<code>second_generation</code> was not true.</p>
 <p>The dataset contains 4935 observations and 934 variables that explore
 demographic characteristics, social context, psychological factors,
 physical health, and behavioral patterns. We selected the following
@@ -487,7 +497,7 @@ income.</p>
 <h2>Discussion</h2>
 <p>Our analysis highlights several key findings regarding health trends
 and resources available to asylum seekers in New York City. Our analysis
-of the ADD HEALTH dataset revealed interesting health trends among
+of the Add Health dataset revealed interesting health trends among
 immigrant populations. We found that first-generation immigrants were
 statistically associated with lower systolic blood pressure (2.49 mmHg
 decrease, p = 0.0027) and diastolic blood pressure (1.97 mmHg decrease,
