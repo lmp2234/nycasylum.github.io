@@ -39,10 +39,6 @@ w4data <- read_sas("w4inhome.sas7bdat") %>%
     )
   )
 
-first_gen_count <- w4data %>% 
-  count(first_gen, name = "count")
-print(first_gen_count)
-
 merged_df <- w1data %>%
   inner_join(w4data, by = "aid") %>% 
   mutate(
@@ -94,7 +90,7 @@ generation_counts %>%
 ```
 
 
-In this data set, there are 257 first generation immigrants. 
+In this data set, there are 257 first generation immigrants, 189 second generation immigrants, and 4720 third generation immigrants. 
 
 
 ## Blood Pressure 
