@@ -77,12 +77,9 @@ Column {data-width=650}
 
 ```{r}
 renderPlotly({
-  # Filter for "Total Individuals" measure
   filtered_df <- daily_df |> filter(measure == "Total Individuals")
   
-  # Dynamically generate the plot based on selected time unit
   if (input$time_units == "date") {
-    # Overall trends by date
     plot <- ggplot(filtered_df, aes(x = date, y = count)) +
       geom_line(color = "blue") +
       labs(
@@ -93,7 +90,6 @@ renderPlotly({
       theme_minimal()
     
   } else if (input$time_units == "month") {
-    # Monthly trends
     monthly_df <- filtered_df |> 
       group_by(month) |> 
       summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop")
@@ -108,7 +104,6 @@ renderPlotly({
       theme_minimal()
     
   } else if (input$time_units == "day") {
-    # Daily trends
     daily_trends_df <- filtered_df |> 
       group_by(day) |> 
       summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop")
