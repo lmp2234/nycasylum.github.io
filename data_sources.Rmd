@@ -44,7 +44,7 @@ Data on NYC shelters was obtained from the Department of Homeless Services repor
 - `Agency`: shelter agency 
 - `Count`: total number of asylum seekers by shelter
 
-#Source 3: Hospital Data 
+# Source 3: Hospital Data 
 
 Our data set examining healthcare facility availability in New York City comes from (NYC Open Data Platform)[https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx]. It shows the acute care hospitals, skilled nursing facilities, diagnostic and treatment centers and community-based clinics that make up the New York City Health and Hospitals Corporation, NYC's public hospital system. This system is a integrated healthcare delivery network that serves New Yorkers regardless of insurance status or documentation with medical, mental health and substance abuse services. The dataset includes information on which borough the facility is located in, what type of facility it is, contact information, and latitude and longitide. 
 

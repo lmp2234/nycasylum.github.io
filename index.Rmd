@@ -11,18 +11,22 @@ output: html_document
 
 Immigrant populations, including asylum seekers and refugees, face a range of challenges when entering the United States and New York City is known to house people from across the world. Some of the barriers asylum seekers encounter include securing housing, accessing healthcare, obtaining food, and understanding legal rights. Many newcomers do not speak English fluently or are unfamiliar with the city's infrastructure and social services, making it even more difficult to access the help they need. A centralized resource tool can serve as a critical gateway to navigate these obstacles, offering accessible information about where and how to access resources across various categories like healthcare, housing, food, and legal support.
 
-
+<div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/HDnYQS5ryfc" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
+</div>
 
 ## Navigation 
 
 - [**Data Sources**](data_processing.html): Dissect the data and understand how it connects to our project objectives. 
-- [**Immigrant Health Outcome Analyses**](health_data.html): Explore the relationship between immigrant generation status and health outcome
-- [**Shelter Data**](shelter_data.html): Explore the trends and distribution of asylum seekers/refugees in shelters
-- [**Hospital Data**](hospital_data.html): Explore healthcare facilities and types by borough to receive comprehensive care
+- [**Immigrant Health Outcome Analyses**](health_data.html): Explore the relationship between immigrant generation status and health outcome.
+- [**Shelter Data**](shelter_data.html): Explore the trends and distribution of asylum seekers/refugees in shelters.
+- [**Hospital Data**](hospital_data.html): Explore healthcare facilities and types by borough to receive comprehensive care.
 - [**Project Report**](project_report.html): Explore the numerous variables that we've extracted and what the findings reveal. 
 - [**Interactive Map**](interactive_map.html): Interact with the map of healthcare facilities in NYC. 
 - [**Meet the Team**](about_us.html): Get to know us behind the project!
-- [**Shiny App**](https://yuchengzhao.shinyapps.io/shiny_dashboard_template/): Explore our interactive visualizations on your mobile device 
+- [**Shiny App**](https://yuchengzhao.shinyapps.io/shiny_dashboard_template/): Explore our interactive visualizations on your mobile device. 
 
 
 
