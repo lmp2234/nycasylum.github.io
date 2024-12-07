@@ -46,12 +46,12 @@ Data on NYC shelters was obtained from the Department of Homeless Services repor
 
 # Source 3: Hospital Data 
 
-Our data set examining healthcare facility availability in New York City comes from (NYC Open Data Platform)[https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx]. It shows the acute care hospitals, skilled nursing facilities, diagnostic and treatment centers and community-based clinics that make up the New York City Health and Hospitals Corporation, NYC's public hospital system. This system is a integrated healthcare delivery network that serves New Yorkers regardless of insurance status or documentation with medical, mental health and substance abuse services. The dataset includes information on which borough the facility is located in, what type of facility it is, contact information, and latitude and longitide. 
+Our data set examining healthcare facility availability in New York City comes from [NYC Open Data Platform](https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx). It shows the acute care hospitals, skilled nursing facilities, diagnostic and treatment centers and community-based clinics that make up the New York City Health and Hospitals Corporation, NYC's public hospital system. This system is a integrated healthcare delivery network that serves New Yorkers regardless of insurance status or documentation with medical, mental health and substance abuse services. The dataset includes information on which borough the facility is located in, what type of facility it is, contact information, and latitude and longitide. 
 
 #### Hospital Variables
 - `Borough`: Indicates which of the five boroughs in NYC the facility is located in
 - `Facility Type`: Indicates the type of facility, including acute care, nursing, child health, and diagnostic&treatment center.
--` Facility Name`: Indicates facility’s name
+- ` Facility Name`: Indicates facility’s name
 - `Cross Streets`: Indicates the cross street that the facility is located on
 - `Phone`: Indicates the contact information for the facility
 - `Location 1`: Indicates exact address and longitude and latitude of facility
