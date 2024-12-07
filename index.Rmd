@@ -15,7 +15,7 @@ Immigrant populations, including asylum seekers and refugees, face a range of ch
 
 ## Navigation 
 
-- [**Data Sources**](data_processing.html): Dissect the data and understand how it connects to our project objectives. 
+- [**Data Sources**](data_sources.html): Dissect the data and understand how it connects to our project objectives. 
 - [**Immigrant Health Outcome Analyses**](health_data.html): Explore the relationship between immigrant generation status and health outcome.
 - [**Shelter Data**](shelter_data.html): Explore the trends and distribution of asylum seekers/refugees in shelters.
 - [**Hospital Data**](hospital_data.html): Explore healthcare facilities and types by borough to receive comprehensive care.
